@@ -1,4 +1,3 @@
-# Optimizations
+# 优化
 
-This chapter will investigate some of the optimizations that are applied by the `Polars`
-query optimizer by going through some examples to see how `Polars` modifies the original query plan.
+本章将研究`Polars`应用的一些优化查询优化器，通过查看一些示例来了解“Polars”如何修改原始查询计划。
