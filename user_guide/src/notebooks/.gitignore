@@ -1,0 +1,4 @@
+*.py
+.ipynb_checkpoints/
+*.html
+*.md
