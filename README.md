@@ -1,8 +1,8 @@
 # polars-book-cn
 
-This repository is the Chinese version of the [`Polars` DataFrame library](https://github.com/pola-rs/polars) User Guide.
+This repository is the Chinese version of the [Polars DataFrame library](https://github.com/pola-rs/polars) User Guide.
 
-这个仓库是 [`Polars` DataFrame library](https://github.com/pola-rs/polars) User Guide 的中文版本。
+这个仓库是 [Polars DataFrame library](https://github.com/pola-rs/polars) User Guide 的中文版本。
 
 ## Contribution
 
@@ -13,4 +13,4 @@ This repository is the Chinese version of the [`Polars` DataFrame library](https
 
 ## License
 
-需要注意的是该项目采用的是[MIT许可证](http://choosealicense.com/licenses/mit/)下。如果您有这方面的顾虑，请随时联系维护者。
+该项目采用的是[MIT许可证](http://choosealicense.com/licenses/mit/)下。如果您有这方面的顾虑，请随时联系维护者。
