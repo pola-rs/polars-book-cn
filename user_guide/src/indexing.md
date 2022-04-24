@@ -1,61 +1,60 @@
-# Indexing
+# 索引
 
-The `Polars` `DataFrame` doesn't have an index, therefore indexing behavior can be consistent without the need of a `df.loc`,
-`df.iloc`, or a `df.at` operation.
+`Polars` `DataFrame`没有索引，因此索引行为可以是一致的，而不需要  `df.loc`,
+`df.iloc`, or a `df.at` 操作。
 
-The rules are as follows (depending on the datatypes of the values):
+规则如下（取决于值的数据类型）:
 
-- **numeric**
+- **数值型**
+  
+  - axis 0: 行（row）
+  - axis 1: 列（column）
 
-  - axis 0: row
-  - axis 1: column
+- **数值型 + 字符串**
+  
+  - axis 0: 行（这里只接收数字)
+  - axis 1: 列（接受数字+字符串值）
 
-- **numeric + strings**
+- **仅字符串**
+  
+  - axis 0: 列（column）
+  - axis 1: 报错（error）
 
-  - axis 0: row (only accept numbers here)
-  - axis 1: column (accept numeric + string values)
-
-- **only strings**
-
-  - axis 0: column
-  - axis 1: error
-
-- **expressions**
-
-  _All expression evaluations are executed in parallel_
-
-  - axis 0: column
-  - axis 1: column
+- **表达式**
+  
+  _所有表达式求值都是并行执行的_
+  
+  - axis 0: 列（column）
+  - axis 1: 列（column）
   - ..
-  - axis n: column
+  - axis n: 列（column）
 
-## Comparison with pandas
+## 与Pandas的对比
 
-| pandas                                                                | polars                        |
-|-----------------------------------------------------------------------|-------------------------------|
-| select row<br> `df.iloc[2]`                                           | `df[2, :]`                    |
-| select several rows by their indices<br> `df.iloc[[2, 5, 6]]`         | `df[[2, 5, 6], :]`            |
-| select slice of rows<br> `df.iloc[2:6]`                               | `df[2:6, :]`                  |
-| select rows using a boolean mask<br> `df.iloc[True, True, False]`     | `df[[True, True, False]]`     |
-| select rows by a predicate condition<br> `df.loc[df["A"] > 3]`        | `df[df["A"] > 3]`             |
-| select slice of columns<br> `df.iloc[:, 1:3]`                         | `df[:, 1:3]`                  |
-| select slice of columns by string order<br> `df.loc[:, "A":"Z"]`      | `df[:, "A":"Z"]`              |
-| select a single value (scalar)<br> `df.loc[2, "A"]`                   | `df[2, "A"]`                  |
-| select a single value (scalar)<br> `df.iloc[2, 1]`                    | `df[2, 1]`                    |
-| select a single value (Series/DataFrame)<br> `df.loc[2, ["A"]]`       | `df[2, ["A"]]`                |
-| select a single value (Series/DataFrame)<br> `df.iloc[2, [1]]`        | `df[2, [1]]`                  |
+| pandas                                                   | polars                    |
+| -------------------------------------------------------- | ------------------------- |
+| 选择列<br> `df.iloc[2]`                                     | `df[2, :]`                |
+| 按索引选择几行<br> `df.iloc[[2, 5, 6]]`                         | `df[[2, 5, 6], :]`        |
+| 选择行的切片<br> `df.iloc[2:6]`                                | `df[2:6, :]`              |
+| 使用布尔掩码（boolean mask）选择行<br> `df.iloc[True, True, False]` | `df[[True, True, False]]` |
+| 按谓词（predicate）条件选择行<br> `df.loc[df["A"] > 3]`            | `df[df["A"] > 3]`         |
+| 选择列的切片<br> `df.iloc[:, 1:3]`                             | `df[:, 1:3]`              |
+| 按字符串顺序选择列的切片<br> `df.loc[:, "A":"Z"]`                    | `df[:, "A":"Z"]`          |
+| 选择单个值（标量）<br> `df.loc[2, "A"]`                           | `df[2, "A"]`              |
+| 选择单个值（标量）<br> `df.iloc[2, 1]`                            | `df[2, 1]`                |
+| 选择单个值（Series或DataFrame）<br> `df.loc[2, ["A"]]`           | `df[2, ["A"]]`            |
+| 选择单个值 (Series或DataFrame)<br> `df.iloc[2, [1]]`           | `df[2, [1]]`              |
 
-## Expressions
+## 表达式
 
-Expressions can also be used in indexing (it is syntactic sugar for `df.select`).
+表达式也可以用于索引（它是`df.select`的语法糖）。
 
-This can be used to do some pretty exotic selections.
+这可以用来做一些很有别致的选择。
 
 ```python
 df[[
-    pl.col("A").head(5),  # get first of "A"
-    pl.col("B").tail(5).reverse(), # get last of "B" in reversed order
-    pl.col("B").filter(pl.col("B") > 5).head(5), # get first of "B" that fulfils predicate
-    pl.sum("A").over("B").head(5) # get the sum aggregation of "A" over the groups of "B" and return the first 5
-]]
+    pl.col("A").head(5),  # 从“A”的首部开始获取
+    pl.col("B").tail(5).reverse(), # 以逆序的方式获取“B”的后部
+    pl.col("B").filter(pl.col("B") > 5).head(5), # 首先得到满足谓词的“B”
+    pl.sum("A").over("B").head(5) # 获取“A”在“B”组上的总和，并返回前5个
 ```
