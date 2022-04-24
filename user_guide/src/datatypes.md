@@ -16,8 +16,8 @@
 - `Float32`: 32位浮点数。
 - `Float64`: 64位浮点数。
 - `Boolean`: 布尔型有效位压缩。
-- `Utf8`: 字符串数据（内部实际上是`Arrow ``LargeUtf8`）。
-- `List`: 列表数组包含着包含列表值的子数组和偏移数组。（这实际上是内部的`Arrow``LargeList`）。
+- `Utf8`: 字符串数据（内部实际上是`Arrow ` `LargeUtf8`）。
+- `List`: 列表数组包含着包含列表值的子数组和偏移数组。（这实际上是内部的`Arrow` `LargeList`）。
 - `Date`: 日期表示，内部表示为自UNIX纪元以来的天数，由32位有符号整数编码。
 - `Datetime`: Datetime表示法，内部表示为自UNIX纪元以来的纳秒，由64位有符号整数编码。
 - `Duration`: 时间型。在减去`Date/Datetime`时创建。
