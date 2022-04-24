@@ -24,4 +24,4 @@
 - `Time`: 时间表示法，从午夜开始在内部表示为纳秒。
 - `Object`: 受支持的有限数据类型，可以是任何值。
 
-要了解有关这些数据类型的内部表示形式的更多信息，请查看[`Arrow`columnar format](https://arrow.apache.org/docs/format/Columnar.html)。
+要了解有关这些数据类型的内部表示形式的更多信息，请查看[`Arrow`柱状格式](https://arrow.apache.org/docs/format/Columnar.html)。
