@@ -1,14 +1,14 @@
 from .dataset import df
 import polars as pl
 
-# drop single column
+# 删除单独的列
 out = df.drop("d")
 
-# drop multiple columns
+# 删除多个列
 out = df.drop(["b", "c"])
 
-# select all but "b" and "c"
+# 选择所有列但是不包括('b', 'c')
 out = df.select(pl.all().exclude(["b", "c"]))
 
-# select only "a"
+# 仅选择列"a"
 out = df.select(pl.col("a"))

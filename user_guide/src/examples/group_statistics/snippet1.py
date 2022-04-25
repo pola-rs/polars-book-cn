@@ -8,9 +8,9 @@ def mkdiff(cumcases: pl.Series) -> pl.Series:
     return cumcases - cumcases.shift(1)
 
 
-# group by uid and aggregate to different Series lists that we later explode and join
-# back on the main DataFrame
-# the mkdiff function gets sorted values on date per group
+# 按uid分组并聚合到不同的系列列表中，我们稍后将其分解并合并
+# 回到主数据帧
+# mkdiff函数获取每个组的日期排序值
 q = (
     dataset.groupby("country")
     .agg(

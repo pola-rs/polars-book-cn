@@ -10,4 +10,4 @@ df = pl.DataFrame(
     }
 )
 
-df.columns = ["banana", "orange", "apple", "grapefruit"]
+df.columns = ["banana", "orange", "apple", "grapefruit"] # 重命名列
