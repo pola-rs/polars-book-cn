@@ -1,21 +1,21 @@
-# Coming from pandas
+# 从pandas入手
 
-Users coming from `Pandas` generally need to know one thing...
+如果你很熟悉`Pandas`，那么你只需要知道一件事：
 
 ```
 polars != pandas
 ```
 
-If your `Polars` code looks like it could be `Pandas` code, it might run, but it likely runs slower than it should.
+如果你的`Polars`代码写起来很像`Pandas`，程序也许可以运行，但是很有可能会慢于它本该有的速度。
 
-Let's go through some typical `Pandas` code and see how we might write that in `Polars`.
+下面我们就通过几个经典`Pandas`代码看看怎样将你的代码写得更加`Polars`。
 
-## Column assignment
+## 列运算
 
 ### `Pandas`
 
 ```python
-# executes sequential
+# 以下代码是顺序执行的
 df["a"] = df["b"] * 10
 df["c"] = df["b"] * 100
 ```
@@ -23,21 +23,21 @@ df["c"] = df["b"] * 100
 ### `Polars`
 
 ```python
-# executes in parallel
+# 以下代码是并发执行的
 df.with_columns([
     (pl.col("b") * 10).alias("a"),
     (pl.col("b") * 100).alias("c"),
 ])
 ```
 
-## Column asignment based on predicate
+### 基于判定的列运算
+
 
 ### `Pandas`
 
 ```python
 df.loc[df["c"] == 2, "a"] = df.loc[df["c"] == 2, "b"]
 ```
-
 ### `Polars`
 
 ```python
@@ -48,12 +48,13 @@ df.with_column(
 )
 ```
 
-Note that `Polars` way is pure, thus the original `DataFrame` is not modified. The `mask` is also not computed twice as in `Pandas`.
-You could prevent this in `Pandas`, but that would require setting a temporary variable.
-Additionally polars can compute every branch of an `if -> then -> otherwise` in parallel. This is valuable, when the branches
-get more expensive to compute.
+注意，`Polars`没有被修改原始`DataFrame`。同时，`mask`（掩膜）也只计算了一次。
 
-## Filtering
+当然你可以在`Pandas`中防止原始`数据表`被修改，但这需要用到临时变量。
+
+另外，`Polars`能并行计算每一个 `if -> then -> otherwise`的分支。当分支的计算复杂度提高时，就能体现并行计算的优势了。
+
+## 筛选
 
 ### `Pandas`
 
@@ -69,15 +70,15 @@ df.filter(
 )
 ```
 
-> This content is under construction. Missing something? Submit a PR! 🙂
+> PS: 这部分内容还在建设中，内容有缺少？欢迎提交PR!
 
-## No Indexes
+## 没有索引列
 
-They are not needed! Not having them makes things easier. Convince us otherwise!
+不需要这一列！没有索引列反而更简单、方便！
 
-## Pandas transform
+## Pandas重塑
 
-The `Pandas` documentation demonstrates an operation on a groupby called `transform`.
+在`Pandas`文档中演示了一种聚合操作 `transform`（重塑）：
 
 ### `Pandas`
 
@@ -90,8 +91,9 @@ df = pd.DataFrame({
 df["size"] = df.groupby("c")["type"].transform(len)
 ```
 
-Here `Pandas` does a groupby on `"c"`, takes column `"type"`, computes the group `len`, and then joins the result back to the original `DataFrame`
-producing:
+使用`Pandas` 要先聚合`"c"`列、截取出`"type"`列、计算`长度`，最后将结果拼接回原始`DataFrame`中。
+
+其结果是:
 
 ```
    c type size
@@ -103,10 +105,9 @@ producing:
 5  2    n    4
 6  2    n    4
 ```
-
 ### `Polars`
 
-In `Polars` the same can be achieved with `window` functions.
+在 `Polars`中可以用 `窗口` 函数来达到相同的目的。
 
 ```python
 df.select([
@@ -137,12 +138,11 @@ shape: (7, 3)
 │ 2   ┆ n    ┆ 4    │
 └─────┴──────┴──────┘
 ```
+因为我们可以将所有的操作放在一个语句中，因此结合多个`窗口`函数，甚至结合不同的组都是可以的!
 
-Because we can store the whole operation in a single expression, we can combine several `window` functions and
-even combine different groups!
+`Polars`会将应用于相同组的`窗口`函数表达式缓存，这样对于单个`select`语句来说方便**且**优雅。
 
-`Polars` will cache window expressions that are applied over the same group, so storing them in a single `select` is both
-convenient **and** optimal.
+比如：
 
 ```python
 df.select([
@@ -174,5 +174,4 @@ shape: (7, 5)
 ├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
 │ 2   ┆ n    ┆ 4    ┆ 5   ┆ 1            │
 └─────┴──────┴──────┴─────┴──────────────┘
-
 ```
