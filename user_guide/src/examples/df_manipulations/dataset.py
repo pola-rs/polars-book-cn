@@ -1,7 +1,7 @@
 import numpy as np
 import polars as pl
 
-np.random.seed(42)
+np.random.seed(42) # 设置随机数种子（保证每次生成的随机数相同）
 
 df = pl.DataFrame(
     {
