@@ -1,19 +1,18 @@
-# Interact with AWS
+# 与AWS互动
 
-> The Interact with AWS page is under construction.
+> "与AWS互动"页面正在建设中。
 
-To read from or write to an AWS bucket, additional dependencies are needed:
+要读取或写入AWS存储桶，需要额外的依赖项：
 
 ```shell
 $ pip install s3fs
 ```
 
-In the next few snippets we'll demonstrate interacting with a `Parquet` file
-located on an AWS bucket.
+在接下来的几个片段中，我们将演示如何与`Parquet`文件交互位于AWS桶上。
 
-## Read
+## 读入
 
-Load a `.parquet` file using:
+使用如下加载一个`.parquet`：
 
 ```python
 import polars as pl
@@ -28,6 +27,6 @@ dataset = pq.ParquetDataset(f"s3://{bucket}/{path}", filesystem=fs)
 df = pl.from_arrow(dataset.read())
 ```
 
-## Write
+## 写入
 
-> This content is under construction.
+> 该内容正在建设中。
