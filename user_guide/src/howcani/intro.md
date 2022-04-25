@@ -1,6 +1,5 @@
-# How can I?
+# How Can I？
 
-This chapter contains some snippets that will get you up to speed with the most
-idiomatic way to get things done in `Polars`.
+本章包含一些片段，可以帮助您了解用`Polars`完成事情的惯用方法的最新信息。
 
-> The How can I chapter is under construction.
+> “How Can I”一章正在建设中。
