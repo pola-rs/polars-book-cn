@@ -3,7 +3,7 @@ import polars as pl
 from .dataset import parsed_sorted as dataset
 
 
-# 创造一个新的polars。每行有差异的序列
+# 创造一个新的polars。每行序列有差异
 def mkdiff(cumcases: pl.Series) -> pl.Series:
     return cumcases - cumcases.shift(1)
 

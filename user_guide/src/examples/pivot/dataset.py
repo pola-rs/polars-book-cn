@@ -1,5 +1,6 @@
 import polars as pl
 
+# 构造DataFrame（数据帧）
 df = pl.DataFrame(
     {
         "foo": ["A", "A", "B", "B", "C"],
