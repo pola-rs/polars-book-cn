@@ -1,32 +1,32 @@
-# Character-Separated Values
+# 字符分隔值
 
-## Read & Write
+## 读&写
 
-Reading a CSV file should look familiar:
+读取CSV文件应该看起来很熟悉:
 
 ```python
 df = pl.read_csv("path.csv")
 ```
 
-CSV files come in many different flavors, so make sure to check the
-[`read_csv()`](POLARS_PY_REF_GUIDE/api/polars.read_csv.html) API.
+CSV文件会有非常多的样式，所以一定要去看一下
+[`read_csv()`](https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.read_csv.html) API。
 
-Writing to a CSV file can be done with the
-[`write_csv()`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.write_csv.html) method.
+写入CSV文件可以用
+[`write_csv()`](https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.write_csv.html)方法。
 
 ```python
 df = pl.DataFrame({"foo": [1, 2, 3], "bar": [None, "bak", "baz"]})
 df.write_csv("path.csv")
 ```
 
-## Scan
+## 扫描
 
-`Polars` allows you to *scan* a CSV input. Scanning delays the actual parsing of the file
-and instead returns a lazy computation holder called a `LazyFrame`.
+`Polars`允许你*扫描*CSV文件。扫描操作延迟了对文件的实际解析，
+并返回一个延迟计算的容器`LazyFrame`。
 
 ```python
 df = pl.scan_csv("path.csv")
 ```
 
-If you want to know why this is desirable,
-you can read more about those `Polars` optimizations [here](../../optimizations/intro.md).
+如果你想了解更多这样设计的精妙之处，
+请移步`Polars`[Optimizations](../../optimizations/intro.md)这一章。
