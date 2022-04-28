@@ -61,18 +61,18 @@ Let's time the result before and after optimization.
 **Without optimization**, `predicate_pushdown=False` and `projection_pushdown=False`.
 
 ```text
-real	0m3,273s
-user	0m9,284s
-sys	0m1,081s
+real    0m3,273s
+user    0m9,284s
+sys    0m1,081s
 ```
 
 **With optimization**, `predicate_pushdown` and `projection_pushdown` flags both to
 `True`.
 
 ```text
-real	0m1,732s
-user	0m7,581s
-sys	0m0,783s
+real    0m1,732s
+user    0m7,581s
+sys    0m0,783s
 ```
 
 We can see that we almost reduced query time by half on this simple query. With real
