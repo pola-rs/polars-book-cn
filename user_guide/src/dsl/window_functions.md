@@ -60,7 +60,6 @@ print(out)
 ```
 
 ```text
-
 {{#include ../outputs/expressions/window_group_2.txt}}
 ```
 
