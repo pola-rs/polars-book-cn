@@ -1,6 +1,6 @@
-# Read from MySQL, Postgres, Sqlite, Redshift, Clickhouse
+# 读取MySQL、Postgres、Sqlite、Redshift、Clickhouse
 
-To read from one of the supported databases `connector-x` needs to be installed.
+从以上数据库中读取数据，请先安装`connector-x`。
 
 ```shell
 $  pip install connectorx>=0.2.0a3
