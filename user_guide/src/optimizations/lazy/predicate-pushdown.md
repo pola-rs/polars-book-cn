@@ -96,17 +96,17 @@ performance.
 **Without optimization**, `predicate_pushdown=False` flag:
 
 ```text
-real	0m2,401s
-user	0m5,457s
-sys	0m0,894s
+real    0m2,401s
+user    0m5,457s
+sys    0m0,894s
 ```
 
 **With optimization**, `predicate_pushdown=True` flag:
 
 ```text
-real	0m1,597s
-user	0m6,143s
-sys	0m0,647s
+real    0m1,597s
+user    0m6,143s
+sys    0m0,647s
 ```
 
 ## Relational algebra

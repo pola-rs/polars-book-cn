@@ -1,29 +1,17 @@
-# Other optimizations
+# 其它优化
 
-> The Other optimizations page is under construction.
+> `其它优化`页面正在构建中。
 
-Besides predicate and projection pushdown, `Polars` does other optimizations.
+除了谓词和投影下推之外，`Polars`还进行其他优化。
 
-One important topic is optional caching and parallelization. It's easy to imagine having two
-different `DataFrame` computations that lead to a scan of the same file. `Polars` may cache
-the scanned file to prevent scanning the same file twice. However, if you want to, you
-may override this behavior and force `Polars` to read the same file. This could be faster
-because the scan can be done in parallel.
+一个重要的主题是可选的缓存和并行化。很容易想象，有两种不同的`DataFrame`计算会导致扫描同一个文件`Polars`可能会缓存扫描的文件，以防止扫描同一文件两次。但是，如果您愿意，可以重写此行为并强制`Polars`读取同一文件。这可能会更快，因为扫描可以并行进行。
 
-## Join parallelization
+## 联结并行化
 
-If we look at the previous query, we see that the join operation has as input a
-computation path with `data/reddit.csv` as root and one path with `data/runescape.csv`
-as root. `Polars` can observe that there are no dependencies between the two `DataFrame`s and
-will read both files in parallel. If other operations are done before the join (e.g.
-groupby, filters, etc.) they are also executed in parallel.
+如果我们查看上一个查询，就会发现join操作有一个输入带有`data/reddit.csv`的计算路径作为根目录，一个路径带有`data/runescape.csv`作为根目录。`Polars`可以观察到两个`DataFrame`之间没有依赖关系，将并行读取这两个文件。如果在加入之前完成了其他操作（例如groupby、filters等），它们也会并行执行。
 
 ![](../../outputs/projection_pushdown/graph-optimized.png)
 
-## Simplify expressions
+## 简化表达式
 
-Some other optimizations that are done are expression simplifications. The impact of
-these optimizations is less than that of predicate and projection pushdown, but they
-likely add up. You can
-[track this issue](https://github.com/pola-rs/polars/issues/139) to see the latest
-status of those.
+其他一些优化是表达式简化。这些优化的影响比谓词和投影下推的影响小，但它们很可能加起来。你可以[追踪这个问题](https://github.com/pola-rs/polars/issues/139)查看这些的最新状态。
