@@ -1,14 +1,14 @@
-# Interact with Google BigQuery
+# 与Google的BigQuery交互
 
-To read or write from GBQ, additional dependencies are needed:
+读写BigQuery数据库，需要额外依赖项：
 
 ```shell
 $ pip install google-cloud-bigquery
 ```
 
-## Read
+## 读取
 
-We can load a query into a `DataFrame` like this:
+从BigQuery查询并得到`DataFrame`，可以像这样：
 
 ```python
 import polars as pl
@@ -16,17 +16,17 @@ from google.cloud import bigquery
 
 client = bigquery.Client()
 
-# Perform a query.
+# 执行查询
 QUERY = (
     'SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` '
     'WHERE state = "TX" '
     'LIMIT 100')
-query_job = client.query(QUERY)  # API request
-rows = query_job.result()  # Waits for query to finish
+query_job = client.query(QUERY)  # API 请求
+rows = query_job.result()  # 等待查询完成
 
 df = pl.from_arrow(rows.to_arrow())
 ```
 
-## Write
+## 写入
 
-> This content is under construction.
+> 内容还在建设中
