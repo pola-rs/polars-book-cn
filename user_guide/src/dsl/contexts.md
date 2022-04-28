@@ -1,37 +1,36 @@
-# Expression contexts
+# 表达式上下文
 
-You cannot use an expression anywhere. An expression needs a context, the available contexts are:
+表达式几乎可以在任何地方使用，但是表达式需要一个上下文，这些上下文包括：
 
-- selection: `df.select([..])`
-- groupy aggregation: `df.groupby(..).agg([..])`
-- hstack/ add columns: `df.with_columns([..])`
+- 选择: `df.select([..])`
+- 分组集合: `df.groupby(..).agg([..])`
+- hstack 或者增加列: `df.with_columns([..])`
 
-## Syntactic sugar
+## 语法糖
 
-The reason for such a context, is that you actually are using the Polars lazy API, even if you use it in eager.
-For instance this snippet:
+需要上下文的主要原因是：即使实在饥饿模式中，你也在使用 Polars 的惰性API。
+比如如下代码实例：
 
 ```python
 df.groupby("foo").agg([pl.col("bar").sum()])
 ```
 
-actually desugars to:
+去掉语法糖后：
 
 ```python
 (df.lazy().groupby("foo").agg([pl.col("bar").sum()])).collect()
 ```
 
-This allows Polars to push the expression into the query engine, do optimizations, and cache intermediate results.
+这种设计可以让 Polars 把表达式推送给查询引擎，进行一些优化和缓存操作。
 
-## Select context
+## `select` 上下文
+ 
+在 `select` 上下文中，选择操作是按照列进行的。在选择向下文的表达式必须要返回 `Series` 并且这些 `Series` 需要有相同的长度或者长度为1。
 
-In the `select` context the selection applies expressions over columns. The expressions in this context must produce `Series` that are all
-the same length or have a length of `1`.
+一个长度为 1 的 `Series` 会被广匹配 `DataFrame` 的高度。
+注意，`select` 可能会返回一个新的列，这个列可能是一些聚合的结果、一些表达式的组合或者字符串。
 
-A `Series` of a length of `1` will be broadcasted to match the height of the `DataFrame`.
-Note that a `select` may produce new columns that are aggregations, combinations of expressions, or literals.
-
-#### Selection context
+#### 选择上下文
 
 ```python
 {{#include ../examples/expressions/select_context_2.py:4:}}
@@ -42,9 +41,9 @@ print(out)
 {{#include ../outputs/expressions/select_context_2.txt}}
 ```
 
-**Add columns**
+**添加列**
 
-Adding columns to a `DataFrame` using `with_columns` is also the `selection` context.
+采用 `with_columns` 给 `DataFrame` 增加列同样也是选择上下文。
 
 ```python
 {{#include ../examples/expressions/with_column_context_1.py:4:}}
@@ -55,9 +54,9 @@ print(out)
 {{#include ../outputs/expressions/wc_context_1.txt}}
 ```
 
-## Groupby context
+## Groupby 上下文
 
-In the `groupby` context expressions work on groups and thus may yield results of any length (a group may have many members).
+在 `groupby` 上下文中的表达式主要作用域分组上，因此他们会返回任意长度（每个组可能有不同数量的成员）。
 
 ```python
 {{#include ../examples/expressions/agg_context_1.py:4:}}
@@ -68,4 +67,4 @@ print(out)
 {{#include ../outputs/expressions/agg_context_1.txt}}
 ```
 
-Besides the standard `groupby`, `groupby_dynamic`, and `groupby_rolling` are also entrances to the `groupby context`.
+除了标准的 `groupby`，还有 `groupby_dynamic` 和 `groupby_rolling` 也属于 Groupby 上下文。
