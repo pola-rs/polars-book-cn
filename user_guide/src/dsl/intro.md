@@ -1,8 +1,5 @@
-# Polars Expressions
+# Polars 表达式
 
-`Polars` has a powerful concept called expressions. Polars expressions can be used in
-various contexts and are a functional mapping of `Fn(Series) -> Series`, meaning that they have a `Series` as an input and
-a `Series` as an output. By looking at this functional definition, we can see that the output of an `Expr` also can serve
-as the input of an `Expr`.
+`Polars`有一个强大的概念叫做表达式。`Polars`表达式可以在各种上下文中使用，是`Fn（Series）->Series`的函数映射，这意味着它们有一个`Series`作为输入，一个`Series`作为输出。通过查看这个函数定义，我们可以看到`Expr`的输出也可以用作`Expr`的输入。
 
-That may sound a bit strange, so let's start with an example.
+这听起来可能有点奇怪，所以让我们从一个例子开始。

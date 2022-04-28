@@ -1,12 +1,10 @@
-# Numpy interop
+# 与Numpy交互
 
-`Polars` expressions support `NumPy` [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html). See [here](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs)
-for a list on all supported numpy functions.
+`Polars` 表达式支持`NumPy` [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html)。 [这里](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs)查看所有受支持的numpy函数的列表。
 
-This means that if a function is not provided by `Polars`, we can use `NumPy` and we still have fast columnar operation through
-the `NumPy` API.
+这意味着，如果一个函数不是由`Polars`提供的，我们可以使用`NumPy`，我们仍然可以通过`NumPy`API进行快速的列操作。
 
-## Example
+## 实例
 
 ```python
 {{#include ../examples/expressions/numpy_ufunc.py}}
@@ -19,4 +17,4 @@ print(out)
 
 ## Gotcha's
 
-Read more about the [gotcha's here](POLARS_ROOT/howcani/interop/numpy.html).
+阅读更多关于 [gotcha's 这里](POLARS_ROOT/howcani/interop/numpy.html).
