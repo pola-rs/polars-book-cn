@@ -1,12 +1,12 @@
 # Parquet
 
-Loading or writing [`Parquet` files](https://parquet.apache.org/) is lightning fast.
-`Pandas` uses [`PyArrow`](https://arrow.apache.org/docs/python/) -`Python` bindings
-exposed by `Arrow`- to load `Parquet` files into memory, but it has to copy that data into
-`Pandas` memory. With `Polars` there is no extra cost due to
-copying as we read `Parquet` directly into `Arrow` memory and *keep it there*.
+加载或写入 [`Parquet`文件](https://parquet.apache.org/)快如闪电。
 
-## Read & write
+`Pandas` 使用 [`PyArrow`](https://arrow.apache.org/docs/python/)（用于Apache `Arrow`的`Python`库）将`Parquet`数据加载到内存，但不得不将数据复制到了`Pandas`的内存空间中。
+
+`Polars`就没有这部分额外的内存开销，因为读取`Parquet`时，`Polars`会直接复制进`Arrow`的内存空间，且*始终使用这块内存*。
+
+## 读&写
 
 ```python
 df = pl.read_parquet("path.parquet")
@@ -17,14 +17,12 @@ df = pl.DataFrame({"foo": [1, 2, 3], "bar": [None, "bak", "baz"]})
 df.write_parquet("path.parquet")
 ```
 
-## Scan
+## 扫描
 
-`Polars` allows you to *scan* a `Parquet` input. Scanning delays the actual parsing of the
-file and instead returns a lazy computation holder called a `LazyFrame`.
+Polars允许你扫描`Parquet`输入。扫描操作延迟了对文件的实际解析，并返回一个延迟计算的容器`LazyFrame`。
 
 ```python
 df = pl.scan_parquet("path.parquet")
 ```
 
-If you want to know why this is desirable,
-you can read more about those `Polars` optimizations [here](../../optimizations/intro.md).
+如果你想了解更多这样设计的精妙之处，请移步`Polars`[Optimizations](../../optimizations/intro.md)这一章。
