@@ -1,15 +1,14 @@
 # Folds
 
-`Polars` provides expressions/methods for horizontal aggregations like [`sum`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.sum.html),
-[`min`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.min.html), [`mean`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.mean.html),
-etc. by setting the argument `axis=1`. However, when you need a more complex aggregation the default methods provided by the
-`Polars` library may not be sufficient. That's when `folds` come in handy.
+`Polars` 提供了横向表达式或者方法，比如[`sum`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.sum.html),
+[`min`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.min.html), [`mean`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.mean.html) 等等，
+我们只需要设置 `axis=1` 即可实现横向聚合。但是，当我们需要复杂的聚合模式时，`Polars` 提供的基本函数可能不能胜任，这时候我们需要 `fold` 函数。
 
-The `Polars` `fold` expression operates on columns for maximum speed. It utilizes the data layout very efficiently and often has vectorized execution.
+`fold` 函数在列方向的性能最佳，它很好的利用了数据的内存格局，通常还会伴随向量化操作。
 
-Let's start with an example by implementing the `sum` operation ourselves, with a `fold`.
+让我们通过里一个例子看看如何受使用 `fold` 实现 `sum` 函数。
 
-## Manual Sum
+## 手工 `sum`
 
 ```python
 {{#include ../examples/expressions/fold_1.py:4:}}
@@ -20,13 +19,12 @@ print(out)
 {{#include ../outputs/expressions/folds_1.txt}}
 ```
 
-The snippet above recursively applies the function `f(acc, x) -> acc` to an accumulator `acc` and a new column `x`.
-The function operates on columns individually and can take advantage of cache efficiency and vectorization.
+上面的例子中，函数 `f(acc, x) -> acc` 被反复调用并把结果累加到 `acc` 变量，最终把结果放入 x 列。
+这个函数按照列执行，并且充分利用了缓存和向量化操作。
 
-## Conditional
+## 条件语句
 
-In the case where you'd want to apply a condition/predicate on all columns in a `DataFrame` a `fold` operation can be
-a very concise way to express this.
+当我们希望对一个 `DataFrame` 的所有列是施加条件语句的时候，采用 `fold` 就非常简洁。
 
 ```python
 {{#include ../examples/expressions/fold_2.py:4:}}
@@ -37,14 +35,12 @@ print(out)
 {{#include ../outputs/expressions/folds_2.txt}}
 ```
 
-In the snippet we filter all rows where **each** column value is `>` `1`.
+上面的例子中，我们选择所有行，这些行的每一列都大于 1。
 
-## Folds and string data
+## `fold` 和 字符串数据
 
-Folds could be used to concatenate string data. However, due to the materialization of intermediate columns, this
-operation will have squared complexity.
-
-Therefore, we recommend using the `concat_str` expression for this.
+Fold 可以用来连接字符串。但是由于这个操作会产生一些中间结果，这个操作是 `O(n^2)` 的时间复杂度。
+因此，我们推荐使用 `concat_str` 表达式。
 
 ```python
 {{#include ../examples/expressions/fold_3.py:3:}}
