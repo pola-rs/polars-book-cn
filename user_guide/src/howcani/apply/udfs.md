@@ -1,48 +1,37 @@
-# Apply custom functions
+# 应用自定义函数
 
-There will always be an operation that is so particular that one cannot do it with the public API of
-`Polars`. Luckily polars allows you to apply custom functions. This means one can
-define a `Python` function (or `lambda`) and pass it to the logical plan.
+总会有一个操作非常特殊，以至于人们无法用`Polars`的公共API来完成它。幸运的是，polars允许您应用自定义函数。这意味着可以定义一个`Python`函数（或`lambda`），并将其传递给逻辑计划。
 
-Let's say we want to apply a mapping operation to a `Polars` `Series` in a eager
-fashion. This could be done as shown below:
+假设我们想要以一种迫切（eager）的方式将一个映射操作应用于一个`Polars` `Series`。这可以按如下所示进行：
 
 ```python
 {{#include ../../examples/udfs/snippet1.py}}
 ```
 
-returning:
+返回：
 
 ```text
 {{#include ../../outputs/udfs/output1.txt}}
 ```
 
-There are a few gotchas however, due to the fact `Polars` `Series` can only contain a
-single datatype.
+然而，由于`Polars` `Series`只能包含一个数据类型，因此存在一些问题。
 
-In the `.apply()` method above we did not specify the datatype the `Series` should
-contain. `Polars` tries to infer the output datatype beforehand by calling the provided
-function itself. If it later gets a datatype that does not match the initially inferred
-type, the value will be indicated as missing (`null`).
+在上面的`apply()`方法中我们没有指定`Series`应该包含的数据类型`Polars`试图通过调用提供的函数本身来提前推断输出数据类型。如果它后来得到的数据类型与最初推断的类型不匹配，则该值将被指示为缺失（`null`）。
 
-If the output dtype is already known, it is thus recommended to provide that information to `Polars` (via
-the `dtype` option of `.apply()`).
+如果输出数据类型已知，建议将该信息提供给`Polars`（通过`.apply()`的`dtype`选项）。
 
-Note it is possible to change datatype as a result of applying a function: the `lambda`
-we used above got an integer as input and returned a string (`pl.Utf8`) after finding
-the right key in the `my_map` dictionary.
+注意，应用函数后可能会更改数据类型：我们上面使用的`lambda`得到一个整数作为输入，并在`my_map`字典中找到正确的键后返回一个字符串（`pl.Utf8`）。
 
-# to map or to apply?
+# 使用map或者apply?
 
-There are two way to use custom function, either by using `map`, or by using `apply`. Which one you need depends on
-the context where the custom functions are used:
+使用自定义函数有两种方法，一种是使用`map`，另一种是使用`apply`。您需要哪一个取决于使用自定义函数的上下文：
 
 - `apply`
-
-  - selection context: the custom function is applied over all values `Fn(value) -> y`
-  - groupby context: the custom function is applied over all groups `Fn([group_value_1, ... group_value_n]) -> y`
+  
+  - 选择上下文：自定义函数应用于所有值 `Fn(value) -> y`
+  - 聚合上下文：自定义函数应用于所有组 `Fn([group_value_1, ... group_value_n]) -> y`
 
 - `map`
-
-  - selection context: the custom function is applied `Series` and must produce a new `Series` `Fn(Series) -> Series`
-  - groupby context: the custom function is applied `Series` and must produce a new `Series` `Fn(Series) -> Series`
+  
+  - 选择上下文：自定义函数应用于`Series`，并且必须生成一个新的`Series` `Fn(Series) -> Series`
+  - 聚合上下文：自定义函数应用于`Series`，并且必须生成一个新的`Series` `Fn(Series) -> Series`
