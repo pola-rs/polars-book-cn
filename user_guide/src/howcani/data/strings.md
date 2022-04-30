@@ -1,36 +1,28 @@
-# Process strings
+# 处理字符串
 
-Thanks to its `Arrow` backend, `Polars` string operations are much faster compared to the
-same operations performed with `NumPy` or `Pandas`. In the latter, strings are stored as
-`Python` objects. While traversing the `np.array` or the `pd.Series` the CPU needs to
-follow all the string pointers, and jump to many random memory locations -- which
-is very cache-inefficient. In `Polars` (via the `Arrow` data
-structure) strings are contiguous in memory. Thus traversing is cache-optimal and
-predictable for the CPU.
+感谢`Arrow` 后端, `Polars`字符串操作比使用`NumPy`或`Pandas`执行的相同操作快得多。在后者中，字符串存储为`Python`对象。 在遍历`np.array` or the `pd.Series`时，CPU需要跟踪所有字符串指针，并跳转到许多随机内存位置——这是非常低效的缓存。在`Polars`（通过`Arrow`数据结构）中，字符串在内存中是连续的。因此，对于CPU来说，遍历缓存是最优的，也是可预测的。
 
-The string processing functions available in `Polars` are available in the
-[`str` namespace](POLARS_PY_REF_GUIDE/series.html#strings).
+`Polars`中可用的字符串处理函数可以在 [``str` namespace](POLARS_PY_REF_GUIDE/series.html#strings) 中找到。
 
-Below are a few examples. To compute string lengths:
+下面是几个例子。要计算字符串长度，请执行以下操作：
 
 ```python
 {{#include ../../examples/strings/snippet1.py}}
 ```
 
-returning:
+返回：
 
 ```text
 {{#include ../../outputs/strings/output1.txt}}
 ```
 
-And below a regex pattern to filter out articles (`the`, `a`, `and`, *etc.*) from a
-sentence:
+下面是从句子中过滤出冠词（`the`、`a`、`and`、*etc.*）的正则表达式模式：
 
 ```python
 {{#include ../../examples/strings/snippet2.py}}
 ```
 
-yielding:
+输出：
 
 ```text
 {{#include ../../outputs/strings/output2.txt}}
