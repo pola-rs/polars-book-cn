@@ -1,33 +1,29 @@
-# Timestamp parsing
+# 时间戳解析
 
-`Polars` offers `4` time datatypes:
+`Polars` 提供了`4`时间数据类型：
 
-- `pl.Date`, to be used for **date** objects: the number of days since the UNIX epoch as
-  a 32 bit signed integer.
-- `pl.Datetime`, to be used of **datetime** ojects: the number of nanoseconds since the
-  UNIX epoch as a 64 bit signed integer.
-- `pl.Time`, encoded as the number of nanoseconds since midnight.
+- `pl.Date`, 用于**日期**对象：自UNIX纪元以来的天数，为32位有符号整数。
+- `pl.Datetime`, 用于**datetime**项目：自UNIX纪元以来的纳秒数，为64位有符号整数。
+- `pl.Time`, 编码为午夜后的纳秒数。
 
-`Polars` string (`pl.Utf8`) datatypes can be parsed as either of them. You can let
-`Polars` try to guess the format of the date\[time\], or explicitly provide a `fmt`
-rule.
+`Polars` 字符串(`pl.Utf8`) 数据类型可以解析为它们中的任何一个。您可以让`Polars`尝试猜测日期\[time\]的格式，或者显式提供`fmt`规则。
 
-For instance (check [this link](https://strftime.org/) for an comprehensive list):
+举例来说（查看此[此链接](https://strftime.org/)以获取全面列表）：
 
-- `"%Y-%m-%d"` for `"2020-12-31"`
-- `"%Y/%B/%d"` for `"2020/December/31"`
-- `"%B %y"` for `"December 20"`
+- `"%Y-%m-%d"` 对于 `"2020-12-31"`
+- `"%Y/%B/%d"` 对于 `"2020/December/31"`
+- `"%B %y"` 对于 `"December 20"`
 
-Below a quick example:
+下面是一个简单的例子：
 
 ```python
 {{#include ../../examples/timestamps/snippet.py}}
 ```
 
-returning:
+返回：
 
 ```text
 {{#include ../../outputs/timestamps/output.txt}}
 ```
 
-All datetime functionality is shown in the [`dt` namespace](POLARS_PY_REF_GUIDE/series.html#timeseries).
+所有datetime功能都显示在 [`dt` 命名空间](POLARS_PY_REF_GUIDE/series.html#timeseries)中。
