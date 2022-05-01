@@ -1,6 +1,6 @@
-# Coming from Apache Spark
+# 从 Apache Spark 转化
 
-## Column-based API vs. Row-based API
+## 基于列的API vs. 基于行的API
 
 `Spark` `DataFrame` 类似于一个行的集合，而 `Polars` `DataFrame` 更接近于一个列的集合。这意味着你可以在 `Polars` 中以 `Spark` 中不可能的方式组合列，因为 `Spark` 保留了每一行中的数据关系。
 
@@ -113,7 +113,7 @@ shape: (3, 2)
 └─────┴─────┘
 ```
 
-同样，这里的两个 `head`  表达式是完全独立的，`a` 与 `5` 和 `b` 与 `4` 的配对纯粹是表达式输出的两列并列的结果。
+同样，这里的两个 `head` 表达式是完全独立的，`a` 与 `5` 和 `b` 与 `4` 的配对纯粹是表达式输出的两列并列的结果。
 
 为了在 `Spark` 中完成类似的工作，你需要生成一个人工的 key 使你能够以相同的方式连接这些值。
 
