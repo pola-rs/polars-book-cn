@@ -1,10 +1,10 @@
-# Coming from Apache Spark
+# 从 Apache Spark 转化
 
-## Column-based API vs. Row-based API
+## 基于列的 API vs. 基于行的 API
 
-Whereas the `Spark` `DataFrame` is analogous to a collection of rows, a `Polars` `DataFrame` is closer to a collection of columns. This means that you can combine columns in `Polars` in ways that are not possible in `Spark`, because `Spark` preserves the relationship of the data in each row.
+`Spark` `DataFrame` 类似于一个行的集合，而 `Polars` `DataFrame` 更接近于一个列的集合。这意味着你可以在 `Polars` 中以 `Spark` 中不可能的方式组合列，因为 `Spark` 保留了每一行中的数据关系。
 
-Consider this sample dataset:
+考虑一下下面这个样本数据集。
 
 ```python
 import polars as pl
@@ -26,9 +26,9 @@ dfs = spark.createDataFrame(
 )
 ```
 
-### Example 1: Combining `head` and `sum`
+### 案例 1: 合并 `head` 与 `sum`
 
-In `Polars` you can write something like this:
+在 `Polars` 中你可以写出下面的语句：
 
 ```python
 df.select([
@@ -37,7 +37,7 @@ df.select([
 ])
 ```
 
-Output:
+该代码段输出:
 
 ```
 shape: (2, 2)
@@ -52,9 +52,9 @@ shape: (2, 2)
 └─────┴─────┘
 ```
 
-The expressions on columns `foo` and `bar` are completely independent. Since the expression on `bar` returns a single value, that value is repeated for each value output by the expression on `foo`. But `a` and `b` have no relation to the data that produced the sum of `9`.
+列 `foo` 和 `bar` 上的表达式是完全独立的。由于 `bar` 上的表达式返回一个单一的值，这个值在 `foo` 表达式输出的每个值中都会重复，但是 `a` 和 `b` 与产生 `9` 没有关系。
 
-To do something similar in `Spark`, you'd need to compute the sum separately and provide it as a literal:
+要在 `Spark` 中做类似的事情，你需要单独计算总和，并将其作为字面值返回：
 
 ```python
 from pyspark.sql.functions import col, sum, lit
@@ -76,7 +76,7 @@ bar_sum = (
 )
 ```
 
-Output:
+该代码段输出:
 
 ```
 +---+---+
@@ -87,9 +87,9 @@ Output:
 +---+---+
 ```
 
-### Example 2: Combining Two `head`s
+### 案例 2: 合并两个 `head`
 
-In `Polars` you can combine two different `head` expressions on the same DataFrame, provided that they return the same number of values.
+在 `Polars` 中你可以在同一个 DataFrame 上结合两个不同的 `head` 表达式，只要它们返回相同数量的值。
 
 ```python
 df.select([
@@ -98,7 +98,7 @@ df.select([
 ])
 ```
 
-Output:
+该代码段输出:
 
 ```
 shape: (3, 2)
@@ -113,9 +113,9 @@ shape: (3, 2)
 └─────┴─────┘
 ```
 
-Again, the two `head` expressions here are completely independent, and the pairing of `a` to `5` and `b` to `4` results purely from the juxtaposition of the two columns output by the expressions.
+同样，这里的两个 `head` 表达式是完全独立的，`a` 与 `5` 和 `b` 与 `4` 的配对纯粹是表达式输出的两列并列的结果。
 
-To accomplish something similar in `Spark`, you would need to generate an artificial key that enables you to join the values in this way.
+为了在 `Spark` 中完成类似的工作，你需要生成一个人工的 key 使你能够以相同的方式连接这些值。
 
 ```python
 from pyspark.sql import Window
@@ -146,7 +146,7 @@ bar_dfs = (
 )
 ```
 
-Output:
+该代码段输出:
 
 ```
 +---+---+
