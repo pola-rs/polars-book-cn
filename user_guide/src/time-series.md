@@ -1,14 +1,13 @@
-# Time-series
+# 时间序列
 
-> The Time-series page is under construction.
+> `时间序列`文章正在建设中
 
-We are still working on this page. But here is already some example to show how we can use `groupby_dynamic` to group by
-a time window.
+我们仍在这一页上部署。但这里已经有一些例子来展示如何使用`groupby_dynamic`按时间窗口分组。
 
 ```python
 import polars as pl
 from datetime import datetime
-# create an example dataframe
+# 创建一个数据帧实例
 df = pl.DataFrame(
     {
         "time": pl.date_range(
@@ -45,7 +44,7 @@ shape: (7, 2)
 └─────────────────────┴─────┘
 ```
 
-Group by windows of 1 hour starting at 2021-12-16 00:00:00.
+从2021-12-16 00:00:00开始，按1小时的窗口分组。
 
 ```python
 (
@@ -70,7 +69,7 @@ shape: (3, 3)
 └─────────────────────┴─────────────────────┴─────────────────────┘
 ```
 
-The window boundaries can also be added to the aggregation result
+窗口边界也可以添加到聚合结果中
 
 ```python
 (
@@ -95,7 +94,7 @@ shape: (3, 4)
 └─────────────────────┴─────────────────────┴─────────────────────┴────────────┘
 ```
 
-When closed="left", should not include right end of interval \[lower_bound, upper_bound)
+当closed=“left”，不应包括区间\[下限、上限]的右端
 
 ```python
 (
@@ -120,7 +119,7 @@ shape: (3, 3)
 └─────────────────────┴────────────┴─────────────────────────────────────┘
 ```
 
-When closed="both" the time values at the window boundaries belong to 2 groups.
+当closed="both"，窗口边界处的时间值分为两组。
 
 ```python
 (
@@ -145,7 +144,7 @@ shape: (3, 2)
 └─────────────────────┴────────────┘
 ```
 
-Dynamic groupbys can also be combined with grouping on normal keys
+动态groupbys还可以与普通键上的分组相结合
 
 ```python
 pl.DataFrame(
