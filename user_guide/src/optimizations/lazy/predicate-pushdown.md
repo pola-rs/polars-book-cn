@@ -1,28 +1,22 @@
-# Predicate pushdown
+# 谓词下推
 
-> The Predicate pushdown page is under construction
+> `谓词下推`章节正在构建中
 
-Predicate pushdown is an optimization `Polars` does that reduces query times and memory
-usage. A predicate is database jargon for applying a filter on some table, thereby
-reducing the number of rows on that table.
+谓词下推是`Polars`所做的优化，可以减少查询时间和内存使用。谓词是数据库行话，用于在某个表上应用过滤器，从而减少该表上的行数。
 
-So let's see if we can load some Reddit data and filter on a few predicates.
+那么，让我们看看是否可以加载一些Reddit数据并对几个谓词进行过滤。
 
 ```python
 {{#include ../../examples/predicate_pushdown/snippet1.py}}
 ```
 
-If we were to run this query above nothing would happen! This is due to the lazy evaluation.
-Nothing will happen until specifically requested. This allows Polars to see the whole
-context of a query and optimize just in time for execution.
+如果我们在上面运行这个查询，什么都不会发生！这是由于懒惰的评估。
+除非特别要求，否则不会发生任何事情。这使Polars能够看到查询的整个上下文，并及时优化以执行。
 
-Execution is requested by the `.collect` method. This would query all available data.
-While you're writing, optimizing, and checking your query, this is often undesirable. Another
-method that calls for execution is the `.fetch` method. `.fetch` takes a parameter
-`n_rows` and tries to 'fetch' that number of rows at the data source (no guarantees are
-given though).
+`.collect`方法请求执行。这将查询所有可用数据。
+在编写、优化和检查查询时，这通常是不可取的。另一个调用执行的方法是`.fetch`方法。`.fetch`接受一个参数`n_rows`，并尝试在数据源上'获取'该数量的行（尽管没有给出任何保证）。
 
-So let's "fetch" ~10 Million rows from the source file and apply the predicates.
+因此，让我们从源文件中“获取”约1000万行，并应用谓词。
 
 ```python
 q1.fetch(n_rows=int(1e7))
@@ -32,11 +26,11 @@ q1.fetch(n_rows=int(1e7))
 {{#include ../../outputs/predicate_pushdown/output1.txt}}
 ```
 
-Above we see that from the 10 Million rows, 61503 rows match our predicate.
+上面我们看到，从1000万行中，61503行匹配我们的谓词。
 
-## Break it down
+## 分解
 
-In `Polars` we can visualize the query plan. Let's take a look.
+在`Polars`中，我们可以可视化查询计划。我们来看看。
 
 ```python
 q1.show_graph(optimized=False)
@@ -44,17 +38,13 @@ q1.show_graph(optimized=False)
 
 ![](../../outputs/predicate_pushdown/graph1.png)
 
-The astute reader maybe would notice that our query is not very optimal because we have
-three separate *FILTER* nodes. That means that after every *FILTER* a new `DataFrame` is
-allocated, which will be input to the next *FILTER* and then deleted from memory -- that
-must be redundant, and you know what... they'd be right. The predicates should be
-combined. We should have written this query:
+精明的读者可能会注意到，我们的查询不是很理想，因为我们有三个独立的*FILTER*节点。这意味着在每一个*过滤器*分配一个新的`DataFrame`，它将被输入到下一个*过滤器*中，然后从内存中删除--这一定是多余的，你知道吗... 他们是对的。谓词应该组合在一起。我们应该写下这个问题：
 
 ```python
 {{#include ../../examples/predicate_pushdown/snippet2.py}}
 ```
 
-That would translate to:
+这将转化为：
 
 ```python
 q2.show_graph(optimized=False)
@@ -62,13 +52,11 @@ q2.show_graph(optimized=False)
 
 ![](../../outputs/predicate_pushdown/graph2.png)
 
-As we can see the predicates are combined. This would lead to less copying of data.
+正如我们所见，谓词是组合在一起的。这将减少数据的复制。
 
-## In comes optimization
+## 优化随之而来
 
-`Polars` tries to save that mental overhead from the query writer and combines predicates
-for you. Besides that, it pushes predicates down to the scan level! Let's see how our
-optimized query looks.
+`Polars`试图从查询编写器中节省这种精神开销，并为您组合谓词。除此之外，它还将谓词下推到扫描级别！让我们看看优化后的查询是什么样子。
 
 ```python
 q1.show_graph(optimized=True)
@@ -76,24 +64,17 @@ q1.show_graph(optimized=True)
 
 ![](../../outputs/predicate_pushdown/graph1-optimized.png)
 
-It may be hard to see, but what is clear is that there is only a single node: the *CSV
-SCAN*. The predicate filtering is done during the reading of the csv. This means that
-this query's memory overhead is reduced by filtering factor! This makes a huge impact.
+这可能很难看到，但很清楚的是，只有一个节点：*CSV扫描*。谓词过滤是在读取csv的过程中完成的。这意味着该查询的内存开销通过过滤因子减少了！这产生了巨大的影响。
 
-### Memory
+### 内存
 
-As we have seen there were ~ 62,000 rows left after the *FILTER*. That means that (aside
-for some memory overhead of the batch size and filter operations) we use \\(
-\\frac{6.2\\text{e-}4}{1\\text{e-}7} \\sim 0.6 \\text{%} \\) of the memory we would
-during an eager evaluation where we first would read the whole table in memory before
-applying a filter.
+正如我们所看到的，在*过滤器*之后还剩下约62000行。这意味着（除了批量大小和筛选操作的一些内存开销）我们使用\\(\\frac{6.2\\text{e-}4}{1\\text{e-}7} \\sim 0.6 \\text{%} \\)在一次急切的评估中，我们将首先读取内存中的整个表，然后再应用过滤器。
 
-### Performance
+### 性能
 
-At the time of writing this, the predicate pushdown also increased the query time
-performance.
+在撰写本文时，谓词下推也提高了查询时间性能。
 
-**Without optimization**, `predicate_pushdown=False` flag:
+**无优化**, `predicate_pushdown=False` 标签:
 
 ```text
 real    0m2,401s
@@ -101,7 +82,7 @@ user    0m5,457s
 sys    0m0,894s
 ```
 
-**With optimization**, `predicate_pushdown=True` flag:
+**有优化**, `predicate_pushdown=True` 标签:
 
 ```text
 real    0m1,597s
@@ -109,14 +90,10 @@ user    0m6,143s
 sys    0m0,647s
 ```
 
-## Relational algebra
+## 关系代数
 
-In the visualization of the query plan, you see a \\( \\sigma \\) symbol. This indicates
-a predicate done at the *SCAN* level. There is also a \\( \\pi \\) symbol indicating
-projection (database jargon for column selection), but we'll get to that later.
+在查询计划的可视化中，您会看到一个\\（\\sigma\\）符号。这表示在*扫描*级别执行的谓词。还有一个\\（\\pi\\）符号表示投影（用于列选择的数据库行话），但我们稍后将讨论这个问题。
 
-## Cheaper joins
+## 更便捷的联结（joins）操作
 
-Predicate pushdown optimization will generally also lead to cheaper join's. A join is
-an expensive operation. The fewer rows we have in a join operation the cheaper
-it will become.
+谓词下推优化通常也会导致更便宜的连接。连接是一个昂贵的操作。连接操作中的行数越少，成本就越低。
