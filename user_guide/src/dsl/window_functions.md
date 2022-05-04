@@ -1,8 +1,7 @@
-# Window functions 🚀🚀
+# 窗口函数 🚀🚀
 
-Window functions are expressions with superpowers. They allow you to perform aggregations on groups in the
-`select` context. Let's get a feel of what that means. First we create a dataset. The dataset loaded in the
-snippet below contains information about pokemon and has the following columns:
+窗口函数是一种强大的表达式。它可以让用户在 `select` 上下文中分组进行类聚。
+让我们通过例子看看这是什么意思。首先，我们创建一个数据结构，这个数据包含如下列，分别代表口袋妖怪的一些信息：
 
 `['#',  'Name',  'Type 1',  'Type 2',  'Total',  'HP',  'Attack',  'Defense',  'Sp. Atk',  'Sp. Def',  'Speed',  'Generation',  'Legendary']`
 
@@ -14,17 +13,15 @@ snippet below contains information about pokemon and has the following columns:
 {{#include ../outputs/expressions/window_1.txt}}
 ```
 
-## Groupby Aggregations in selection
+## Groupby 类聚
 
-Below we show how to use window functions to group over different columns and perform an aggregation on them.
-Doing so allows us to use multiple groupby operations in parallel, using a single query. The results of the aggregation
-are projected back to the original rows. Therefore, a window function will always lead to a `DataFrame` with the same size
-as the original.
+下面我们看看如何用窗口函数对不同的列分组并且类聚。这样我们可以在一个潮汛中，并行的运行多个分组操作。
+类聚的结果会投射会原有的行。因此，窗口函数永远返回一个跟原有 `DataFrame` 一样规格的 `DataFrame`。
 
-Note how we call `.over("Type 1")` and `.over(["Type 1", "Type 2"])`. Using window functions we can aggregate
-over different groups in a single `select` call!
+注意，我们使用了 `.over("Type 1")` 和 `.over(["Type 1", "Type 2"])`，利用窗口函数我们可以一个 
+`select` 语境中实现多个分组类聚。
 
-The best part is, this won't cost you anything. The computed groups are cached and shared between different `window` expressions.
+更好的是，计算过的分组会被缓存并且在不同的窗口函数中共享。
 
 ```python
 {{#include ../examples/expressions/window_2.py:3:}}
@@ -34,12 +31,12 @@ The best part is, this won't cost you anything. The computed groups are cached a
 {{#include ../outputs/expressions/window_2.txt}}
 ```
 
-## Operations per group
+## 分组操作
 
-Window functions can do more than aggregation. They can also be viewed as an operation within a group. If, for instance, you
-want to `sort` the values within a `group`, you can write `col("value").sort().over("group")` and voilà! We sorted by group!
+窗口函数不仅仅可以类聚，还可以用来按照组施加自定义函数。例如，如果你想要在某一组中排序，你可以：
+`.col("value").sort().over("group")`。
 
-Let's filter out some rows to make this more clear.
+让我们试着过滤一些行：
 
 ```python
 {{#include ../examples/expressions/window_group_1.py:4:}}
@@ -50,9 +47,8 @@ print(filtered)
 {{#include ../outputs/expressions/window_group_1.txt}}
 ```
 
-Observe that the group `Water` of column `Type 1` is not contiguous. There are two rows of `Grass` in between. Also note
-that each pokemon within a group are sorted by `Speed` in `ascending` order. Unfortunately, for this example we want them sorted in
-`descending` speed order. Luckily with window functions this is easy to accomplish.
+注意到，分组 `Water` 的列 `Type 1` 并不连续，中间有两行 `Grass`。而且，同组中的每一个口袋妖股
+被按照 `Speed` 升序排列。不幸的是，这个例子我们希望降序排列，幸运的是，这很简单：
 
 ```python
 {{#include ../examples/expressions/window_group_2.py:4:}}
@@ -63,51 +59,50 @@ print(out)
 {{#include ../outputs/expressions/window_group_2.txt}}
 ```
 
-`Polars` keeps track of each group's location and maps the expressions to the proper row locations. This will also work
-over different groups in a single `select`.
+`Polars` 会追踪每个组的位置，并把相应的表达式映射到适当的行。这个操作可以在一个 select 环境中完成。
 
-The power of window expressions is that you often don't need a `groupby -> explode` combination, but you can put the logic in a
-single expression. It also makes the API cleaner. If properly used a:
+窗口函数的强大之处在于：你通常不需要 `groupby -> explode` 组合，而是把逻辑放入一个表达式中。
+这也使得 API 更加简洁：
 
-- `groupby` -> marks that groups are aggregated and we expect a `DataFrame` of size `n_groups`
-- `over` -> marks that we want to compute something within a group, but doesn't modify the original size of the `DataFrame`
+- `groupby` -> 标记类聚的分组，返回一个跟组的个数一致的 `DataFrame`
+- `over` -> 标记我们希望对这个分组进行计算，但是不会更改原有 `DataFrame` 的形状
 
-## Window expression rules
+## 窗口表达式的规则
 
-The evaluations of window expressions are as follows (assuming we apply it to a `pl.Int32` column):
+窗口表达式的计算规则如下（假设我们有一个 `pl.Int32` 列）：
 
 ```python
-# aggregate and broadcast within a group
-# output type: -> Int32
+# 分组内类聚且广播
+# 输出类型: -> Int32
 pl.sum("foo").over("groups")
 
-# sum within a group and multiply with group elements
-# output type: -> Int32
+# 组内加和，然后乘以组内的元素
+# 输出类型: -> Int32
 (pl.col("x").sum() * pl.col("y")).over("groups")
 
-# sum within a group and multiply with group elements 
-# and aggregate the group to a list
-# output type: -> List(Int32)
+# 组内加和，然后乘以组内的元素
+# 并且组内类聚成一个列表
+# 输出类型: -> List(Int32)
 (pl.col("x").sum() * pl.col("y")).list().over("groups")
 
-# note that it will require an explicit `list()` call
-# sum within a group and multiply with group elements 
-# and aggregate the group to a list
-# the flatten call explodes that list
+# 注意这里需要一个显式的 `list` 调用
+# 组内加和，然后乘以组内的元素
+# 并且组内类聚成一个列表
+# list() 会展开
 
-# This is the fastest method to do things over groups when the groups are sorted
+# 如果组内是有序的，这是最快的操作方法：
 (pl.col("x").sum() * pl.col("y")).list().over("groups").flatten()
 ```
 
 ## More examples
 
-For more exercise, below are some window functions for us to compute:
+更多练习，下面是一些窗口函数：
 
-- sort all pokemon by type
-- select the first `3` pokemon per type as `"Type 1"`
-- sort the pokemon within a type by speed and select the first `3` as `"fastest/group"`
-- sort the pokemon within a type by attack and select the first `3` as `"strongest/group"`
-- sort the pokemon by name within a type and select the first `3` as `"sorted_by_alphabet"`
+- 按照 `Type` 给所有口袋妖怪排序
+- 选择每组前三个妖怪
+- 每组按照速度排序，并选择前三作为 `"fastest/group"`
+- 每组按照攻击排序，并选择前三作为 `"strongest/group"`
+- 每组按照名字排序，并选择前三作为 `"sorted_by_alphabet"`
 
 ```python
 {{#include ../examples/expressions/window_3.py:3:}}
@@ -117,16 +112,16 @@ For more exercise, below are some window functions for us to compute:
 {{#include ../outputs/expressions/window_3.txt}}
 ```
 
-## Flattened window function
+## 展开窗口函数
 
-If we have a window function that aggregates to a `list` like the example above with the following expression:
+就像刚刚的例子，如果你的窗口函数返回一个 `list`：
 
 `pl.col("Name").sort_by(pl.col("Speed")).head(3).list().over("Type 1")`
 
-This still works, but that
-would give us a column type `List` which might not be what we want (this would significantly increase our memory usage!).
+这样可以，但是这样会返回一个类型为 `List` 的列，这可能不是我们想要的，而且会增加内存使用。
 
-Instead we could `flatten`. This just turns our 2D list into a 1D array and projects that array/column back to our `DataFrame`.
-This is very fast because the reshape is often free, and adding the column back the the original `DataFrame` is also a lot cheaper (since we don't require a join like in a normal window function).
+这是我们可以采用 `flatten`。这个函数会把一个 2D 列表转换成 1D，然后把列投射到我们的 `DataFrame`。
+这个操作非常快，因为 reshape 基本没有成本，给原有 `DataFrame` 增加列也非常快，因为我们不需要
+一般窗口函数的联合（Join）操作。
 
-However, for this operation to make sense, it is important that the columns used in `over([..])` are sorted!
+但是，想要正确的使用这个操作，我们要保证用于 `over` 的列是有序的。
