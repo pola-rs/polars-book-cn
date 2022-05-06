@@ -10,7 +10,12 @@ def compute_age() -> pl.Expr:
 
 
 def avg_birthday(gender: str) -> pl.Expr:
-    return compute_age().filter(pl.col("gender") == gender).mean().alias(f"avg {gender} birthday")
+    return (
+        compute_age()
+        .filter(pl.col("gender") == gender)
+        .mean()
+        .alias(f"avg {gender} birthday")
+    )
 
 
 q = (

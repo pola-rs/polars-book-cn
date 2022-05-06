@@ -4,6 +4,6 @@ import polars as pl
 out = df.select(
     [
         pl.sum("nrs"),
-        pl.col("names").sort(), # 对names列进行排序
+        pl.col("names").sort(),  # 对names列进行排序
     ]
 )

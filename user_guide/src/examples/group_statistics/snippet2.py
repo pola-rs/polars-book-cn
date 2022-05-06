@@ -9,7 +9,12 @@ def mkdiff(cumcases: pl.Series) -> pl.Series:
 
 
 q = dataset.with_column(
-    pl.col("cumcases").apply(mkdiff).over("country").take(pl.col("country").arg_unique()).explode().alias("diffcases"),
+    pl.col("cumcases")
+    .apply(mkdiff)
+    .over("country")
+    .take(pl.col("country").arg_unique())
+    .explode()
+    .alias("diffcases"),
 )
 
 df = q.collect()
