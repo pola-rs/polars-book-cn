@@ -1,5 +1,7 @@
 # polars-book-cn
 
+[Read here the Chinese translation of the polars User Guide](https://pola-rs.github.io/polars-book-cn/user-guide/index.html)
+
 这个仓库是 [Polars DataFrame library](https://github.com/pola-rs/polars) User Guide 的中文版本。
 
 ## Contribution
