@@ -3,7 +3,7 @@ name: Polars Guides
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   test:
@@ -36,6 +36,6 @@ jobs:
           cd user_guide
           mdbook build --dest-dir ../docs/user-guide .
           cd ..
-          echo '<meta http-equiv=refresh content=0;url=/polars-book/user-guide/index.html>' > docs/index.html
+          echo '<meta http-equiv=refresh content=0;url=/polars-book-cn/user-guide/index.html>' > docs/index.html
           ghp-import --no-jekyll docs
           git push -qf https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git gh-pages

@@ -91,7 +91,7 @@ we have a nice summary overview.
 {{#include ../outputs/groupby_dsl/output3.txt}}
 ```
 
-#### 过滤 
+#### 过滤
 
 我们也可以过滤分组。假设我们想要计算每组的均值，但是我们不希望计算所有值的均值，我们也不希望直接
 从 `DataFrame` 过滤，因为我们后需还需要哪些行做其他操作。
@@ -107,7 +107,7 @@ we have a nice summary overview.
 {{#include ../outputs/groupby_dsl/output4.txt}}
 ```
 
-#### 排序 
+#### 排序
 
 我们经常把一个 `DataFrame` 排序为了在分组操作的时候保持某种顺序。假设我们我们希望知道
 每个 `state` 政治家的名字，并按照年龄排序。我们可以用 `sort` 和 `groupby`：
@@ -142,7 +142,7 @@ we have a nice summary overview.
 {{#include ../outputs/groupby_dsl/output7.txt}}
 ```
 
-### 结论 
+### 结论
 
 上面的例子中我们知道通过组合表达式可以完成复杂的查询。而且，我们避免了使用自定义 `Python` 函数
 带来的性能损失 （解释器和 GIL）。

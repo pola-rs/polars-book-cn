@@ -24,7 +24,7 @@ df.groupby("foo").agg([pl.col("bar").sum()])
 这种设计可以让 Polars 把表达式推送给查询引擎，进行一些优化和缓存操作。
 
 ## `select` 上下文
- 
+
 在 `select` 上下文中，选择操作是按照列进行的。在选择向下文的表达式必须要返回 `Series` 并且这些 `Series` 需要有相同的长度或者长度为1。
 
 一个长度为 1 的 `Series` 会被广匹配 `DataFrame` 的高度。

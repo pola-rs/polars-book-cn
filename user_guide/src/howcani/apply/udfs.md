@@ -27,11 +27,11 @@
 使用自定义函数有两种方法，一种是使用`map`，另一种是使用`apply`。您需要哪一个取决于使用自定义函数的上下文：
 
 - `apply`
-  
+
   - 选择上下文：自定义函数应用于所有值 `Fn(value) -> y`
   - 聚合上下文：自定义函数应用于所有组 `Fn([group_value_1, ... group_value_n]) -> y`
 
 - `map`
-  
+
   - 选择上下文：自定义函数应用于`Series`，并且必须生成一个新的`Series` `Fn(Series) -> Series`
   - 聚合上下文：自定义函数应用于`Series`，并且必须生成一个新的`Series` `Fn(Series) -> Series`
