@@ -1,46 +1,44 @@
-# Time Series
+# 时间序列
 
-For `time-series` resampling `Polars` offers a powerful API to resample data. `Pandas` is well known for
-its resampling functionality via `df.resample`.
+`Polars` 为时间序列重采样提供了强大的 API 支持。许多人都知道 `Pandas` 中 `df.resample` 提供了重采样功能。
 
-`Polars` make the distinction between
+`Polars` 在以下两个方面与 `Pandas` 有所区别：
 
-- upsampling
-- downsampling
+- 上采样 (Upsampling)
+- 下采样 (Downsampling)
 
-## Upsampling
+## 上采样 (Upsampling)
 
-An upsample operation is actually nothing more than left joining a date range with your dataset and filling the blanks.
-`Polars` provides wrapper methods for this operation. Later on we'll discuss an example.
+上采样实际上相当于将一个日期范围与你的数据集进行左关联 (left join) 操作，并填充缺失数据。`Polars` 为此操作
+提供了封装方法，你可以参考下面的一个示例。
 
-## Downsampling
+## 下采样 (Downsampling)
 
-Downsampling is interesting. Here you deal with date intervals, window durations, aggregations etc.
+下采样很有意思。你需要处理日期间隔、窗口持续时间、聚合等问题。
 
-`Polars` views downsampling as a special case of the **groupby** operation and therefore has two extra entrances in the
-expression API with the `groupby` context:
+`Polars` 将下采样视为 **groupby** 操作的一个特例，因此表达式 API 为 **groupby** 上下文提供了两个额外的入口。
 
 - [groupby_dynamic](POLARS_PY_REF_GUIDE/api/polars.DataFrame.groupby_dynamic.html)
 - [groupby_rolling](POLARS_PY_REF_GUIDE/api/polars.DataFrame.groupby_rolling.html)
 
-Calling any of those functions will give you complete access to the expression API and performance!
+你可以通过调用二者其中任何一个函数来获取对表达式 API 的完整访问，它有着强大的性能！
 
-Let's go through some examples and see what that means.
+让我们通过下面几个示例来理解这样做的意义。
 
-## Groupby Dynamic
+## 动态分组 (Groupby Dynamic)
 
-In the snippet below we create a `date range` with every **day** (`"1d"`) in 2021 and turn this into a `DataFrame`.
+在下面的一段代码中，我们以 **天** (`"1d"`) 为单位，把关于 2021 年的 `日期范围 (date range)` 创建为一个 `DataFrame`。
 
-Then we we create dynamic windows that starts every **month** (`"1mo"`) and has a window length of `1` month. Dynamic windows
-don't have a size thats fixed by the number of rows in a `DataFrame`, instead they are fixed by a temporal unit. This can
-be a day (`"1d"`), `3` weeks (`"3w"`) or `5` nanoseconds (`"5ns"`) ... you get the idea.
+接下来，我们创建起始于每 **月** (`"1mo"`)，长度为 `1` 个月的动态窗口 (dynamic windows)。动态窗口的大小并不由 `DataFrame` 
+中的行数决定，而是由一个时间单位 (temporal unit) 决定，比如一天 (`"1d"`)，三周 (`"3w"`)，亦或是五纳秒 (`"5ns"`) ... 
+希望这个例子有助于让你理解动态窗口的含义。
 
-The values that match these dynamic windows are then assigned to that group and can be aggregated with the powerful expression API.
+匹配某个动态窗口的值会被分配到该窗口所对应的组中，接下来你可以用强大的表达式 API 进行聚合操作。
 
-Below we show an example where we use **groupby_dynamic** to compute:
+下面的示例使用 **groupby_dynamic** 来计算：
 
-- the number of days until the end of the month
-- the number of days in a month
+- 距离月底的天数
+- 一个月里的天数
 
 ```python
 {{#include ../examples/time_series/days_month.py:4:}}
@@ -51,24 +49,23 @@ print(out)
 {{#include ../outputs/time_series/days_month.txt}}
 ```
 
-A dynamic window is defined by a:
+要定义一个动态窗口，需要提供以下三个参数：
 
-- **every**: indicates the interval of the window
-- **period**: indicates the duration of the window
-- **offset**: can be used to offset the start of the windows
+- **every**：窗口的时间间隔
+- **period**：窗口的持续时间
+- **offset**：可以对窗口的开始进行偏移
 
-Because _**every**_ does not have to be equal to _**period**_, we can create many groups in a very flexible way. They may overlap
-or leave boundaries between them.
+因为 _**every**_ 并不总是需要等于 _**period**_，我们可以用一种非常灵活的方式来创建很多组别。它们可以互相重叠，也可以在组间留出边界。
 
-Let's see how the windows for some parameter combinations would look. Let's start out boring. 🥱
+我们先从简单的例子开始 🥱 想想看下面几组参数会创建出怎么样的窗口。
 
 >
 
-- every: 1 day -> `"1d"`
-- period: 1 day -> `"1d"`
+- every: 1 天 -> `"1d"`
+- period: 1 天 -> `"1d"`
 
 ```text
-this creates adjacent windows of the same size
+创建出的窗口相邻，且长度相等
 |--|
    |--|
       |--|
@@ -76,11 +73,11 @@ this creates adjacent windows of the same size
 
 >
 
-- every: 1 day -> `"1d"`
-- period: 2 days -> `"2d"`
+- every: 1 天 -> `"1d"`
+- period: 2 天 -> `"2d"`
 
 ```text
-these windows have an overlap of 1 day
+窗口之间有 1 天的重叠
 |----|
    |----|
       |----|
@@ -88,25 +85,22 @@ these windows have an overlap of 1 day
 
 >
 
-- every: 2 days -> `"2d"`
-- period: 1 day -> `"1d"`
+- every: 2 天 -> `"2d"`
+- period: 1 天 -> `"1d"`
 
 ```text
-this would leave gaps between the windows
-data points that in these gaps will not be a member of any group
+两个窗口之间留有间隔，在这段范围内的数据不属于任何一个组别
 |--|
        |--|
               |--|
-```
+``` 
 
-## Rolling GroupBy
+## 滚动分组 (Rolling Groupby)
 
-The rolling groupby is another entrance to the `groupby` context. But different from the `groupby_dynamic` the windows are
-not fixed by a parameter `every` and `period`. In a rolling groupby the windows are not fixed at all! They are determined
-by the values in the `index_column`.
+滚动分组是 `groupby` 上下文的另一个入口。但与 `groupby_dynamic` 不同的是，窗口的设置不接受参数 `every` 和 `period` —— 
+对于一个滚动分组，窗口根本就不是固定的！它们由 `index_column` 中的值决定。
 
-So imagine having a time column with the values `{2021-01-01, 20210-01-05}` and a `period="5d"` this would create the following
-windows:
+想象一下，你有一个值为`{2021-01-01, 20210-01-05}` 的时间序列，使用参数 `period="5d"` 将创建以下窗口：
 
 ```text
 
@@ -117,14 +111,13 @@ windows:
              |----------|
 ```
 
-Because the windows of a rolling groupby are always determined by the values in the `DataFrame` column, the number of
-groups is always equal to the original `DataFrame`.
+由于滚动分组的窗口总是由 `DataFrame` 列中的值决定，组别的数目总是与原 `DataFrame` 相等。
 
-## Combining Groupby and Dynamic / Rolling
+## 将动态分组与滚动分组结合起来
 
-Rolling and dynamic groupby's can be combined with normal groupby operations.
+用正常的 groupby 操作，我们可以将这两种分组方式结合起来。
 
-Below is an example with a dynamic groupby.
+下面是一个使用动态分组的例子：
 
 ```python
 {{#include ../examples/time_series/dynamic_ds.py:0:}}
@@ -144,6 +137,6 @@ print(out)
 {{#include ../outputs/time_series/dyn_gb.txt}}
 ```
 
-## Upsample
+## 上采样
 
-> This content is under construction.
+> 该部分内容仍在编写。
