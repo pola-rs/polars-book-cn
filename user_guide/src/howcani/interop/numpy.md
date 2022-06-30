@@ -1,15 +1,12 @@
 # NumPy
 
-`Polars` `Series` have support for `NumPy`
-[universal functions (ufuncs)](https://numpy.org/doc/stable/reference/ufuncs.html).
-Element-wise functions such as `np.exp()`, `np.cos()`, `np.div()`, *etc.* all work with
-almost zero overhead.
+`Polars` 的 `Series` 支持 `NumPy` 的
+[通用函数 (ufuncs)](https://numpy.org/doc/stable/reference/ufuncs.html)。
+调用元素层面的 (element-wise) 函数，比如 `np.exp()`、`np.cos()` 或 `np.div()`，基本上没有额外开销。
 
-However, as a `Polars`-specific remark: missing values are a separate bitmask and are not
-visible by `NumPy`. It can yield to a window function or a `np.convolve()` giving
-flawed or incomplete results.
+需要注意的是，`Polars` 中的缺失值是一个独立的比特掩码 —— 其在 `NumPy` 中是不可见的。
+这可能导致窗口函数或 `np.convolve()` 输出有缺陷或不完整的结果。
 
-Convert a `Polars` `Series` to a `NumPy` array with the `.to_numpy()` method.
-Missing values will be replaced by `np.nan` during the conversion. If the `Series` does
-not include missing values, or those values are not desired anymore, the `.view()`
-method can be used instead, providing a zero-copy `NumPy` array of the data.
+要将一个 `Polars` `Series` 转换为 `NumPy` 数组，可以调用 `.to_numpy()` 函数。
+转换时，此函数将会把缺失值替换为 `np.nan`。如果 `Series` 中没有缺失值，或转换后不再需要这些值，
+可以使用 `.view()` 函数作为代替，这将为数据生成一个零拷贝的 `NumPy` 数组。
