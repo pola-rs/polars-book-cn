@@ -1,12 +1,12 @@
-# Conditionally apply
+# 条件应用
 
-Modifying a `Series` or a column in a `DataFrame` consists of two steps.
+要修改一个 `Series` 或 `DataFrame` 中的一列，需要以下两步。
 
-1. Creating a `boolean` `mask` based on some predicate.
-1. Replace the values where the `mask` evaluates `True`
-1. (Only in lazy) Define values where the mask evaluates `False`
+1. 基于一些谓词创建一个 `boolean` 掩码
+1. 替换掉掩码评估为 `True` 的值
+1. （仅当惰性操作时） 定义掩码评估为 `False` 的值
 
-## Dataset
+## 数据集
 
 ```python
 {{#include ../../examples/conditionally_apply/dataset.py}}
@@ -17,13 +17,13 @@ df.head()
 {{#include ../../outputs/conditionally_apply/dataset.txt}}
 ```
 
-We can use the `.when()`/`.then()`/`.otherwise()` expressions.
+我们可以使用 `.when()`/`.then()`/`.otherwise()` 表达式。
 
-- `when` - accepts a predicate expression
-- `then` - expression to use when `predicate == True`
-- `otherwise` - expression to use when `predicate == False`
+- `when` - 接受一个谓词表达式
+- `then` - 当 `谓词 == True` 时使用的表达式
+- `otherwise` - 当 `谓词 == False` 时使用的表达式
 
-See:
+请参见以下例子。
 
 ```python
 {{#include ../../examples/conditionally_apply/lazy.py:4:}}

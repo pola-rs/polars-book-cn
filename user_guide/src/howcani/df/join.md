@@ -1,13 +1,13 @@
-# Joins
+# 连接
 
-Polars supports sorting behavior similar to other DataFrame libraries.
+类似于其他数据框架库，Polars 支持一系列连接操作。
 
-- Join on a single or multiple column(s)
-- Left join
-- Inner join
-- Outer join
+- 在单个或多个列上进行连接
+- 左连接
+- 内连接
+- 外连接
 
-## Dataset
+## 数据集
 
 ```python
 {{#include ../../examples/join/dataset.py}}
@@ -26,7 +26,7 @@ print(df_b)
 {{#include ../../outputs/join/dataset_b.txt}}
 ```
 
-## Eager
+## 急性
 
 ```python
 {{#include ../../examples/join/eager.py:2:}}
@@ -37,7 +37,7 @@ print(out)
 {{#include ../../outputs/join/eager.txt}}
 ```
 
-## Lazy
+## 惰性
 
 ```python
 {{#include ../../examples/join/lazy.py:2:}}

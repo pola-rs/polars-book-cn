@@ -1,28 +1,28 @@
-# Filter
+# 过滤
 
-## Eager
+## 急性
 
-Filter operation in Eager are very similar to what you are used in `Pandas`.
+Polars 的急性过滤操作与 `Pandas` 中的非常相似。
 
 ```python
 {{#include ../../examples/filter/eager.py}}
 ```
 
-or in more idiomatic `Polars` way:
+或者用下面更符合 `Polars` 习惯的方式：
 
 ```python
 df.filter(pl.col("a") > 2)
 ```
 
-## Lazy
+## 惰性
 
-Filters operations in Lazy are expressed as:
+惰性过滤操作通常使用以下表达：
 
 ```python
 {{#include ../../examples/filter/lazy.py:2:}}
 ```
 
-Both result in:
+两者的结果都是：
 
 ```text
 {{#include ../../outputs/filter/filter.txt}}
