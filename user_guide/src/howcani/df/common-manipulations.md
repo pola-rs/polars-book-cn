@@ -1,10 +1,9 @@
-# Common manipulations
+# 常用操作
 
-Like other DataFrame libaries, Polars provides a wide range of common functions to
-manipulate a Dataframe. Users that are familiar with Dataframes will see many
-similarities with `Pandas` or `R` implementations.
+与许多其他数据框架库一样，Polars 提供了大量的常用函数来对 Dataframe 进行操作。
+熟悉 Dataframes 的用户会发现 Polars 与 `Pandas` 或 `R` 的实现有许多相似之处。
 
-## Add columns
+## 添加列
 
 ```python
 {{#include ../../examples/df_manipulations/add_column.py:4:}}
@@ -15,10 +14,10 @@ print(out)
 {{#include ../../outputs/df_manipulations/add_column.txt}}
 ```
 
-## Type casting
+## 类型转换
 
-In this example we use Python datatypes, but we can also cast with Polars dtypes like
-`pl.Float32` or `pl.Float64`
+这个例子使用的是 Python 数据类型，但我们也可以在 Polars `dtypes`
+（如 `pl.Float32`、`pl.Float64`）之间进行转换。
 
 ```python
 {{#include ../../examples/df_manipulations/casting.py:4:}}
@@ -29,7 +28,7 @@ print(out)
 {{#include ../../outputs/df_manipulations/casting.txt}}
 ```
 
-## Rename column
+## 重命名列
 
 ```python
 {{#include ../../examples/df_manipulations/rename_column.py}}
@@ -39,7 +38,7 @@ print(out)
 {{#include ../../outputs/df_manipulations/rename_column.txt}}
 ```
 
-## Drop column
+## 删除列
 
 ```python
 {{#include ../../examples/df_manipulations/drop_column.py:3:}}
@@ -49,7 +48,7 @@ print(out)
 {{#include ../../outputs/df_manipulations/drop_column.txt}}
 ```
 
-## Drop nulls
+## 删除空值
 
 ```python
 df.drop_nulls()
@@ -59,14 +58,14 @@ df.drop_nulls()
 {{#include ../../outputs/df_manipulations/drop_nulls.txt}}
 ```
 
-## Fill NA
+## 填充缺失值（NA）
 
-Other strategies:
+策略:
 
-- `mean`
-- `backward`
-- `min`
-- `max`
+- `mean`：平均值
+- `backward`：上一值
+- `min`：最小值
+- `max`：最大值
 
 ```python
 df.fill_none("forward")
@@ -76,7 +75,7 @@ df.fill_none("forward")
 {{#include ../../outputs/df_manipulations/fill_na.txt}}
 ```
 
-## Get columns
+## 获取所有列
 
 ```python
 df.columns
@@ -86,7 +85,7 @@ df.columns
 {{#include ../../outputs/df_manipulations/get_columns.txt}}
 ```
 
-## Null Count
+## 空值计数
 
 ```python
 df.null_count()
@@ -96,7 +95,7 @@ df.null_count()
 {{#include ../../outputs/df_manipulations/null_count.txt}}
 ```
 
-## Sort columns
+## 列排序
 
 ```python
 df.sort("a", reverse=True)
@@ -106,7 +105,7 @@ df.sort("a", reverse=True)
 {{#include ../../outputs/df_manipulations/sort_columns.txt}}
 ```
 
-## To Numpy
+## 转为 NumPy
 
 ```python
 df.to_numpy()
@@ -116,7 +115,7 @@ df.to_numpy()
 {{#include ../../outputs/df_manipulations/to_numpy.txt}}
 ```
 
-## To Pandas
+## 转为 Pandas
 
 ```python
 df.to_pandas()

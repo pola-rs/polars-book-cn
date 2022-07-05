@@ -1,8 +1,8 @@
-# Melts
+# 重塑
 
-Melt operations unpivot a DataFrame from wide format to long format
+重塑操作将一个宽格式的 DataFrame 逆透视为长格式。
 
-## Dataset
+## 数据集
 
 ```python
 {{#include ../../examples/melt/dataset.py}}
@@ -13,9 +13,9 @@ print(df)
 {{#include ../../outputs/melt/dataset.txt}}
 ```
 
-## Eager + Lazy
+## 急性 + 惰性
 
-`Eager` and `lazy` have the same API.
+`急性` 与 `惰性` 操作的 API 相同。
 
 ```python
 {{#include ../../examples/melt/eager.py:3:}}
