@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Contexts - Polars - User Guide</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../quickstart/intro.html"><strong aria-hidden="true">2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../dsl/intro.html"><strong aria-hidden="true">3.</strong> Polars expressions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dsl/expressions.html"><strong aria-hidden="true">3.1.</strong> Expressions</a></li><li class="chapter-item expanded "><a href="../dsl/contexts.html" class="active"><strong aria-hidden="true">3.2.</strong> Contexts</a></li><li class="chapter-item "><a href="../dsl/groupby.html"><strong aria-hidden="true">3.3.</strong> GroupBy</a></li><li class="chapter-item "><a href="../dsl/folds.html"><strong aria-hidden="true">3.4.</strong> Folds</a></li><li class="chapter-item "><a href="../dsl/window_functions.html"><strong aria-hidden="true">3.5.</strong> Window functions</a></li><li class="chapter-item "><a href="../dsl/numpy.html"><strong aria-hidden="true">3.6.</strong> Numpy universal functions</a></li><li class="chapter-item "><a href="../notebooks/introduction_polars.html"><strong aria-hidden="true">3.7.</strong> Examples</a></li><li class="chapter-item "><a href="../dsl/api.html"><strong aria-hidden="true">3.8.</strong> API</a></li><li class="chapter-item "><a href="../dsl/video_intro.html"><strong aria-hidden="true">3.9.</strong> Video introduction</a></li></ol></li><li class="chapter-item expanded "><a href="../indexing.html"><strong aria-hidden="true">4.</strong> Indexing</a></li><li class="chapter-item expanded "><a href="../datatypes.html"><strong aria-hidden="true">5.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="../coming_from_pandas.html"><strong aria-hidden="true">6.</strong> Coming from Pandas</a></li><li class="chapter-item expanded "><a href="../coming_from_spark.html"><strong aria-hidden="true">7.</strong> Coming from Apache Spark</a></li><li class="chapter-item expanded "><a href="../timeseries/intro.html"><strong aria-hidden="true">8.</strong> Time-series</a></li><li class="chapter-item expanded "><a href="../howcani/intro.html"><strong aria-hidden="true">9.</strong> How can I?</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/intro.html"><strong aria-hidden="true">9.1.</strong> IO</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/csv.html"><strong aria-hidden="true">9.1.1.</strong> CSV files</a></li><li class="chapter-item "><a href="../howcani/io/parquet.html"><strong aria-hidden="true">9.1.2.</strong> Parquet files</a></li><li class="chapter-item "><a href="../multiple_files/intro.html"><strong aria-hidden="true">9.1.3.</strong> Multiple files</a></li><li class="chapter-item "><a href="../howcani/io/read_db.html"><strong aria-hidden="true">9.1.4.</strong> Read from a database</a></li><li class="chapter-item "><a href="../howcani/io/aws.html"><strong aria-hidden="true">9.1.5.</strong> Interact with AWS</a></li><li class="chapter-item "><a href="../howcani/io/google-big-query.html"><strong aria-hidden="true">9.1.6.</strong> Interact with Google BigQuery</a></li><li class="chapter-item "><a href="../howcani/io/postgres.html"><strong aria-hidden="true">9.1.7.</strong> Interact with Postgres</a></li><li class="chapter-item "><a href="../howcani/interop/intro.html"><strong aria-hidden="true">9.1.8.</strong> Interoperability</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/interop/arrow.html"><strong aria-hidden="true">9.1.8.1.</strong> Arrow</a></li><li class="chapter-item "><a href="../howcani/interop/numpy.html"><strong aria-hidden="true">9.1.8.2.</strong> NumPy</a></li></ol></li><li class="chapter-item "><a href="../howcani/data/intro.html"><strong aria-hidden="true">9.1.9.</strong> Data handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/data/strings.html"><strong aria-hidden="true">9.1.9.1.</strong> Process strings</a></li><li class="chapter-item "><a href="../howcani/data/timestamps.html"><strong aria-hidden="true">9.1.9.2.</strong> Process timestamps</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../performance/intro.html"><strong aria-hidden="true">10.</strong> Performance</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../performance/strings.html"><strong aria-hidden="true">10.1.</strong> Strings</a></li></ol></li><li class="chapter-item expanded "><a href="../optimizations/intro.html"><strong aria-hidden="true">11.</strong> Optimizations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/intro.html"><strong aria-hidden="true">11.1.</strong> Lazy API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/predicate-pushdown.html"><strong aria-hidden="true">11.1.1.</strong> Predicate pushdown</a></li><li class="chapter-item "><a href="../optimizations/lazy/projection-pushdown.html"><strong aria-hidden="true">11.1.2.</strong> Projection pushdown</a></li><li class="chapter-item "><a href="../optimizations/lazy/other-optimizations.html"><strong aria-hidden="true">11.1.3.</strong> Other optimizations</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../references.html"><strong aria-hidden="true">12.</strong> Reference guides</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Polars - User Guide</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="表达式上下文"><a class="header" href="#表达式上下文">表达式上下文</a></h1>
+<p>表达式几乎可以在任何地方使用，但是表达式需要一个上下文，这些上下文包括：</p>
+<ul>
+<li>选择: <code>df.select([..])</code></li>
+<li>分组集合: <code>df.groupby(..).agg([..])</code></li>
+<li>hstack 或者增加列: <code>df.with_columns([..])</code></li>
+</ul>
+<h2 id="语法糖"><a class="header" href="#语法糖">语法糖</a></h2>
+<p>需要上下文的主要原因是：即使实在饥饿模式中，你也在使用 Polars 的惰性API。
+比如如下代码实例：</p>
+<pre><code class="language-python">df.groupby(&quot;foo&quot;).agg([pl.col(&quot;bar&quot;).sum()])
+</code></pre>
+<p>去掉语法糖后：</p>
+<pre><code class="language-python">(df.lazy().groupby(&quot;foo&quot;).agg([pl.col(&quot;bar&quot;).sum()])).collect()
+</code></pre>
+<p>这种设计可以让 Polars 把表达式推送给查询引擎，进行一些优化和缓存操作。</p>
+<h2 id="select-上下文"><a class="header" href="#select-上下文"><code>select</code> 上下文</a></h2>
+<p>在 <code>select</code> 上下文中，选择操作是按照列进行的。在选择向下文的表达式必须要返回 <code>Series</code> 并且这些 <code>Series</code> 需要有相同的长度或者长度为1。</p>
+<p>一个长度为 1 的 <code>Series</code> 会被广匹配 <code>DataFrame</code> 的高度。
+注意，<code>select</code> 可能会返回一个新的列，这个列可能是一些聚合的结果、一些表达式的组合或者字符串。</p>
+<h4 id="选择上下文"><a class="header" href="#选择上下文">选择上下文</a></h4>
+<pre><code class="language-python">out = df.select(
+    [
+        pl.sum(&quot;nrs&quot;),
+        pl.col(&quot;names&quot;).sort(),
+        pl.col(&quot;names&quot;).first().alias(&quot;first name&quot;),
+        (pl.mean(&quot;nrs&quot;) * 10).alias(&quot;10xnrs&quot;),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌─────┬───────┬────────────┬────────┐
+│ nrs ┆ names ┆ first name ┆ 10xnrs │
+│ --- ┆ ---   ┆ ---        ┆ ---    │
+│ i64 ┆ str   ┆ str        ┆ f64    │
+╞═════╪═══════╪════════════╪════════╡
+│ 11  ┆ null  ┆ foo        ┆ 27.5   │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 11  ┆ egg   ┆ foo        ┆ 27.5   │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 11  ┆ foo   ┆ foo        ┆ 27.5   │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 11  ┆ ham   ┆ foo        ┆ 27.5   │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 11  ┆ spam  ┆ foo        ┆ 27.5   │
+└─────┴───────┴────────────┴────────┘
+</code></pre>
+<p><strong>添加列</strong></p>
+<p>采用 <code>with_columns</code> 给 <code>DataFrame</code> 增加列同样也是选择上下文。</p>
+<pre><code class="language-python">df = df.with_columns(
+    [
+        pl.sum(&quot;nrs&quot;).alias(&quot;nrs_sum&quot;),
+        pl.col(&quot;random&quot;).count().alias(&quot;count&quot;),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (5, 6)
+┌──────┬───────┬──────────┬────────┬─────────┬───────┐
+│ nrs  ┆ names ┆ random   ┆ groups ┆ nrs_sum ┆ count │
+│ ---  ┆ ---   ┆ ---      ┆ ---    ┆ ---     ┆ ---   │
+│ i64  ┆ str   ┆ f64      ┆ str    ┆ i64     ┆ u32   │
+╞══════╪═══════╪══════════╪════════╪═════════╪═══════╡
+│ 1    ┆ foo   ┆ 0.154163 ┆ A      ┆ 11      ┆ 5     │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ 2    ┆ ham   ┆ 0.74     ┆ A      ┆ 11      ┆ 5     │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ 3    ┆ spam  ┆ 0.263315 ┆ B      ┆ 11      ┆ 5     │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ null ┆ egg   ┆ 0.533739 ┆ C      ┆ 11      ┆ 5     │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ 5    ┆ null  ┆ 0.014575 ┆ B      ┆ 11      ┆ 5     │
+└──────┴───────┴──────────┴────────┴─────────┴───────┘
+</code></pre>
+<h2 id="groupby-上下文"><a class="header" href="#groupby-上下文">Groupby 上下文</a></h2>
+<p>在 <code>groupby</code> 上下文中的表达式主要作用域分组上，因此他们会返回任意长度（每个组可能有不同数量的成员）。</p>
+<pre><code class="language-python">out = df.groupby(&quot;groups&quot;).agg(
+    [
+        pl.sum(&quot;nrs&quot;),  # 通过groups列对nrs求和
+        pl.col(&quot;random&quot;).count().alias(&quot;count&quot;),  # 记录组数
+        # 如果name != null记录random列的和
+        pl.col(&quot;random&quot;).filter(pl.col(&quot;names&quot;).is_not_null()).sum().suffix(&quot;_sum&quot;),
+        pl.col(&quot;names&quot;).reverse().alias((&quot;reversed names&quot;)),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 5)
+┌────────┬──────┬───────┬────────────┬────────────────┐
+│ groups ┆ nrs  ┆ count ┆ random_sum ┆ reversed names │
+│ ---    ┆ ---  ┆ ---   ┆ ---        ┆ ---            │
+│ str    ┆ i64  ┆ u32   ┆ f64        ┆ list[str]      │
+╞════════╪══════╪═══════╪════════════╪════════════════╡
+│ B      ┆ 8    ┆ 2     ┆ 0.263315   ┆ [null, &quot;spam&quot;] │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ C      ┆ null ┆ 1     ┆ 0.533739   ┆ [&quot;egg&quot;]        │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ A      ┆ 3    ┆ 2     ┆ 0.894213   ┆ [&quot;ham&quot;, &quot;foo&quot;] │
+└────────┴──────┴───────┴────────────┴────────────────┘
+</code></pre>
+<p>除了标准的 <code>groupby</code>，还有 <code>groupby_dynamic</code> 和 <code>groupby_rolling</code> 也属于 Groupby 上下文。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../dsl/expressions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../dsl/groupby.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../dsl/expressions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../dsl/groupby.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Window functions - Polars - User Guide</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../quickstart/intro.html"><strong aria-hidden="true">2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../dsl/intro.html"><strong aria-hidden="true">3.</strong> Polars expressions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dsl/expressions.html"><strong aria-hidden="true">3.1.</strong> Expressions</a></li><li class="chapter-item "><a href="../dsl/contexts.html"><strong aria-hidden="true">3.2.</strong> Contexts</a></li><li class="chapter-item "><a href="../dsl/groupby.html"><strong aria-hidden="true">3.3.</strong> GroupBy</a></li><li class="chapter-item "><a href="../dsl/folds.html"><strong aria-hidden="true">3.4.</strong> Folds</a></li><li class="chapter-item expanded "><a href="../dsl/window_functions.html" class="active"><strong aria-hidden="true">3.5.</strong> Window functions</a></li><li class="chapter-item "><a href="../dsl/numpy.html"><strong aria-hidden="true">3.6.</strong> Numpy universal functions</a></li><li class="chapter-item "><a href="../notebooks/introduction_polars.html"><strong aria-hidden="true">3.7.</strong> Examples</a></li><li class="chapter-item "><a href="../dsl/api.html"><strong aria-hidden="true">3.8.</strong> API</a></li><li class="chapter-item "><a href="../dsl/video_intro.html"><strong aria-hidden="true">3.9.</strong> Video introduction</a></li></ol></li><li class="chapter-item expanded "><a href="../indexing.html"><strong aria-hidden="true">4.</strong> Indexing</a></li><li class="chapter-item expanded "><a href="../datatypes.html"><strong aria-hidden="true">5.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="../coming_from_pandas.html"><strong aria-hidden="true">6.</strong> Coming from Pandas</a></li><li class="chapter-item expanded "><a href="../coming_from_spark.html"><strong aria-hidden="true">7.</strong> Coming from Apache Spark</a></li><li class="chapter-item expanded "><a href="../timeseries/intro.html"><strong aria-hidden="true">8.</strong> Time-series</a></li><li class="chapter-item expanded "><a href="../howcani/intro.html"><strong aria-hidden="true">9.</strong> How can I?</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/intro.html"><strong aria-hidden="true">9.1.</strong> IO</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/csv.html"><strong aria-hidden="true">9.1.1.</strong> CSV files</a></li><li class="chapter-item "><a href="../howcani/io/parquet.html"><strong aria-hidden="true">9.1.2.</strong> Parquet files</a></li><li class="chapter-item "><a href="../multiple_files/intro.html"><strong aria-hidden="true">9.1.3.</strong> Multiple files</a></li><li class="chapter-item "><a href="../howcani/io/read_db.html"><strong aria-hidden="true">9.1.4.</strong> Read from a database</a></li><li class="chapter-item "><a href="../howcani/io/aws.html"><strong aria-hidden="true">9.1.5.</strong> Interact with AWS</a></li><li class="chapter-item "><a href="../howcani/io/google-big-query.html"><strong aria-hidden="true">9.1.6.</strong> Interact with Google BigQuery</a></li><li class="chapter-item "><a href="../howcani/io/postgres.html"><strong aria-hidden="true">9.1.7.</strong> Interact with Postgres</a></li><li class="chapter-item "><a href="../howcani/interop/intro.html"><strong aria-hidden="true">9.1.8.</strong> Interoperability</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/interop/arrow.html"><strong aria-hidden="true">9.1.8.1.</strong> Arrow</a></li><li class="chapter-item "><a href="../howcani/interop/numpy.html"><strong aria-hidden="true">9.1.8.2.</strong> NumPy</a></li></ol></li><li class="chapter-item "><a href="../howcani/data/intro.html"><strong aria-hidden="true">9.1.9.</strong> Data handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/data/strings.html"><strong aria-hidden="true">9.1.9.1.</strong> Process strings</a></li><li class="chapter-item "><a href="../howcani/data/timestamps.html"><strong aria-hidden="true">9.1.9.2.</strong> Process timestamps</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../performance/intro.html"><strong aria-hidden="true">10.</strong> Performance</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../performance/strings.html"><strong aria-hidden="true">10.1.</strong> Strings</a></li></ol></li><li class="chapter-item expanded "><a href="../optimizations/intro.html"><strong aria-hidden="true">11.</strong> Optimizations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/intro.html"><strong aria-hidden="true">11.1.</strong> Lazy API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/predicate-pushdown.html"><strong aria-hidden="true">11.1.1.</strong> Predicate pushdown</a></li><li class="chapter-item "><a href="../optimizations/lazy/projection-pushdown.html"><strong aria-hidden="true">11.1.2.</strong> Projection pushdown</a></li><li class="chapter-item "><a href="../optimizations/lazy/other-optimizations.html"><strong aria-hidden="true">11.1.3.</strong> Other optimizations</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../references.html"><strong aria-hidden="true">12.</strong> Reference guides</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Polars - User Guide</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="窗口函数-"><a class="header" href="#窗口函数-">窗口函数 🚀🚀</a></h1>
+<p>窗口函数是一种强大的表达式。它可以让用户在 <code>select</code> 上下文中分组进行类聚。
+让我们通过例子看看这是什么意思。首先，我们创建一个数据结构，这个数据包含如下列，分别代表口袋妖怪的一些信息：</p>
+<p><code>['#',  'Name',  'Type 1',  'Type 2',  'Total',  'HP',  'Attack',  'Defense',  'Sp. Atk',  'Sp. Def',  'Speed',  'Generation',  'Legendary']</code></p>
+<pre><code class="language-python">import polars as pl
+
+# 然后，让我们加载一些包pokemon信息的csv数据
+df = pl.read_csv(
+    &quot;https://gist.githubusercontent.com/ritchie46/cac6b337ea52281aa23c049250a4ff03/raw/89a957ff3919d90e6ef2d34235e6bf22304f3366/pokemon.csv&quot;
+)
+</code></pre>
+<pre><code class="language-text">shape: (163, 13)
+┌─────┬───────────────────────┬─────────┬────────┬─────┬─────────┬───────┬────────────┬───────────┐
+│ #   ┆ Name                  ┆ Type 1  ┆ Type 2 ┆ ... ┆ Sp. Def ┆ Speed ┆ Generation ┆ Legendary │
+│ --- ┆ ---                   ┆ ---     ┆ ---    ┆     ┆ ---     ┆ ---   ┆ ---        ┆ ---       │
+│ i64 ┆ str                   ┆ str     ┆ str    ┆     ┆ i64     ┆ i64   ┆ i64        ┆ bool      │
+╞═════╪═══════════════════════╪═════════╪════════╪═════╪═════════╪═══════╪════════════╪═══════════╡
+│ 1   ┆ Bulbasaur             ┆ Grass   ┆ Poison ┆ ... ┆ 65      ┆ 45    ┆ 1          ┆ false     │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2   ┆ Ivysaur               ┆ Grass   ┆ Poison ┆ ... ┆ 80      ┆ 60    ┆ 1          ┆ false     │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ 3   ┆ Venusaur              ┆ Grass   ┆ Poison ┆ ... ┆ 100     ┆ 80    ┆ 1          ┆ false     │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ 3   ┆ VenusaurMega Venusaur ┆ Grass   ┆ Poison ┆ ... ┆ 120     ┆ 80    ┆ 1          ┆ false     │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ ... ┆ ...                   ┆ ...     ┆ ...    ┆ ... ┆ ...     ┆ ...   ┆ ...        ┆ ...       │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ 147 ┆ Dratini               ┆ Dragon  ┆ null   ┆ ... ┆ 50      ┆ 50    ┆ 1          ┆ false     │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ 148 ┆ Dragonair             ┆ Dragon  ┆ null   ┆ ... ┆ 70      ┆ 70    ┆ 1          ┆ false     │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ 149 ┆ Dragonite             ┆ Dragon  ┆ Flying ┆ ... ┆ 100     ┆ 80    ┆ 1          ┆ false     │
+├╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌┤
+│ 150 ┆ Mewtwo                ┆ Psychic ┆ null   ┆ ... ┆ 90      ┆ 130   ┆ 1          ┆ true      │
+└─────┴───────────────────────┴─────────┴────────┴─────┴─────────┴───────┴────────────┴───────────┘
+</code></pre>
+<h2 id="groupby-类聚"><a class="header" href="#groupby-类聚">Groupby 类聚</a></h2>
+<p>下面我们看看如何用窗口函数对不同的列分组并且类聚。这样我们可以在一个潮汛中，并行的运行多个分组操作。
+类聚的结果会投射会原有的行。因此，窗口函数永远返回一个跟原有 <code>DataFrame</code> 一样规格的 <code>DataFrame</code>。</p>
+<p>注意，我们使用了 <code>.over(&quot;Type 1&quot;)</code> 和 <code>.over([&quot;Type 1&quot;, &quot;Type 2&quot;])</code>，利用窗口函数我们可以一个
+<code>select</code> 语境中实现多个分组类聚。</p>
+<p>更好的是，计算过的分组会被缓存并且在不同的窗口函数中共享。</p>
+<pre><code class="language-python">
+out = df.select(
+    [
+        &quot;Type 1&quot;,
+        &quot;Type 2&quot;,
+        pl.col(&quot;Attack&quot;).mean().over(&quot;Type 1&quot;).alias(&quot;avg_attack_by_type&quot;),
+        pl.col(&quot;Defense&quot;).mean().over([&quot;Type 1&quot;, &quot;Type 2&quot;]).alias(&quot;avg_defense_by_type_combination&quot;),
+        pl.col(&quot;Attack&quot;).mean().alias(&quot;avg_attack&quot;),
+    ]
+)
+</code></pre>
+<pre><code class="language-text">shape: (163, 5)
+┌─────────┬────────┬────────────────────┬─────────────────────────────────┬────────────┐
+│ Type 1  ┆ Type 2 ┆ avg_attack_by_type ┆ avg_defense_by_type_combination ┆ avg_attack │
+│ ---     ┆ ---    ┆ ---                ┆ ---                             ┆ ---        │
+│ str     ┆ str    ┆ f64                ┆ f64                             ┆ f64        │
+╞═════════╪════════╪════════════════════╪═════════════════════════════════╪════════════╡
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ ...     ┆ ...    ┆ ...                ┆ ...                             ┆ ...        │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Dragon  ┆ null   ┆ 94.0               ┆ 55.0                            ┆ 75.349693  │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Dragon  ┆ null   ┆ 94.0               ┆ 55.0                            ┆ 75.349693  │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Dragon  ┆ Flying ┆ 94.0               ┆ 95.0                            ┆ 75.349693  │
+├╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Psychic ┆ null   ┆ 53.875             ┆ 51.428571                       ┆ 75.349693  │
+└─────────┴────────┴────────────────────┴─────────────────────────────────┴────────────┘
+</code></pre>
+<h2 id="分组操作"><a class="header" href="#分组操作">分组操作</a></h2>
+<p>窗口函数不仅仅可以类聚，还可以用来按照组施加自定义函数。例如，如果你想要在某一组中排序，你可以：
+<code>.col(&quot;value&quot;).sort().over(&quot;group&quot;)</code>。</p>
+<p>让我们试着过滤一些行：</p>
+<pre><code class="language-python">filtered = df.filter(pl.col(&quot;Type 2&quot;) == &quot;Psychic&quot;).select(
+    [
+        &quot;Name&quot;,
+        &quot;Type 1&quot;,
+        &quot;Speed&quot;,
+    ]
+)
+print(filtered)
+</code></pre>
+<pre><code class="language-text">shape: (7, 3)
+┌─────────────────────┬────────┬───────┐
+│ Name                ┆ Type 1 ┆ Speed │
+│ ---                 ┆ ---    ┆ ---   │
+│ str                 ┆ str    ┆ i64   │
+╞═════════════════════╪════════╪═══════╡
+│ Slowpoke            ┆ Water  ┆ 15    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Slowbro             ┆ Water  ┆ 30    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ SlowbroMega Slowbro ┆ Water  ┆ 30    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Exeggcute           ┆ Grass  ┆ 40    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Exeggutor           ┆ Grass  ┆ 55    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Starmie             ┆ Water  ┆ 115   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Jynx                ┆ Ice    ┆ 95    │
+└─────────────────────┴────────┴───────┘
+</code></pre>
+<p>注意到，分组 <code>Water</code> 的列 <code>Type 1</code> 并不连续，中间有两行 <code>Grass</code>。而且，同组中的每一个口袋妖股
+被按照 <code>Speed</code> 升序排列。不幸的是，这个例子我们希望降序排列，幸运的是，这很简单：</p>
+<pre><code class="language-python">out = filtered.with_columns(
+    [
+        pl.col([&quot;Name&quot;, &quot;Speed&quot;]).sort(reverse=True).over(&quot;Type 1&quot;),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (7, 3)
+┌─────────────────────┬────────┬───────┐
+│ Name                ┆ Type 1 ┆ Speed │
+│ ---                 ┆ ---    ┆ ---   │
+│ str                 ┆ str    ┆ i64   │
+╞═════════════════════╪════════╪═══════╡
+│ Starmie             ┆ Water  ┆ 115   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Slowpoke            ┆ Water  ┆ 30    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ SlowbroMega Slowbro ┆ Water  ┆ 30    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Exeggutor           ┆ Grass  ┆ 55    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Exeggcute           ┆ Grass  ┆ 40    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Slowbro             ┆ Water  ┆ 15    │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ Jynx                ┆ Ice    ┆ 95    │
+└─────────────────────┴────────┴───────┘
+</code></pre>
+<p><code>Polars</code> 会追踪每个组的位置，并把相应的表达式映射到适当的行。这个操作可以在一个 select 环境中完成。</p>
+<p>窗口函数的强大之处在于：你通常不需要 <code>groupby -&gt; explode</code> 组合，而是把逻辑放入一个表达式中。
+这也使得 API 更加简洁：</p>
+<ul>
+<li><code>groupby</code> -&gt; 标记类聚的分组，返回一个跟组的个数一致的 <code>DataFrame</code></li>
+<li><code>over</code> -&gt; 标记我们希望对这个分组进行计算，但是不会更改原有 <code>DataFrame</code> 的形状</li>
+</ul>
+<h2 id="窗口表达式的规则"><a class="header" href="#窗口表达式的规则">窗口表达式的规则</a></h2>
+<p>窗口表达式的计算规则如下（假设我们有一个 <code>pl.Int32</code> 列）：</p>
+<pre><code class="language-python"># 分组内类聚且广播
+# 输出类型: -&gt; Int32
+pl.sum(&quot;foo&quot;).over(&quot;groups&quot;)
+
+# 组内加和，然后乘以组内的元素
+# 输出类型: -&gt; Int32
+(pl.col(&quot;x&quot;).sum() * pl.col(&quot;y&quot;)).over(&quot;groups&quot;)
+
+# 组内加和，然后乘以组内的元素
+# 并且组内类聚成一个列表
+# 输出类型: -&gt; List(Int32)
+(pl.col(&quot;x&quot;).sum() * pl.col(&quot;y&quot;)).list().over(&quot;groups&quot;)
+
+# 注意这里需要一个显式的 `list` 调用
+# 组内加和，然后乘以组内的元素
+# 并且组内类聚成一个列表
+# list() 会展开
+
+# 如果组内是有序的，这是最快的操作方法：
+(pl.col(&quot;x&quot;).sum() * pl.col(&quot;y&quot;)).list().over(&quot;groups&quot;).flatten()
+</code></pre>
+<h2 id="more-examples"><a class="header" href="#more-examples">More examples</a></h2>
+<p>更多练习，下面是一些窗口函数：</p>
+<ul>
+<li>按照 <code>Type</code> 给所有口袋妖怪排序</li>
+<li>选择每组前三个妖怪</li>
+<li>每组按照速度排序，并选择前三作为 <code>&quot;fastest/group&quot;</code></li>
+<li>每组按照攻击排序，并选择前三作为 <code>&quot;strongest/group&quot;</code></li>
+<li>每组按照名字排序，并选择前三作为 <code>&quot;sorted_by_alphabet&quot;</code></li>
+</ul>
+<pre><code class="language-python">
+out = df.sort(&quot;Type 1&quot;).select(
+    [
+        pl.col(&quot;Type 1&quot;).head(3).list().over(&quot;Type 1&quot;).flatten(),
+        pl.col(&quot;Name&quot;).sort_by(pl.col(&quot;Speed&quot;)).head(3).list().over(&quot;Type 1&quot;).flatten().alias(&quot;fastest/group&quot;),
+        pl.col(&quot;Name&quot;).sort_by(pl.col(&quot;Attack&quot;)).head(3).list().over(&quot;Type 1&quot;).flatten().alias(&quot;strongest/group&quot;),
+        pl.col(&quot;Name&quot;).sort().head(3).list().over(&quot;Type 1&quot;).flatten().alias(&quot;sorted_by_alphabet&quot;),
+    ]
+)
+</code></pre>
+<pre><code class="language-text">shape: (43, 4)
+┌────────┬─────────────────────┬─────────────────┬─────────────────────────┐
+│ Type 1 ┆ fastest/group       ┆ strongest/group ┆ sorted_by_alphabet      │
+│ ---    ┆ ---                 ┆ ---             ┆ ---                     │
+│ str    ┆ str                 ┆ str             ┆ str                     │
+╞════════╪═════════════════════╪═════════════════╪═════════════════════════╡
+│ Bug    ┆ Paras               ┆ Metapod         ┆ Beedrill                │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Bug    ┆ Metapod             ┆ Kakuna          ┆ BeedrillMega Beedrill   │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Bug    ┆ Parasect            ┆ Caterpie        ┆ Butterfree              │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Dragon ┆ Dratini             ┆ Dratini         ┆ Dragonair               │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ ...    ┆ ...                 ┆ ...             ┆ ...                     │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Rock   ┆ Omanyte             ┆ Omastar         ┆ Geodude                 │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Water  ┆ Slowpoke            ┆ Magikarp        ┆ Blastoise               │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Water  ┆ Slowbro             ┆ Tentacool       ┆ BlastoiseMega Blastoise │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ Water  ┆ SlowbroMega Slowbro ┆ Horsea          ┆ Cloyster                │
+└────────┴─────────────────────┴─────────────────┴─────────────────────────┘
+</code></pre>
+<h2 id="展开窗口函数"><a class="header" href="#展开窗口函数">展开窗口函数</a></h2>
+<p>就像刚刚的例子，如果你的窗口函数返回一个 <code>list</code>：</p>
+<p><code>pl.col(&quot;Name&quot;).sort_by(pl.col(&quot;Speed&quot;)).head(3).list().over(&quot;Type 1&quot;)</code></p>
+<p>这样可以，但是这样会返回一个类型为 <code>List</code> 的列，这可能不是我们想要的，而且会增加内存使用。</p>
+<p>这是我们可以采用 <code>flatten</code>。这个函数会把一个 2D 列表转换成 1D，然后把列投射到我们的 <code>DataFrame</code>。
+这个操作非常快，因为 reshape 基本没有成本，给原有 <code>DataFrame</code> 增加列也非常快，因为我们不需要
+一般窗口函数的联合（Join）操作。</p>
+<p>但是，想要正确的使用这个操作，我们要保证用于 <code>over</code> 的列是有序的。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../dsl/folds.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../dsl/numpy.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../dsl/folds.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../dsl/numpy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

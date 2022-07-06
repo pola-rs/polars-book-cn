@@ -1,0 +1,1 @@
+[<class 'polars.datatypes.Int64'>, <class 'polars.datatypes.Utf8'>, <class 'polars.datatypes.Float64'>, <class 'polars.datatypes.Utf8'>]

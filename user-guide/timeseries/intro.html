@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Time-series - Polars - User Guide</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../quickstart/intro.html"><strong aria-hidden="true">2.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="../dsl/intro.html"><strong aria-hidden="true">3.</strong> Polars expressions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dsl/expressions.html"><strong aria-hidden="true">3.1.</strong> Expressions</a></li><li class="chapter-item "><a href="../dsl/contexts.html"><strong aria-hidden="true">3.2.</strong> Contexts</a></li><li class="chapter-item "><a href="../dsl/groupby.html"><strong aria-hidden="true">3.3.</strong> GroupBy</a></li><li class="chapter-item "><a href="../dsl/folds.html"><strong aria-hidden="true">3.4.</strong> Folds</a></li><li class="chapter-item "><a href="../dsl/window_functions.html"><strong aria-hidden="true">3.5.</strong> Window functions</a></li><li class="chapter-item "><a href="../dsl/numpy.html"><strong aria-hidden="true">3.6.</strong> Numpy universal functions</a></li><li class="chapter-item "><a href="../notebooks/introduction_polars.html"><strong aria-hidden="true">3.7.</strong> Examples</a></li><li class="chapter-item "><a href="../dsl/api.html"><strong aria-hidden="true">3.8.</strong> API</a></li><li class="chapter-item "><a href="../dsl/video_intro.html"><strong aria-hidden="true">3.9.</strong> Video introduction</a></li></ol></li><li class="chapter-item expanded "><a href="../indexing.html"><strong aria-hidden="true">4.</strong> Indexing</a></li><li class="chapter-item expanded "><a href="../datatypes.html"><strong aria-hidden="true">5.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="../coming_from_pandas.html"><strong aria-hidden="true">6.</strong> Coming from Pandas</a></li><li class="chapter-item expanded "><a href="../coming_from_spark.html"><strong aria-hidden="true">7.</strong> Coming from Apache Spark</a></li><li class="chapter-item expanded "><a href="../timeseries/intro.html" class="active"><strong aria-hidden="true">8.</strong> Time-series</a></li><li class="chapter-item expanded "><a href="../howcani/intro.html"><strong aria-hidden="true">9.</strong> How can I?</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/intro.html"><strong aria-hidden="true">9.1.</strong> IO</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/csv.html"><strong aria-hidden="true">9.1.1.</strong> CSV files</a></li><li class="chapter-item "><a href="../howcani/io/parquet.html"><strong aria-hidden="true">9.1.2.</strong> Parquet files</a></li><li class="chapter-item "><a href="../multiple_files/intro.html"><strong aria-hidden="true">9.1.3.</strong> Multiple files</a></li><li class="chapter-item "><a href="../howcani/io/read_db.html"><strong aria-hidden="true">9.1.4.</strong> Read from a database</a></li><li class="chapter-item "><a href="../howcani/io/aws.html"><strong aria-hidden="true">9.1.5.</strong> Interact with AWS</a></li><li class="chapter-item "><a href="../howcani/io/google-big-query.html"><strong aria-hidden="true">9.1.6.</strong> Interact with Google BigQuery</a></li><li class="chapter-item "><a href="../howcani/io/postgres.html"><strong aria-hidden="true">9.1.7.</strong> Interact with Postgres</a></li><li class="chapter-item "><a href="../howcani/interop/intro.html"><strong aria-hidden="true">9.1.8.</strong> Interoperability</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/interop/arrow.html"><strong aria-hidden="true">9.1.8.1.</strong> Arrow</a></li><li class="chapter-item "><a href="../howcani/interop/numpy.html"><strong aria-hidden="true">9.1.8.2.</strong> NumPy</a></li></ol></li><li class="chapter-item "><a href="../howcani/data/intro.html"><strong aria-hidden="true">9.1.9.</strong> Data handling</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/data/strings.html"><strong aria-hidden="true">9.1.9.1.</strong> Process strings</a></li><li class="chapter-item "><a href="../howcani/data/timestamps.html"><strong aria-hidden="true">9.1.9.2.</strong> Process timestamps</a></li></ol></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../performance/intro.html"><strong aria-hidden="true">10.</strong> Performance</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../performance/strings.html"><strong aria-hidden="true">10.1.</strong> Strings</a></li></ol></li><li class="chapter-item expanded "><a href="../optimizations/intro.html"><strong aria-hidden="true">11.</strong> Optimizations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/intro.html"><strong aria-hidden="true">11.1.</strong> Lazy API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/predicate-pushdown.html"><strong aria-hidden="true">11.1.1.</strong> Predicate pushdown</a></li><li class="chapter-item "><a href="../optimizations/lazy/projection-pushdown.html"><strong aria-hidden="true">11.1.2.</strong> Projection pushdown</a></li><li class="chapter-item "><a href="../optimizations/lazy/other-optimizations.html"><strong aria-hidden="true">11.1.3.</strong> Other optimizations</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../references.html"><strong aria-hidden="true">12.</strong> Reference guides</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Polars - User Guide</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="时间序列"><a class="header" href="#时间序列">时间序列</a></h1>
+<p><code>Polars</code> 为时间序列重采样提供了强大的 API 支持。许多人都知道 <code>Pandas</code> 中 <code>df.resample</code> 提供了重采样功能。</p>
+<p><code>Polars</code> 在以下两个方面与 <code>Pandas</code> 有所区别：</p>
+<ul>
+<li>上采样 (Upsampling)</li>
+<li>下采样 (Downsampling)</li>
+</ul>
+<h2 id="上采样-upsampling"><a class="header" href="#上采样-upsampling">上采样 (Upsampling)</a></h2>
+<p>上采样实际上相当于将一个日期范围与你的数据集进行左关联 (left join) 操作，并填充缺失数据。<code>Polars</code> 为此操作
+提供了封装方法，你可以参考下面的一个示例。</p>
+<h2 id="下采样-downsampling"><a class="header" href="#下采样-downsampling">下采样 (Downsampling)</a></h2>
+<p>下采样很有意思。你需要处理日期间隔、窗口持续时间、聚合等问题。</p>
+<p><code>Polars</code> 将下采样视为 <strong>groupby</strong> 操作的一个特例，因此表达式 API 为 <strong>groupby</strong> 上下文提供了两个额外的入口。</p>
+<ul>
+<li><a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.groupby_dynamic.html">groupby_dynamic</a></li>
+<li><a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.groupby_rolling.html">groupby_rolling</a></li>
+</ul>
+<p>你可以通过调用二者其中任何一个函数来获取对表达式 API 的完整访问，它有着强大的性能！</p>
+<p>让我们通过下面几个示例来理解这样做的意义。</p>
+<h2 id="动态分组-groupby-dynamic"><a class="header" href="#动态分组-groupby-dynamic">动态分组 (Groupby Dynamic)</a></h2>
+<p>在下面的一段代码中，我们以 <strong>天</strong> (<code>&quot;1d&quot;</code>) 为单位，把关于 2021 年的 <code>日期范围 (date range)</code> 创建为一个 <code>DataFrame</code>。</p>
+<p>接下来，我们创建起始于每 <strong>月</strong> (<code>&quot;1mo&quot;</code>)，长度为 <code>1</code> 个月的动态窗口 (dynamic windows)。动态窗口的大小并不由 <code>DataFrame</code>
+中的行数决定，而是由一个时间单位 (temporal unit) 决定，比如一天 (<code>&quot;1d&quot;</code>)，三周 (<code>&quot;3w&quot;</code>)，亦或是五纳秒 (<code>&quot;5ns&quot;</code>) ...
+希望这个例子有助于让你理解动态窗口的含义。</p>
+<p>匹配某个动态窗口的值会被分配到该窗口所对应的组中，接下来你可以用强大的表达式 API 进行聚合操作。</p>
+<p>下面的示例使用 <strong>groupby_dynamic</strong> 来计算：</p>
+<ul>
+<li>距离月底的天数</li>
+<li>一个月里的天数</li>
+</ul>
+<pre><code class="language-python"># 时间轴（从low到high，间隔为1天，轴名称为&quot;time&quot;）
+df = pl.date_range(low=datetime(2021, 1, 1), high=datetime(2021, 12, 31), interval=&quot;1d&quot;, name=&quot;time&quot;).to_frame()
+
+out = (
+    df.groupby_dynamic(&quot;time&quot;, every=&quot;1mo&quot;, period=&quot;1mo&quot;, closed=&quot;left&quot;)
+    .agg(
+        [
+            pl.col(&quot;time&quot;).cumcount().reverse().head(3).alias(&quot;day/eom&quot;),
+            ((pl.col(&quot;time&quot;) - pl.col(&quot;time&quot;).first()).last().dt.days() + 1).alias(&quot;days_in_month&quot;),
+        ]
+    )
+    .explode(&quot;day/eom&quot;)
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (36, 3)
+┌─────────────────────┬─────────┬───────────────┐
+│ time                ┆ day/eom ┆ days_in_month │
+│ ---                 ┆ ---     ┆ ---           │
+│ datetime[ns]        ┆ u32     ┆ i64           │
+╞═════════════════════╪═════════╪═══════════════╡
+│ 2021-01-01 00:00:00 ┆ 30      ┆ 31            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-01-01 00:00:00 ┆ 29      ┆ 31            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-01-01 00:00:00 ┆ 28      ┆ 31            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-02-01 00:00:00 ┆ 27      ┆ 28            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ ...                 ┆ ...     ┆ ...           │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-11-01 00:00:00 ┆ 27      ┆ 30            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-01 00:00:00 ┆ 30      ┆ 31            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-01 00:00:00 ┆ 29      ┆ 31            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-01 00:00:00 ┆ 28      ┆ 31            │
+└─────────────────────┴─────────┴───────────────┘
+</code></pre>
+<p>要定义一个动态窗口，需要提供以下三个参数：</p>
+<ul>
+<li><strong>every</strong>：窗口的时间间隔</li>
+<li><strong>period</strong>：窗口的持续时间</li>
+<li><strong>offset</strong>：可以对窗口的开始进行偏移</li>
+</ul>
+<p>因为 <em><strong>every</strong></em> 并不总是需要等于 <em><strong>period</strong></em>，我们可以用一种非常灵活的方式来创建很多组别。它们可以互相重叠，也可以在组间留出边界。</p>
+<p>我们先从简单的例子开始 🥱 想想看下面几组参数会创建出怎么样的窗口。</p>
+<blockquote>
+</blockquote>
+<ul>
+<li>every: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+<li>period: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+</ul>
+<pre><code class="language-text">创建出的窗口相邻，且长度相等
+|--|
+   |--|
+      |--|
+</code></pre>
+<blockquote>
+</blockquote>
+<ul>
+<li>every: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+<li>period: 2 天 -&gt; <code>&quot;2d&quot;</code></li>
+</ul>
+<pre><code class="language-text">窗口之间有 1 天的重叠
+|----|
+   |----|
+      |----|
+</code></pre>
+<blockquote>
+</blockquote>
+<ul>
+<li>every: 2 天 -&gt; <code>&quot;2d&quot;</code></li>
+<li>period: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+</ul>
+<pre><code class="language-text">两个窗口之间留有间隔，在这段范围内的数据不属于任何一个组别
+|--|
+       |--|
+              |--|
+</code></pre>
+<h2 id="滚动分组-rolling-groupby"><a class="header" href="#滚动分组-rolling-groupby">滚动分组 (Rolling Groupby)</a></h2>
+<p>滚动分组是 <code>groupby</code> 上下文的另一个入口。但与 <code>groupby_dynamic</code> 不同的是，窗口的设置不接受参数 <code>every</code> 和 <code>period</code> ——
+对于一个滚动分组，窗口根本就不是固定的！它们由 <code>index_column</code> 中的值决定。</p>
+<p>想象一下，你有一个值为<code>{2021-01-01, 20210-01-05}</code> 的时间序列，使用参数 <code>period=&quot;5d&quot;</code> 将创建以下窗口：</p>
+<pre><code class="language-text">
+2021-01-01   2021-01-06
+    |----------|
+
+       2021-01-05   2021-01-10
+             |----------|
+</code></pre>
+<p>由于滚动分组的窗口总是由 <code>DataFrame</code> 列中的值决定，组别的数目总是与原 <code>DataFrame</code> 相等。</p>
+<h2 id="将动态分组与滚动分组结合起来"><a class="header" href="#将动态分组与滚动分组结合起来">将动态分组与滚动分组结合起来</a></h2>
+<p>用正常的 groupby 操作，我们可以将这两种分组方式结合起来。</p>
+<p>下面是一个使用动态分组的例子：</p>
+<pre><code class="language-python">import polars as pl
+from datetime import datetime
+
+
+df = pl.DataFrame(
+    {
+        &quot;time&quot;: pl.date_range(
+            low=datetime(2021, 12, 16),
+            high=datetime(2021, 12, 16, 3),
+            interval=&quot;30m&quot;,
+        ),
+        &quot;groups&quot;: [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;],
+    }
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (7, 2)
+┌─────────────────────┬────────┐
+│ time                ┆ groups │
+│ ---                 ┆ ---    │
+│ datetime[ns]        ┆ str    │
+╞═════════════════════╪════════╡
+│ 2021-12-16 00:00:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 00:30:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:00:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:30:00 ┆ b      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:00:00 ┆ b      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:30:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 03:00:00 ┆ a      │
+└─────────────────────┴────────┘
+</code></pre>
+<pre><code class="language-python"># 动态分组
+out = df.groupby_dynamic(
+    &quot;time&quot;,
+    every=&quot;1h&quot;,
+    closed=&quot;both&quot;,
+    by=&quot;groups&quot;,
+    include_boundaries=True,
+).agg([pl.count()])
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (7, 5)
+┌────────┬─────────────────────┬─────────────────────┬─────────────────────┬───────┐
+│ groups ┆ _lower_boundary     ┆ _upper_boundary     ┆ time                ┆ count │
+│ ---    ┆ ---                 ┆ ---                 ┆ ---                 ┆ ---   │
+│ str    ┆ datetime[ns]        ┆ datetime[ns]        ┆ datetime[ns]        ┆ u32   │
+╞════════╪═════════════════════╪═════════════════════╪═════════════════════╪═══════╡
+│ a      ┆ 2021-12-15 23:00:00 ┆ 2021-12-16 00:00:00 ┆ 2021-12-16 00:00:00 ┆ 1     │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ a      ┆ 2021-12-16 00:00:00 ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 00:00:00 ┆ 3     │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ a      ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 01:00:00 ┆ 1     │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ a      ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 02:00:00 ┆ 2     │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ a      ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 04:00:00 ┆ 2021-12-16 03:00:00 ┆ 1     │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ b      ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 01:00:00 ┆ 2     │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌┤
+│ b      ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 02:00:00 ┆ 1     │
+└────────┴─────────────────────┴─────────────────────┴─────────────────────┴───────┘
+</code></pre>
+<h2 id="上采样"><a class="header" href="#上采样">上采样</a></h2>
+<blockquote>
+<p>该部分内容仍在编写。</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../coming_from_spark.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../howcani/intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../coming_from_spark.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../howcani/intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
