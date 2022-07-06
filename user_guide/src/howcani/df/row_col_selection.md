@@ -1,13 +1,13 @@
-# Row and column selection
+# 选中行或列
 
-Selection of rows and columns is similar to other DataFrame libraries.
+对行或列进行选择的操作与其他数据框架库类似。
 
-## Column selection
+## 选中列
 
 ```python
-# preferred
+# 推荐写法
 df.select(["a", "b"])
-# also works
+# 也可以写成这样
 df(["a", "b"])
 ```
 
@@ -15,7 +15,7 @@ df(["a", "b"])
 {{#include ../../outputs/row_col_selection/col_selection.txt}}
 ```
 
-## Row selection
+## 选中行
 
 ```python
 df[0:2]

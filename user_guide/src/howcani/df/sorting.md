@@ -1,9 +1,8 @@
-# Sorting
+# 排序
 
-Polars supports sorting behavior similar to other DataFrame libraries, that is sorting
-by one or multiple columns and in multiple/different orders.
+Polars 支持与其他数据框架库类似的排序行为，即按一个或多个列以及多个（不同的）顺序进行排序。
 
-## Dataset
+## 数据集
 
 ```python
 {{#include ../../examples/sorting/dataset.py}}
@@ -14,7 +13,7 @@ print(df)
 {{#include ../../outputs/sorting/dataset.txt}}
 ```
 
-## Eager
+## 急性
 
 ```python
 {{#include ../../examples/sorting/eager.py:3:}}
@@ -25,7 +24,7 @@ print(out)
 {{#include ../../outputs/sorting/eager.txt}}
 ```
 
-## Lazy
+## 惰性
 
 ```python
 {{#include ../../examples/sorting/lazy.py:2:}}
