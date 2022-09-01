@@ -94,9 +94,9 @@ pl.sum("foo").over("groups")
 (pl.col("x").sum() * pl.col("y")).list().over("groups").flatten()
 ```
 
-## More examples
+## 更多示例
 
-更多练习，下面是一些窗口函数：
+让我们通过练习，尝试使用以下窗口函数完成计算任务吧：
 
 - 按照 `Type` 给所有口袋妖怪排序
 - 选择每组前三个妖怪
