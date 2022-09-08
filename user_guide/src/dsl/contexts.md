@@ -4,7 +4,7 @@
 
 - 选择: `df.select([..])`
 - 分组集合: `df.groupby(..).agg([..])`
-- 横向拉伸(hstack) 或者增加列: `df.with_columns([..])`
+- 横向堆叠(hstack) 或者增加列: `df.with_columns([..])`
 
 ## 语法糖
 
