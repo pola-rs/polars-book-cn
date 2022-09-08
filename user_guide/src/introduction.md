@@ -2,11 +2,11 @@
 
 # 介绍
 
-这是一个介绍[`Polars` DataFrame library](https://github.com/pola-rs/polars)的指南。它的目标是通过阅读示例并与其他示例进行比较，向您介绍`Polars`解决方案。这里介绍了一些设计选择。该指南还将向您介绍`Polars`的最佳使用。
+这是一个介绍[`Polars` DataFrame library](https://github.com/pola-rs/polars)的指南。它的目标是通过示例演示以及与其他类似解决方案进行比较，向您介绍`Polars`。这里介绍了一些设计选择。该指南还将向您介绍`Polars`的最佳使用。
 
 尽管`Polars`完全是用[`Rust`](https://www.rust-lang.org/)写的（没有运行时开销！）使用 [`Arrow`](https://arrow.apache.org/) -- [原生 `Rust` 实现的arrow2](https://github.com/jorgecarleitao/arrow2) -- 作为它的底基。本指南中的示例主要使用其更高级的语言绑定。高级绑定只作为核心库中实现的功能的简要的包装。
 
-对于 [`Pandas`](https://pandas.pydata.org/) 使用者, 我们的[Python package](https://pypi.org/project/polars/) 提供最简单的方式来启动`Polars`.
+对于 [`Pandas`](https://pandas.pydata.org/) 使用者, 我们的[Python package](https://pypi.org/project/polars/) 提供最简单的方式来入门`Polars`.
 
 ## 目标与非目标
 
