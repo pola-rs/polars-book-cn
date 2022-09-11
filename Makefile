@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 PYTHON=.venv/bin/python
 DATA_SRC=https://github.com/ritchie46/static/releases/download/0.0.1
+DATA_SRC_STATIC=https://raw.githubusercontent.com/pola-rs/polars-static/master/data
 DATA_DIR=data
 
 .venv:
@@ -11,12 +12,18 @@ DATA_DIR=data
 data: .venv
 	@mkdir -p $(DATA_DIR)
 	$(PYTHON) generate_data.py
+	wget -q --no-check-certificate --content-disposition ${DATA_SRC_STATIC}/appleStock.csv -O $(DATA_DIR)/appleStock.csv
 	wget -q $(DATA_SRC)/reddit100k.tar.gz -O - | tar -xzf - -O > $(DATA_DIR)/reddit.csv
 	wget -q $(DATA_SRC)/runescape100k.tar.gz -O - | tar -xzf - -O > $(DATA_DIR)/runescape.csv
 
 run: data
-	./tasks.sh process_nbook introduction_polars
+	./tasks.sh process_nbook introduction_polars-py
+	./tasks.sh process_nbook introduction_polars-rs
+	$(PYTHON) -m user_guide.src.examples.testing
 	$(PYTHON) -m user_guide.src.examples.multiple_files
+	$(PYTHON) -m user_guide.src.examples.combining_data
+	$(PYTHON) -m user_guide.src.examples.missing_data
+	$(PYTHON) -m user_guide.src.examples.selecting_data
 	$(PYTHON) -m user_guide.src.examples.time_series
 	$(PYTHON) -m user_guide.src.examples.expressions
 	$(PYTHON) -m user_guide.src.examples.aggregate
@@ -43,9 +50,6 @@ run: data
 serve_user_guide: run
 	cd ./user_guide; mdbook serve --hostname 0.0.0.0 --port 8000
 
-serve_ref_guide_python: docs
-	cd ./reference_guide_python; mdbook serve --hostname 0.0.0.0 --port 8000
-
 serve: serve_user_guide
 
 clean:
@@ -54,8 +58,6 @@ clean:
 	-@rm -fr user_guide/src/outputs
 	-@rm -fr `find . -name __pycache__`
 	-@cd user_guide; mdbook clean &>/dev/null
-	-@cd reference_guide_python; mdbook clean &>/dev/null
-	-@rm -fr reference_guide_python/src
 
 fmt: format
 
