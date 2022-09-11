@@ -15,7 +15,7 @@ jobs:
       - name: Checkout polars-book-cn
         uses: actions/checkout@v3
 
-      - name: Checkout website repo
+      - name: Checkout polars-book
         uses: actions/checkout@v3
         with:
           repository: pola-rs/polars-book
@@ -26,14 +26,53 @@ jobs:
         with:
           python-version: 3.8
 
-      - id: sync_diff
-        run: |
-          python3 .github/tools/sync.py
-#          echo "::set-output name=diffs::$(cat diffs.log)"
-
       - run: |
           python3 -m pip install black==22.3.0
           python3 -m black .
+
+      - run: |
+          python3 .github/tools/sync.py
+          python3 -m black .
+          rm -rf tmp/
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: polars-book-cn-bkp
+          path: .
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y graphviz make wget
+          python -m pip install black==22.3.0 mdformat==0.7.5
+
+      - name: Check formatting
+        run: |
+          black --check .
+          mdformat --check $(find user_guide/src -name "*.md" | grep -v SUMMARY.md)
+
+      - name: Run snippets
+        run: |
+          sudo make run
+
+  push:
+    needs: sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout polars-book-cn
+        uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: polars-book-cn-bkp
+          path: tmp/
+      
+      - run: |
+          rsync -av tmp/ .
+          git config core.filemode false
+
+      - id: report
+        run: echo "::set-output name=diffs::$(cat diffs.log)"
 
       - name: Propose a PR for sync diffs
         uses: peter-evans/create-pull-request@v3
@@ -45,4 +84,4 @@ jobs:
           title: "chore: sync codes and scripts from polars-book"
           body: |
             #### This PR *cannot* resolve the following files and left them unchanged
-            ${{steps.sync_diff.outputs.diffs}}
+            ${{steps.report.outputs.diffs}}

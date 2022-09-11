@@ -1,6 +1,9 @@
 import difflib
-import os
 import re
+import token
+import tokenize
+import os
+
 from pathlib import Path
 from typing import TextIO
 from urllib.parse import quote
@@ -16,14 +19,44 @@ scripts = [
     "Makefile",
     "generate_data.py",
     "tasks.sh",
+    "user_guide/preprocessor/",
+    "user_guide/data/",
 ]
 
 # may contain translated comments
 # if there exists chinese characters in the original file, will be skipped and print the diff in the log
 codes = [
-    "user_guide/preprocessor/",
     "user_guide/src/examples/",
 ]
+
+
+def remove_comments(fname):
+    """https://stackoverflow.com/questions/1769332/script-to-remove-python-comments-docstrings"""
+    res = ""
+    with open(fname, "r", encoding="utf-8") as source:
+        prev_toktype = token.INDENT
+        first_line = None
+        last_lineno = -1
+        last_col = 0
+
+        tokgen = tokenize.generate_tokens(source.readline)
+        for toktype, ttext, (slineno, scol), (elineno, ecol), ltext in tokgen:
+            if slineno > last_lineno:
+                last_col = 0
+            if scol > last_col:
+                res += " " * (scol - last_col)
+            if toktype == token.STRING and prev_toktype == token.INDENT:
+                pass  # docstring
+            elif toktype == tokenize.COMMENT:
+                pass  # comment
+            else:
+                res += ttext
+
+            prev_toktype = toktype
+            last_col = ecol
+            last_lineno = elineno
+
+    return "\n".join(l.rstrip() for l in res.split("\n") if l.strip())
 
 
 def sync(targets, force, log: TextIO):
@@ -37,10 +70,14 @@ def sync(targets, force, log: TextIO):
                 with open(file, "w", encoding="utf-8") as old:
                     old.write(new.read())
             else:
-                with open(file, "r+", encoding="utf-8") as old:
-                    old_text = old.readlines()
-                    if not any(contains_zh.search(o) for o in old_text):
-                        old.write(new.read())
+                old_clean = remove_comments(file)
+                new_clean = remove_comments(f"{polars_book_dir}/{file}")
+                if old_clean != new_clean:
+                    with open(file, "r", encoding="utf-8") as old:
+                        old_text = old.readlines()
+                    if all(not contains_zh.search(o) for o in old_text):
+                        with open(file, "w", encoding="utf-8") as old:
+                            old.write(new.read())
                     else:
                         diff = "".join(difflib.unified_diff(a=new.readlines(), b=old_text, n=0))
                         print(diff)
@@ -69,4 +106,5 @@ if __name__ == "__main__":
     with open("diffs.log", "r", encoding="utf-8") as log:
         # to set a multiline file's context as github output, replace \n as <br>
         context = "<br>".join([l.rstrip() for l in log.readlines()])
-        os.system(f'echo "::set-output name=diffs::{context}"')
+    with open("diffs.log", "w", encoding="utf-8") as log:
+        log.write(context)
