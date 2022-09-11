@@ -5,3 +5,7 @@ out
 gen
 .DS_Store
 .venv/
+
+# ci: sync with polars-book
+tmp/
+*.log

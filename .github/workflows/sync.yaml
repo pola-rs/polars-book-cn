@@ -1,0 +1,48 @@
+name: Sync codes and scripts from polars-book
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 18 * * *'
+
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout polars-book-cn
+        uses: actions/checkout@v3
+
+      - name: Checkout website repo
+        uses: actions/checkout@v3
+        with:
+          repository: pola-rs/polars-book
+          path: tmp/polars-book
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - id: sync_diff
+        run: |
+          python3 .github/tools/sync.py
+#          echo "::set-output name=diffs::$(cat diffs.log)"
+
+      - run: |
+          python3 -m pip install black==22.3.0
+          python3 -m black .
+
+      - name: Propose a PR for sync diffs
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: main
+          branch: sync-polars-book
+          author: GitHub Actions <41898282+github-actions[bot]@users.noreply.github.com>
+          commit-message: "chore: sync codes and scripts from polars-book"
+          title: "chore: sync codes and scripts from polars-book"
+          body: |
+            #### This PR *cannot* resolve the following files and left them unchanged
+            ${{steps.sync_diff.outputs.diffs}}
