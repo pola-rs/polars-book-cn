@@ -28,7 +28,7 @@
 这是个很糟糕的情况，特别我们在做 `.groupby` 的时候会经常传入 `lambda` 函数。虽然 `Polars`
 支持这种操作，但是请注意 Python 的限制，特别是解释器和GIL。
 
-为了解决这个问题，`Polars` 实现了一种非常强大的语法，不仅可以用在惰性API，也可以用在饥饿API。
+为了解决这个问题，`Polars` 实现了一种非常强大的语法，在其延迟执行API和即时执行API上都有定义。
 
 ## Polars Expressions
 
@@ -43,7 +43,7 @@
 
 #### 基本聚合操作
 
-你可以轻松地把多个聚合表达式放在一个 `list` 里面，并没有长度限制，你放入任何数量的表达式。
+你可以轻松地把多个聚合表达式放在一个 `list` 里面，并没有数量限制，你可以任意组合你放入任何数量的表达式。
 下面这段代码中我们做如下聚合操作：
 
 对于每一个 `first_name` 分组：
@@ -57,8 +57,7 @@
   - 短版: `pl.first("last_name")`
   - 长版: `pl.col("last_name").first()`
 
-Besides the aggregation, we immediately sort the result and limit to the top `5` so that
-we have a nice summary overview.
+除了聚合，我们还立即对结果进行排序，并取其中前5条记录，这样我们能更好地从宏观角度理解这组数据的特征。
 
 ```python
 {{#include ../examples/groupby_dsl/snippet1.py}}
@@ -94,7 +93,7 @@ we have a nice summary overview.
 #### 过滤
 
 我们也可以过滤分组。假设我们想要计算每组的均值，但是我们不希望计算所有值的均值，我们也不希望直接
-从 `DataFrame` 过滤，因为我们后需还需要哪些行做其他操作。
+从 `DataFrame` 过滤，因为我们后需还需要那些行做其他操作。
 
 下面的例子说明我们是如何做到的。注意，我们可以写明 `Python` 的自定义函数，这些函数没有什么
 运行时开销。因为这些函数返回了 `Polars` 表达式，我们并没在运行时让 `Series` 调用自动函数。
