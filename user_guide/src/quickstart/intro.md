@@ -12,7 +12,7 @@ $ pip install polars
 
 ## 实例
 
-下面的例子中我们读入并解析一个 CSV 文件，过滤后连接一个 `groupby` 操作：
+下面的例子中我们读入并解析一个 CSV 文件，过滤后紧跟一个 `groupby` 分组求和操作（该例子仅在Python中演示，因为对于Rust而言，即时执行的API并不推荐）：
 
 ```python
 import polars as pl
@@ -43,9 +43,9 @@ shape: (3, 5)
 
 如上所示， `Polars` 可以格式化输出，包括作为表头的列名和数据类型。
 
-## 惰性实例
+## 延迟执行示例
 
-上面的例子我们也可以采用惰性方式执行：
+上面的例子我们也可以采用延迟执行方式执行：
 
 ```python
 import polars as pl
@@ -60,19 +60,17 @@ print(
 )
 ```
 
-如果数据文件保存在本地，我们还可以使用 `scan_csv` 来实现惰性查询。
+如果数据文件保存在本地，我们还可以使用 `scan_csv` 来实现延迟执行查询。
 
 ## 参考
 
 `Python` API 可以参考：[Fix Me](POLARS_PY_REF_GUIDE).
 
-### 惰性 API
+### 延迟执行 API
 
-惰性 API 会构建一个查询方案。在调用 `LazyFrame.collect()` 或者 `LazyFrame.fetch()` 之前，
-`Polars` 不会执行任何操作。这种方式可以让 `Polars` 了解查询的所有操作，并依据这些操作进行优化，
-选择最佳的算法执行。
+延迟执行 API 会构建一个查询计划。在调用 `LazyFrame.collect()` 或者 `LazyFrame.fetch()` 之前，`Polars` 不会执行任何操作。这种方式可以让 `Polars` 了解查询的所有操作，并依据这些操作进行优化并选择最佳的算法执行。
 
-从饥俄执行到惰性执行的改变非常简单，只需要在已有调用基础上添加 `.lazy()` 和 `.collect()` 即可。
+从即时执行变更为延迟执行非常简单，只需要在已有调用基础上添加 `.lazy()` 和 `.collect()` 即可。
 
 正如之前看到的例子一样：
 
