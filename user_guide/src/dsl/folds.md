@@ -1,4 +1,4 @@
-# Folds
+# 折叠
 
 `Polars` 提供了横向表达式或者方法，比如[`sum`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.sum.html),
 [`min`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.min.html), [`mean`](POLARS_PY_REF_GUIDE/api/polars.DataFrame.mean.html) 等等，

@@ -17,10 +17,12 @@ mdbook serve --hostname 0.0.0.0 --port 8000
 
 ## 贡献指南
 
-在 [user_guide/src](./user_guide/src/) 文件夹下找到需要补充的内容。在参与贡献过程中请遵循[贡献指南](./CONTRIBUTING.md)来参与到该项目的协作中。
+在 [user_guide/src](./user_guide/src/) 文件夹下找到需要补充的内容:
 
 - [中文文档：pola-rs/polars-book-cn](https://pola-rs.github.io/polars-book-cn/user-guide/index.html)
 - [英文文档：pola-rs/polars-book](https://pola-rs.github.io/polars-book/user-guide/index.html)
+
+请遵循[贡献指南](./CONTRIBUTING.md)来参与到项目的协作与完善中。
 
 ## 参考学习
 
