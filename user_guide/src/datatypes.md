@@ -1,7 +1,6 @@
 # 数据类型
 
-`Polars`完全基于`Arrow`数据类型，并由`Arrow`内存阵列支持。这使得数据处理
-缓存效率高，支持进程间通信。大多数数据类型遵循确切的实现来自`Arrow`，除了`Utf8`（实际上是`LargeUtf8`）、`category`和`Object`（支持有限）。
+`Polars`完全基于`Arrow`数据类型，并由`Arrow`内存阵列支持。这使得数据处理缓存效率高，支持进程间通信。大多数数据类型遵循确切的实现来自`Arrow`，除了`Utf8`（实际上是`LargeUtf8`）、`category`和`Object`（支持有限）。
 
 这些数据类型是:
 

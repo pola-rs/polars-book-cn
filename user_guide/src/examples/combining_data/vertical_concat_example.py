@@ -1,6 +1,6 @@
 import polars as pl
 
-# DataFrames for vertical concatenation
+# 垂直串联的数据帧
 df_v1 = pl.DataFrame(
     {
         "a": [1],

@@ -1,6 +1,6 @@
 import polars as pl
 
-# DataFrames for semi & anti joins
+# 半与反串联的数据帧
 df_cars = pl.DataFrame(
     {
         "id": ["a", "b", "c"],

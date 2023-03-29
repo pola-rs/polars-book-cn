@@ -1,4 +1,4 @@
-# NumPy
+# Numpy
 
 `Polars` 的 `Series` 支持 `NumPy` 的
 [通用函数 (ufuncs)](https://numpy.org/doc/stable/reference/ufuncs.html)。
