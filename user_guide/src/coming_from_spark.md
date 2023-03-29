@@ -1,6 +1,6 @@
 # 来自 Apache Spark
 
-## 基于列的 API vs. 基于行的 API
+## 基于列的方法 vs. 基于行的方法
 
 `Spark` `DataFrame` 类似于一个行的集合，而 `Polars` `DataFrame` 更接近于一个列的集合。这意味着你可以在 `Polars` 中以 `Spark` 中不可能的方式组合列，因为 `Spark` 保留了每一行中的数据关系。
 
