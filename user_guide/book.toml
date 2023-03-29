@@ -1,6 +1,6 @@
 [book]
 authors = ["ritchie46"]
-language = "en"
+language = "zh-CN"
 multilingual = false
 src = "src"
 title = "Polars - 用户指南"
