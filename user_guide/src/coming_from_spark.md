@@ -1,4 +1,4 @@
-# 从 Apache Spark 转化
+# 来自 Apache Spark
 
 ## 基于列的 API vs. 基于行的 API
 

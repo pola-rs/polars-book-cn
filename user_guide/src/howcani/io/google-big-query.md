@@ -1,4 +1,4 @@
-# 与Google的BigQuery交互
+# 与 Google BigQuery 交互
 
 读写BigQuery数据库，需要额外依赖项：
 
