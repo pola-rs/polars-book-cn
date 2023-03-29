@@ -4,6 +4,8 @@
 
 这个仓库是 [Polars DataFrame library](https://github.com/pola-rs/polars) User Guide 的中文版本。
 
+This repository is the Chinese version of the [Polars DataFrame library](https://github.com/pola-rs/polars) User Guide.
+
 ## 本地预览
 
 在本地预览首先要安装 [`cargo`](https://doc.rust-lang.org/cargo/getting-started/installation.html)，在项目根目录执行以下命令即可创建本地预览
