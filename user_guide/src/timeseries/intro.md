@@ -1,27 +1,27 @@
 # 时间序列
 
-`Polars` 为时间序列重采样提供了强大的 API 支持。许多人都知道 `Pandas` 中 `df.resample` 提供了重采样功能。
+`Polars` 为时间序列重采样提供了强大的方法支持。许多人都知道 `Pandas` 中 `df.resample` 提供了重采样功能。
 
 `Polars` 在以下两个方面与 `Pandas` 有所区别：
 
-- 上采样 (Upsampling)
-- 下采样 (Downsampling)
+- 上采样 (Up Sampling)
+- 下采样 (Down Sampling)
 
-## 上采样 (Upsampling)
+## 上采样 (Up Sampling)
 
 上采样实际上相当于将一个日期范围与你的数据集进行左关联 (left join) 操作，并填充缺失数据。`Polars` 为此操作
 提供了封装方法，你可以参考下面的一个示例。
 
-## 下采样 (Downsampling)
+## 下采样 (Down Sampling)
 
 下采样很有意思。你需要处理日期间隔、窗口持续时间、聚合等问题。
 
-`Polars` 将下采样视为 **groupby** 操作的一个特例，因此表达式 API 为 **groupby** 上下文提供了两个额外的入口。
+`Polars` 将下采样视为分组（groupby）操作的一个特例，因此表达式 API 为分组（groupby）上下文（contexts）提供了两个额外的入口。
 
 - [groupby_dynamic](POLARS_PY_REF_GUIDE/api/polars.DataFrame.groupby_dynamic.html)
 - [groupby_rolling](POLARS_PY_REF_GUIDE/api/polars.DataFrame.groupby_rolling.html)
 
-你可以通过调用二者其中任何一个函数来获取对表达式 API 的完整访问，它有着强大的性能！
+你可以通过调用二者其中任何一个函数来获取对表达式方法的完整访问，它有着强大的性能！
 
 让我们通过下面几个示例来理解这样做的意义。
 
@@ -33,7 +33,7 @@
 中的行数决定，而是由一个时间单位 (temporal unit) 决定，比如一天 (`"1d"`)，三周 (`"3w"`)，亦或是五纳秒 (`"5ns"`) ...
 希望这个例子有助于让你理解动态窗口的含义。
 
-匹配某个动态窗口的值会被分配到该窗口所对应的组中，接下来你可以用强大的表达式 API 进行聚合操作。
+匹配某个动态窗口的值会被分配到该窗口所对应的组中，接下来你可以用强大的表达式方法进行聚合操作。
 
 下面的示例使用 **groupby_dynamic** 来计算：
 
@@ -97,8 +97,7 @@ print(out)
 
 ## 滚动分组 (Rolling Groupby)
 
-滚动分组是 `groupby` 上下文的另一个入口。但与 `groupby_dynamic` 不同的是，窗口的设置不接受参数 `every` 和 `period` ——
-对于一个滚动分组，窗口根本就不是固定的！它们由 `index_column` 中的值决定。
+滚动分组是分组（groupby）上下文的另一个入口。但与 `groupby_dynamic` 不同的是，窗口的设置不接受参数 `every` 和 `period` —— 对于一个滚动分组，窗口不是固定的！它们由 `index_column` 中的值决定。
 
 想象一下，你有一个值为`{2021-01-01, 20210-01-05}` 的时间序列，使用参数 `period="5d"` 将创建以下窗口：
 

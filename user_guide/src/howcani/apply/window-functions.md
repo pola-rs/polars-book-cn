@@ -1,4 +1,4 @@
-# 应用窗口函数
+# 窗口函数
 
 `Polars` 支持窗口函数，灵感来自于[PostgreSQL](https://www.postgresql.org/docs/current/tutorial-window.html). `Pandas` 用户可能会将其识别为a `groupby.transform(aggregation)`.
 
