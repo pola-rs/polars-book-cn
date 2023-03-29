@@ -8,6 +8,9 @@ title = "Polars - 用户指南"
 default-theme = "Ayu"
 mathjax-support = true
 
+[output.html.search]
+use-boolean-and = true
+
 [output.html.fold]
 enable = true
 level = 1
