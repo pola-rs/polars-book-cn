@@ -33,9 +33,8 @@
     - [处理字符串](howcani/data/strings.md)
     - [时间戳解析](howcani/data/timestamps.md)
   - [应用](howcani/apply/intro.md)
-    - [使用自定义功能](howcani/apply/udfs.md)
+    - [应用用自定义功能](howcani/apply/udfs.md)
     - [应用窗口函数](howcani/apply/window-functions.md)
-
 - [性能](performance/intro.md)
   - [字符串](performance/strings.md)
 - [优化](optimizations/intro.md)
