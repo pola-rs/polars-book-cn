@@ -1,4 +1,4 @@
-# 与Numpy交互
+# 与 Numpy 交互
 
 `Polars` 表达式支持`NumPy` [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html)。 [这里](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs)查看所有受支持的numpy函数的列表。
 
