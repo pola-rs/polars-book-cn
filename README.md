@@ -29,6 +29,7 @@ mdbook serve --hostname 0.0.0.0 --port 8000
 ## 参考学习
 
 - [`Python` API](https://pola-rs.github.io/polars/py-polars/html/reference/)
+- [Try with Examples](https://github.com/pola-rs/polars-book-cn/tree/main/user_guide/src/examples)
 - [`Rust` 发行版本](https://docs.rs/polars/latest/polars/)
 
 ## License
