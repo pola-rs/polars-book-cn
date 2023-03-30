@@ -10,7 +10,6 @@
   - [窗口函数](dsl/window_functions.md)
   - [Numpy 通用函数](dsl/numpy.md)
   - [示例](notebooks/introduction_polars.md)
-    - []
   - [方法](dsl/api.md)
   - [视频介绍](dsl/video_intro.md)
 - [索引](indexing.md)
