@@ -28,7 +28,7 @@
     - [与 Postgres 交互](howcani/io/postgres.md)
   - [互通性](howcani/interop/intro.md)
     - [Arrow](howcani/interop/arrow.md)
-    - [NumPy](howcani/interop/numpy.md)
+    - [Numpy](howcani/interop/numpy.md)
   - [数据处理](howcani/data/intro.md)
     - [处理字符串](howcani/data/strings.md)
     - [时间戳解析](howcani/data/timestamps.md)
