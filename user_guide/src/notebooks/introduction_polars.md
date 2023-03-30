@@ -1,4 +1,4 @@
 # 实例
 
-- [introduction polars with python](introduction_polars-py.ipynb)
-- [introduction polars with rust](introduction_polars-rs.ipynb)
+- [介绍 Python 版本的 polars](introduction_polars-py.ipynb)
+- [介绍 Rust 版本的 polars](introduction_polars-rs.ipynb)
