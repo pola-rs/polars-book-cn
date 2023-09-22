@@ -12,6 +12,10 @@
 上采样实际上相当于将一个日期范围与你的数据集进行左关联 (left join) 操作，并填充缺失数据。`Polars` 为此操作
 提供了封装方法，你可以参考下面的一个示例。
 
+```python
+{{#include ../examples/time_series/resampling_example.py:5:}}
+```
+
 ## 下采样 (Down Sampling)
 
 下采样很有意思。你需要处理日期间隔、窗口持续时间、聚合等问题。
@@ -24,6 +28,14 @@
 你可以通过调用二者其中任何一个函数来获取对表达式方法的完整访问，它有着强大的性能！
 
 让我们通过下面几个示例来理解这样做的意义。
+
+```python
+{{#include ../examples/time_series/dynamic_ds.py:5:}}
+```
+
+```python
+{{#include ../examples/time_series/dynamic_groupby.py:5:}}
+```
 
 ## 动态分组 (Groupby Dynamic)
 
@@ -129,13 +141,9 @@ print(out)
 
 ```python
 {{#include ../examples/time_series/dynamic_groupby.py:4:}}
-print(out)
+print(df)
 ```
 
 ```text
 {{#include ../outputs/time_series/dyn_gb.txt}}
 ```
-
-## 上采样
-
-> 该部分内容仍在编写。
