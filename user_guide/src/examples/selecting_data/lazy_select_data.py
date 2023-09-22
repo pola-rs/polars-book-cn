@@ -3,7 +3,7 @@ from datetime import datetime
 
 lazy_select_df = pl.scan_csv("data/appleStock.csv").select(["Date"])
 
-lazy_select_df = lazy_select_df.describe_optimized_plan()
+lazy_select_df = lazy_select_df.explain()
 
 lazy_filter_df = (
     pl.scan_csv("data/appleStock.csv")
@@ -13,4 +13,4 @@ lazy_filter_df = (
     .filter(pl.col("Close") > 100)
 )
 
-lazy_filter_df = lazy_filter_df.describe_optimized_plan()
+lazy_filter_df = lazy_filter_df.explain()
