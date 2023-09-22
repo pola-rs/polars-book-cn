@@ -1,7 +1,5 @@
 # 惰性方法
 
-> 惰性方法页面正在构建中。
-
 为了展示惰性`Polars`功能，我们将探索两种中大型用户名数据集：
 
 [Reddit用户名数据集](https://www.reddit.com/r/datasets/comments/9i8s5j/dataset_metadata_for_69_million_reddit_users_in/)

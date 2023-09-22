@@ -28,5 +28,4 @@ df.write_csv("path.csv")
 df = pl.scan_csv("path.csv")
 ```
 
-如果你想了解更多这样设计的精妙之处，
-请移步`Polars`[Optimizations](../../optimizations/intro.md)这一章。
+如果你想了解更多这样设计的精妙之处，请移步`Polars`[Optimizations](../../optimizations/intro.md)这一章。

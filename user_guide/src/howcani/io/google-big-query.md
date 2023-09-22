@@ -29,4 +29,21 @@ df = pl.from_arrow(rows.to_arrow())
 
 ## 写入
 
-> 内容还在建设中
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+with io.BytesIO() as stream:
+    df.write_parquet(stream)
+    stream.seek(0)
+    job = client.load_table_from_file(
+        stream,
+        destination='tablename',
+        project='projectname',
+        job_config=bigquery.LoadJobConfig(
+            source_format=bigquery.SourceFormat.PARQUET,
+        ),
+    )
+job.result() 
+```
