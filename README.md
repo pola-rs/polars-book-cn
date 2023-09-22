@@ -14,7 +14,6 @@ This repository is the Chinese version of the [Polars DataFrame library](https:/
 git clone https://github.com/pola-rs/polars-book-cn.git
 cd user_guide/src/examples
 ```
-
 ## 本地预览
 
 在本地预览首先要安装 [`cargo`](https://doc.rust-lang.org/cargo/getting-started/installation.html)，在项目根目录执行以下命令即可创建本地预览
