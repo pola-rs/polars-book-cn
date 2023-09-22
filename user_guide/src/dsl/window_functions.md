@@ -94,24 +94,6 @@ pl.sum("foo").over("groups")
 (pl.col("x").sum() * pl.col("y")).list().over("groups").flatten()
 ```
 
-## 更多示例
-
-让我们通过练习，尝试使用以下窗口函数完成计算任务吧：
-
-- 按照 `Type` 给所有口袋妖怪排序
-- 选择每组前三个妖怪
-- 每组按照速度排序，并选择前三作为 `"fastest/group"`
-- 每组按照攻击排序，并选择前三作为 `"strongest/group"`
-- 每组按照名字排序，并选择前三作为 `"sorted_by_alphabet"`
-
-```python
-{{#include ../examples/expressions/window_3.py:3:}}
-```
-
-```text
-{{#include ../outputs/expressions/window_3.txt}}
-```
-
 ## 展开窗口函数
 
 就像刚刚的例子，如果你的窗口函数返回一个 `list`：
