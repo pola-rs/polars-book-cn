@@ -31,7 +31,7 @@
 
 Polars的速度非常快，事实上是目前性能最好的解决方案之一。参见h2oai的db基准测试中的结果。下图显示了产生结果的最大数据集。
 
-![](../data/db-benchmark.png)
+![](https://raw.githubusercontent.com/pola-rs/polars-book-cn/main/user_guide/data/db-benchmark.png)
 
 ### 当前状态
 
