@@ -6,7 +6,6 @@ from .parsing_dates import (
     df as parse_dates_df,
     filtered_df,
     filtered_range_df,
-    annual_average_df,
     df_with_year,
     negative_dates_filtered_df,
 )
@@ -35,9 +34,6 @@ with open(f"{path}/parse_dates_filtered_df.txt", "w") as f:
 
 with open(f"{path}/parse_dates_filtered_range_df.txt", "w") as f:
     f.write(f"{filtered_range_df}\n")
-
-with open(f"{path}/parse_dates_annual_average_df.txt", "w") as f:
-    f.write(f"{annual_average_df}\n")
 
 with open(f"{path}/parse_dates_with_year.txt", "w") as f:
     f.write(f"{df_with_year}\n")
