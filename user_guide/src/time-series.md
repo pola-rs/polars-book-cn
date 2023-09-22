@@ -1,9 +1,5 @@
 # 时间序列
 
-> `时间序列`文章正在建设中
-
-我们仍在这一页上部署。但这里已经有一些例子来展示如何使用`groupby_dynamic`按时间窗口分组。
-
 ```python
 import polars as pl
 from datetime import datetime
