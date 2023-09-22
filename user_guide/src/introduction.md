@@ -31,7 +31,7 @@
 
 Polars的速度非常快，事实上是目前性能最好的解决方案之一。参见h2oai的db基准测试中的结果。下图显示了产生结果的最大数据集。
 
-![](https://www.ritchievink.com/img/post-35-polars-0.15/db-benchmark.png)
+![](../data/db-benchmark.png)
 
 ### 当前状态
 
@@ -48,7 +48,7 @@ Polars的速度非常快，事实上是目前性能最好的解决方案之一�
   - 位掩码（bitmask）优化
 - 高效算法
 - 非常快的IO
-  - 它的csv和parquet 阅读器是现存速度最快的阅读器之一
+  - 它的csv和parquet阅读器是现存速度最快的阅读器之一
 - [查询优化](optimizations/lazy/intro.md)
   - 谓词（Predicate）下推
     - 扫描级过滤
