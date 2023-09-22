@@ -6,6 +6,15 @@
 
 This repository is the Chinese version of the [Polars DataFrame library](https://github.com/pola-rs/polars) User Guide.
 
+## 尝试案例
+
+使用 Git 获取最新的 polars-book-cn 仓库并访问[示例集合](./user_guide/src/examples)：
+
+```text
+git clone https://github.com/pola-rs/polars-book-cn.git
+cd user_guide/src/examples
+```
+
 ## 本地预览
 
 在本地预览首先要安装 [`cargo`](https://doc.rust-lang.org/cargo/getting-started/installation.html)，在项目根目录执行以下命令即可创建本地预览
@@ -24,12 +33,12 @@ mdbook serve --hostname 0.0.0.0 --port 8000
 - [中文文档：pola-rs/polars-book-cn](https://pola-rs.github.io/polars-book-cn/user-guide/index.html)
 - [英文文档：pola-rs/polars-book](https://pola-rs.github.io/polars-book/user-guide/index.html)
 
-请遵循[贡献指南](./CONTRIBUTING.md)来参与到项目的协作与完善中，[尝试案例](https://github.com/pola-rs/polars-book-cn/tree/main/user_guide/src/examples)并结合最新的英文文档来获取更多内容。
+请遵循[贡献指南](./CONTRIBUTING.md)来参与到项目的协作与完善中
 
 ## 参考学习
 
 - [`Python` API](https://pola-rs.github.io/polars/py-polars/html/reference/)
-- [`Rust` 发行版本](https://docs.rs/polars/latest/polars/)
+- [`Rust` 最新版本](https://docs.rs/polars/latest/polars/)
 
 ## License
 
