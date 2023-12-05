@@ -2,6 +2,8 @@ pandas
 polars
 matplotlib
 nbconvert==6.4.5
+jsonschema==4.17.3
+jupyterlab_server==2.22.1
 jupyterlab==4.0.6
 pyarrow
 mdformat==0.7.5
