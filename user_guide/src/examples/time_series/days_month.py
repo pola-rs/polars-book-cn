@@ -4,7 +4,8 @@ from datetime import datetime
 # 时间轴（从low到high，间隔为1天，轴名称为"time"）
 df = pl.date_range(start=datetime(2021, 1, 1), 
                    end=datetime(2021, 12, 31), 
-                   interval="1d", name="time", 
+                   interval="1d", 
+                   name="time", 
                    eager=True).to_frame()
 
 out = (
