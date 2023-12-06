@@ -1,0 +1,577 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>分组 - Polars - 用户指南</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="../quickstart/intro.html"><strong aria-hidden="true">2.</strong> 开始使用</a></li><li class="chapter-item expanded "><a href="../dsl/intro.html"><strong aria-hidden="true">3.</strong> Polars 表达式</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../dsl/expressions.html"><strong aria-hidden="true">3.1.</strong> 表达式</a></li><li class="chapter-item "><a href="../dsl/contexts.html"><strong aria-hidden="true">3.2.</strong> 上下文</a></li><li class="chapter-item expanded "><a href="../dsl/groupby.html" class="active"><strong aria-hidden="true">3.3.</strong> 分组</a></li><li class="chapter-item "><a href="../dsl/folds.html"><strong aria-hidden="true">3.4.</strong> 折叠</a></li><li class="chapter-item "><a href="../dsl/custom_functions.html"><strong aria-hidden="true">3.5.</strong> 自定义函数</a></li><li class="chapter-item "><a href="../dsl/window_functions.html"><strong aria-hidden="true">3.6.</strong> 窗口函数</a></li><li class="chapter-item "><a href="../dsl/numpy.html"><strong aria-hidden="true">3.7.</strong> Numpy 通用函数</a></li><li class="chapter-item "><a href="../notebooks/introduction_polars.html"><strong aria-hidden="true">3.8.</strong> 示例</a></li><li class="chapter-item "><a href="../dsl/api.html"><strong aria-hidden="true">3.9.</strong> 方法</a></li><li class="chapter-item "><a href="../dsl/video_intro.html"><strong aria-hidden="true">3.10.</strong> 视频介绍</a></li></ol></li><li class="chapter-item expanded "><a href="../indexing.html"><strong aria-hidden="true">4.</strong> 索引</a></li><li class="chapter-item expanded "><a href="../datatypes.html"><strong aria-hidden="true">5.</strong> 数据类型</a></li><li class="chapter-item expanded "><a href="../coming_from_pandas.html"><strong aria-hidden="true">6.</strong> 来自 Pandas</a></li><li class="chapter-item expanded "><a href="../coming_from_spark.html"><strong aria-hidden="true">7.</strong> 来自 Apache Spark</a></li><li class="chapter-item expanded "><a href="../timeseries/intro.html"><strong aria-hidden="true">8.</strong> 时间序列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../time-series.html"><strong aria-hidden="true">8.1.</strong> 示例</a></li></ol></li><li class="chapter-item expanded "><a href="../howcani/intro.html"><strong aria-hidden="true">9.</strong> 使用范围</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/intro.html"><strong aria-hidden="true">9.1.</strong> IO</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/io/csv.html"><strong aria-hidden="true">9.1.1.</strong> CSV 文件</a></li><li class="chapter-item "><a href="../howcani/io/parquet.html"><strong aria-hidden="true">9.1.2.</strong> Parquet 文件</a></li><li class="chapter-item "><a href="../multiple_files/intro.html"><strong aria-hidden="true">9.1.3.</strong> 多文件</a></li><li class="chapter-item "><a href="../howcani/io/read_db.html"><strong aria-hidden="true">9.1.4.</strong> 从数据库中读取</a></li><li class="chapter-item "><a href="../howcani/io/aws.html"><strong aria-hidden="true">9.1.5.</strong> 与 AWS 交互</a></li><li class="chapter-item "><a href="../howcani/io/google-big-query.html"><strong aria-hidden="true">9.1.6.</strong> 与 Google BigQuery 交互</a></li><li class="chapter-item "><a href="../howcani/io/postgres.html"><strong aria-hidden="true">9.1.7.</strong> 与 Postgres 交互</a></li></ol></li><li class="chapter-item "><a href="../howcani/interop/intro.html"><strong aria-hidden="true">9.2.</strong> 互通性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/interop/arrow.html"><strong aria-hidden="true">9.2.1.</strong> Arrow</a></li><li class="chapter-item "><a href="../howcani/interop/numpy.html"><strong aria-hidden="true">9.2.2.</strong> Numpy</a></li></ol></li><li class="chapter-item "><a href="../howcani/data/intro.html"><strong aria-hidden="true">9.3.</strong> 数据</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/data/strings.html"><strong aria-hidden="true">9.3.1.</strong> 字符串</a></li><li class="chapter-item "><a href="../howcani/data/timestamps.html"><strong aria-hidden="true">9.3.2.</strong> 时间戳</a></li></ol></li><li class="chapter-item "><a href="../howcani/df/intro.html"><strong aria-hidden="true">9.4.</strong> 数据帧</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/df/row_col_selection.html"><strong aria-hidden="true">9.4.1.</strong> 选中</a></li><li class="chapter-item "><a href="../howcani/df/common-manipulations.html"><strong aria-hidden="true">9.4.2.</strong> 常用</a></li><li class="chapter-item "><a href="../howcani/df/groupby.html"><strong aria-hidden="true">9.4.3.</strong> 分组</a></li><li class="chapter-item "><a href="../howcani/df/aggregate.html"><strong aria-hidden="true">9.4.4.</strong> 聚合</a></li><li class="chapter-item "><a href="../howcani/df/filter.html"><strong aria-hidden="true">9.4.5.</strong> 过滤</a></li><li class="chapter-item "><a href="../howcani/df/join.html"><strong aria-hidden="true">9.4.6.</strong> 连接</a></li><li class="chapter-item "><a href="../howcani/df/melt.html"><strong aria-hidden="true">9.4.7.</strong> 重塑</a></li><li class="chapter-item "><a href="../howcani/df/pivot.html"><strong aria-hidden="true">9.4.8.</strong> 透视</a></li><li class="chapter-item "><a href="../howcani/df/sorting.html"><strong aria-hidden="true">9.4.9.</strong> 排序</a></li><li class="chapter-item "><a href="../howcani/df/conditionally-apply.html"><strong aria-hidden="true">9.4.10.</strong> 条件应用</a></li></ol></li><li class="chapter-item "><a href="../howcani/apply/intro.html"><strong aria-hidden="true">9.5.</strong> 应用</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../howcani/apply/udfs.html"><strong aria-hidden="true">9.5.1.</strong> 自定义函数</a></li><li class="chapter-item "><a href="../howcani/apply/window-functions.html"><strong aria-hidden="true">9.5.2.</strong> 窗口函数</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../performance/intro.html"><strong aria-hidden="true">10.</strong> 性能</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../performance/strings.html"><strong aria-hidden="true">10.1.</strong> 字符串</a></li></ol></li><li class="chapter-item expanded "><a href="../optimizations/intro.html"><strong aria-hidden="true">11.</strong> 优化</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/intro.html"><strong aria-hidden="true">11.1.</strong> 惰性方法</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../optimizations/lazy/predicate-pushdown.html"><strong aria-hidden="true">11.1.1.</strong> 谓词下推</a></li><li class="chapter-item "><a href="../optimizations/lazy/projection-pushdown.html"><strong aria-hidden="true">11.1.2.</strong> 投影下推</a></li><li class="chapter-item "><a href="../optimizations/lazy/other-optimizations.html"><strong aria-hidden="true">11.1.3.</strong> 其它优化</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../references.html"><strong aria-hidden="true">12.</strong> 参考指南</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Polars - 用户指南</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="分组"><a class="header" href="#分组">分组</a></h1>
+<h2 id="多线程"><a class="header" href="#多线程">多线程</a></h2>
+<p>处理表状数据最高效的方式就是通过“分割-处理-组合”的方式并行地进行。这样的操作正是 <code>Polars</code> 的
+分组操作的核心，也是 <code>Polars</code> 如此高效的秘密。特别指出，分割和处理都是多线程执行的。</p>
+<p>下面的例子展示了分组操作的流程：</p>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/docs/split-apply-combine.svg" alt="" /></p>
+<p>对于分割阶段的哈希操作，<code>Polars</code> 使用了无锁多线程方式，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/docs/lock-free-hash.svg" alt="" /></p>
+<p>这样的并行操作可以让分组和联合操作非常非常高效。</p>
+<blockquote>
+<p>更多解释参考 <a href="https://www.ritchievink.com/blog/2021/02/28/i-wrote-one-of-the-fastest-dataframe-libraries/">这篇博客</a></p>
+</blockquote>
+<h2 id="不要杀死并行"><a class="header" href="#不要杀死并行">不要“杀死”并行</a></h2>
+<p>众所周知，<code>Python</code> 慢、水平拓展不好。除了因为是解释型语言，Python 还收到全局解释器锁，GIL。
+这就意味着，如果你传入一个 <code>lambda</code> 或者 <code>Python</code> 自定义函数，<code>Polars</code> 速度会被限制，即
+无法使用多核进行并行计算。</p>
+<p>这是个很糟糕的情况，特别我们在做 <code>.groupby</code> 的时候会经常传入 <code>lambda</code> 函数。虽然 <code>Polars</code>
+支持这种操作，但是请注意 Python 的限制，特别是解释器和GIL。</p>
+<p>为了解决这个问题，<code>Polars</code> 实现了一种非常强大的语法，在其延迟执行API和即时执行API上都有定义。</p>
+<h2 id="polars-expressions"><a class="header" href="#polars-expressions">Polars Expressions</a></h2>
+<p>刚才我们提到自定义 Python 函数会损伤并行能力，<code>Polars</code> 提供了惰性 API 来应对这种情况。接下来
+我们看看这是什么意思。</p>
+<p>我们可以从这个数据集开始：<a href="https://github.com/unitedstates/congress-legislators">US congress dataset</a>.</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby(&quot;first_name&quot;)
+    .agg(
+        [
+            pl.count(),
+            pl.col(&quot;gender&quot;),
+            pl.first(&quot;last_name&quot;),
+        ]
+    )
+    .sort(&quot;count&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<h4 id="基本聚合操作"><a class="header" href="#基本聚合操作">基本聚合操作</a></h4>
+<p>你可以轻松地把多个聚合表达式放在一个 <code>list</code> 里面，并没有数量限制，你可以任意组合你放入任何数量的表达式。
+下面这段代码中我们做如下聚合操作：</p>
+<p>对于每一个 <code>first_name</code> 分组：</p>
+<ul>
+<li>统计每组的行数：
+<ul>
+<li>短版：<code>pl.count(&quot;party&quot;)</code></li>
+<li>长版：<code>pl.col(&quot;party&quot;).count()</code></li>
+</ul>
+</li>
+<li>把每组的性别放入一个列表:
+<ul>
+<li>长版： <code>pl.col(&quot;gender&quot;).list()</code></li>
+</ul>
+</li>
+<li>找到每组的第一个 <code>last_name</code>：
+<ul>
+<li>短版: <code>pl.first(&quot;last_name&quot;)</code></li>
+<li>长版: <code>pl.col(&quot;last_name&quot;).first()</code></li>
+</ul>
+</li>
+</ul>
+<p>除了聚合，我们还立即对结果进行排序，并取其中前5条记录，这样我们能更好地从宏观角度理解这组数据的特征。</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby(&quot;first_name&quot;)
+    .agg(
+        [
+            pl.count(),
+            pl.col(&quot;gender&quot;),
+            pl.first(&quot;last_name&quot;),
+        ]
+    )
+    .sort(&quot;count&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌────────────┬───────┬───────────────────┬───────────┐
+│ first_name ┆ count ┆ gender            ┆ last_name │
+│ ---        ┆ ---   ┆ ---               ┆ ---       │
+│ cat        ┆ u32   ┆ list[cat]         ┆ str       │
+╞════════════╪═══════╪═══════════════════╪═══════════╡
+│ John       ┆ 1256  ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Walker    │
+│ William    ┆ 1022  ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Few       │
+│ James      ┆ 714   ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Armstrong │
+│ Thomas     ┆ 454   ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Tucker    │
+│ Charles    ┆ 439   ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Carroll   │
+└────────────┴───────┴───────────────────┴───────────┘
+</code></pre>
+<h4 id="条件"><a class="header" href="#条件">条件</a></h4>
+<p>简单吧！我们加点料！假设我们想要知道对于每个 <code>state</code> 有多少 <code>Pro</code> 和 <code>Anti</code>。我们可以
+不用 <code>lambda</code> 而直接查询。</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby(&quot;state&quot;)
+    .agg(
+        [
+            (pl.col(&quot;party&quot;) == &quot;Anti-Administration&quot;).sum().alias(&quot;anti&quot;),
+            (pl.col(&quot;party&quot;) == &quot;Pro-Administration&quot;).sum().alias(&quot;pro&quot;),
+        ]
+    )
+    .sort(&quot;pro&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌───────┬──────┬─────┐
+│ state ┆ anti ┆ pro │
+│ ---   ┆ ---  ┆ --- │
+│ cat   ┆ u32  ┆ u32 │
+╞═══════╪══════╪═════╡
+│ NJ    ┆ 0    ┆ 3   │
+│ CT    ┆ 0    ┆ 3   │
+│ NC    ┆ 1    ┆ 2   │
+│ VA    ┆ 3    ┆ 1   │
+│ MA    ┆ 0    ┆ 1   │
+└───────┴──────┴─────┘
+</code></pre>
+<p>类似的，我们可以通过多层聚合实现，但是这不利于我显摆这些很酷的特征😉！</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby([&quot;state&quot;, &quot;party&quot;])
+    .agg([pl.count(&quot;party&quot;).alias(&quot;count&quot;)])
+    .filter((pl.col(&quot;party&quot;) == &quot;Anti-Administration&quot;) | (pl.col(&quot;party&quot;) == &quot;Pro-Administration&quot;))
+    .sort(&quot;count&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌───────┬─────────────────────┬───────┐
+│ state ┆ party               ┆ count │
+│ ---   ┆ ---                 ┆ ---   │
+│ cat   ┆ cat                 ┆ u32   │
+╞═══════╪═════════════════════╪═══════╡
+│ VA    ┆ Anti-Administration ┆ 3     │
+│ CT    ┆ Pro-Administration  ┆ 3     │
+│ NJ    ┆ Pro-Administration  ┆ 3     │
+│ NC    ┆ Pro-Administration  ┆ 2     │
+│ VA    ┆ Pro-Administration  ┆ 1     │
+└───────┴─────────────────────┴───────┘
+</code></pre>
+<h4 id="过滤"><a class="header" href="#过滤">过滤</a></h4>
+<p>我们也可以过滤分组。假设我们想要计算每组的均值，但是我们不希望计算所有值的均值，我们也不希望直接
+从 <code>DataFrame</code> 过滤，因为我们后需还需要那些行做其他操作。</p>
+<p>下面的例子说明我们是如何做到的。注意，我们可以写明 <code>Python</code> 的自定义函数，这些函数没有什么
+运行时开销。因为这些函数返回了 <code>Polars</code> 表达式，我们并没在运行时让 <code>Series</code> 调用自动函数。</p>
+<pre><code class="language-python">from datetime import date
+
+import polars as pl
+
+from .dataset import dataset
+
+
+def compute_age() -&gt; pl.Expr:
+    return date(2021, 1, 1).year - pl.col(&quot;birthday&quot;).dt.year()
+
+
+def avg_birthday(gender: str) -&gt; pl.Expr:
+    return compute_age().filter(pl.col(&quot;gender&quot;) == gender).mean().alias(f&quot;avg {gender} birthday&quot;)
+
+
+q = (
+    dataset.lazy()
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            avg_birthday(&quot;M&quot;),
+            avg_birthday(&quot;F&quot;),
+            (pl.col(&quot;gender&quot;) == &quot;M&quot;).sum().alias(&quot;# male&quot;),
+            (pl.col(&quot;gender&quot;) == &quot;F&quot;).sum().alias(&quot;# female&quot;),
+        ]
+    )
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 5)
+┌───────┬────────────────┬────────────────┬────────┬──────────┐
+│ state ┆ avg M birthday ┆ avg F birthday ┆ # male ┆ # female │
+│ ---   ┆ ---            ┆ ---            ┆ ---    ┆ ---      │
+│ cat   ┆ f64            ┆ f64            ┆ u32    ┆ u32      │
+╞═══════╪════════════════╪════════════════╪════════╪══════════╡
+│ WI    ┆ 152.939698     ┆ null           ┆ 199    ┆ 0        │
+│ LA    ┆ 157.195531     ┆ 97.8           ┆ 194    ┆ 5        │
+│ OH    ┆ 171.836735     ┆ 79.444444      ┆ 672    ┆ 9        │
+│ MO    ┆ 163.741433     ┆ 81.625         ┆ 329    ┆ 8        │
+│ PA    ┆ 179.724846     ┆ 91.857143      ┆ 1050   ┆ 7        │
+└───────┴────────────────┴────────────────┴────────┴──────────┘
+</code></pre>
+<h4 id="排序"><a class="header" href="#排序">排序</a></h4>
+<p>我们经常把一个 <code>DataFrame</code> 排序为了在分组操作的时候保持某种顺序。假设我们我们希望知道
+每个 <code>state</code> 政治家的名字，并按照年龄排序。我们可以用 <code>sort</code> 和 <code>groupby</code>：</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+
+def get_person() -&gt; pl.Expr:
+    return pl.col(&quot;first_name&quot;) + pl.lit(&quot; &quot;) + pl.col(&quot;last_name&quot;)
+
+
+q = (
+    dataset.lazy()
+    .sort(&quot;birthday&quot;, descending=True)
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            get_person().first().alias(&quot;youngest&quot;),
+            get_person().last().alias(&quot;oldest&quot;),
+        ]
+    )
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌───────┬──────────────────┬─────────────────┐
+│ state ┆ youngest         ┆ oldest          │
+│ ---   ┆ ---              ┆ ---             │
+│ cat   ┆ str              ┆ str             │
+╞═══════╪══════════════════╪═════════════════╡
+│ VT    ┆ Benjamin Deming  ┆ Moses Robinson  │
+│ MT    ┆ Greg Gianforte   ┆ James Cavanaugh │
+│ MN    ┆ Erik Paulsen     ┆ Cyrus Aldrich   │
+│ AS    ┆ Eni Faleomavaega ┆ Fofó Sunia      │
+│ NC    ┆ James McKay      ┆ Samuel Johnston │
+└───────┴──────────────────┴─────────────────┘
+</code></pre>
+<p>但是，<strong>如果</strong>我们想把名字也按照字母排序，上面的代码就不行了。
+幸运的是，我们可以在 <code>groupby</code> 上下文中进行排序，与 <code>DataFrame</code> 无关。</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+
+def get_person() -&gt; pl.Expr:
+    return pl.col(&quot;first_name&quot;) + pl.lit(&quot; &quot;) + pl.col(&quot;last_name&quot;)
+
+
+q = (
+    dataset.lazy()
+    .sort(&quot;birthday&quot;, descending=True)
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            get_person().first().alias(&quot;youngest&quot;),
+            get_person().last().alias(&quot;oldest&quot;),
+            get_person().sort().first().alias(&quot;alphabetical_first&quot;),
+        ]
+    )
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌───────┬─────────────────────┬─────────────────┬────────────────────┐
+│ state ┆ youngest            ┆ oldest          ┆ alphabetical_first │
+│ ---   ┆ ---                 ┆ ---             ┆ ---                │
+│ cat   ┆ str                 ┆ str             ┆ str                │
+╞═══════╪═════════════════════╪═════════════════╪════════════════════╡
+│ OH    ┆ Amos Townsend       ┆ Paul Fearing    ┆ Aaron Harlan       │
+│ KY    ┆ Benjamin Grey       ┆ Matthew Lyon    ┆ Aaron Harding      │
+│ HI    ┆ Tulsi Gabbard       ┆ Robert Wilcox   ┆ Cecil Heftel       │
+│ LA    ┆ John Slidell        ┆ Thomas Posey    ┆ Adolph Meyer       │
+│ PR    ┆ Aníbal Acevedo-Vilá ┆ Tulio Larrinaga ┆ Antonio Colorado   │
+└───────┴─────────────────────┴─────────────────┴────────────────────┘
+</code></pre>
+<p>我们甚至可以在 <code>groupby</code> 上下文中增加另一个列，并且按照男女排序：
+<code>pl.col(&quot;gender&quot;).sort_by(&quot;first_name&quot;).first().alias(&quot;gender&quot;)</code></p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+
+def get_person() -&gt; pl.Expr:
+    return pl.col(&quot;first_name&quot;) + pl.lit(&quot; &quot;) + pl.col(&quot;last_name&quot;)
+
+
+q = (
+    dataset.lazy()
+    .sort(&quot;birthday&quot;, descending=True)
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            get_person().first().alias(&quot;youngest&quot;),
+            get_person().last().alias(&quot;oldest&quot;),
+            get_person().sort().first().alias(&quot;alphabetical_first&quot;),
+            pl.col(&quot;gender&quot;).sort_by(&quot;first_name&quot;).first().alias(&quot;gender&quot;),
+        ]
+    )
+    .sort(&quot;state&quot;)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 5)
+┌───────┬────────────────┬─────────────────┬────────────────────┬────────┐
+│ state ┆ youngest       ┆ oldest          ┆ alphabetical_first ┆ gender │
+│ ---   ┆ ---            ┆ ---             ┆ ---                ┆ ---    │
+│ cat   ┆ str            ┆ str             ┆ str                ┆ cat    │
+╞═══════╪════════════════╪═════════════════╪════════════════════╪════════╡
+│ CT    ┆ Samuel Simons  ┆ Roger Sherman   ┆ Abner Sibal        ┆ M      │
+│ KY    ┆ Benjamin Grey  ┆ Matthew Lyon    ┆ Aaron Harding      ┆ M      │
+│ FL    ┆ George Hawkins ┆ Joseph White    ┆ Abijah Gilbert     ┆ M      │
+│ NY    ┆ Robert Baker   ┆ Philip Schuyler ┆ A. Foster          ┆ M      │
+│ MI    ┆ Samuel Clark   ┆ Gabriel Richard ┆ Aaron Bliss        ┆ M      │
+└───────┴────────────────┴─────────────────┴────────────────────┴────────┘
+</code></pre>
+<h3 id="结论"><a class="header" href="#结论">结论</a></h3>
+<p>上面的例子中我们知道通过组合表达式可以完成复杂的查询。而且，我们避免了使用自定义 <code>Python</code> 函数
+带来的性能损失 （解释器和 GIL）。</p>
+<p>如果这里少了哪类表达式，清在这里开一个 Issue：
+<a href="https://github.com/pola-rs/polars/issues/new/choose">feature request</a>!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../dsl/contexts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../dsl/folds.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../dsl/contexts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../dsl/folds.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

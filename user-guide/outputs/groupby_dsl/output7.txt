@@ -1,0 +1,12 @@
+shape: (5, 5)
+┌───────┬────────────────┬─────────────────┬────────────────────┬────────┐
+│ state ┆ youngest       ┆ oldest          ┆ alphabetical_first ┆ gender │
+│ ---   ┆ ---            ┆ ---             ┆ ---                ┆ ---    │
+│ cat   ┆ str            ┆ str             ┆ str                ┆ cat    │
+╞═══════╪════════════════╪═════════════════╪════════════════════╪════════╡
+│ CT    ┆ Samuel Simons  ┆ Roger Sherman   ┆ Abner Sibal        ┆ M      │
+│ KY    ┆ Benjamin Grey  ┆ Matthew Lyon    ┆ Aaron Harding      ┆ M      │
+│ FL    ┆ George Hawkins ┆ Joseph White    ┆ Abijah Gilbert     ┆ M      │
+│ NY    ┆ Robert Baker   ┆ Philip Schuyler ┆ A. Foster          ┆ M      │
+│ MI    ┆ Samuel Clark   ┆ Gabriel Richard ┆ Aaron Bliss        ┆ M      │
+└───────┴────────────────┴─────────────────┴────────────────────┴────────┘

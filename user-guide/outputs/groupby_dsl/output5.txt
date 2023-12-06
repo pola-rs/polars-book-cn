@@ -1,0 +1,12 @@
+shape: (5, 3)
+┌───────┬──────────────────┬─────────────────┐
+│ state ┆ youngest         ┆ oldest          │
+│ ---   ┆ ---              ┆ ---             │
+│ cat   ┆ str              ┆ str             │
+╞═══════╪══════════════════╪═════════════════╡
+│ VT    ┆ Benjamin Deming  ┆ Moses Robinson  │
+│ MT    ┆ Greg Gianforte   ┆ James Cavanaugh │
+│ MN    ┆ Erik Paulsen     ┆ Cyrus Aldrich   │
+│ AS    ┆ Eni Faleomavaega ┆ Fofó Sunia      │
+│ NC    ┆ James McKay      ┆ Samuel Johnston │
+└───────┴──────────────────┴─────────────────┘

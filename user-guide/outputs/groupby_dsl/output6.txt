@@ -1,0 +1,12 @@
+shape: (5, 4)
+┌───────┬─────────────────────┬─────────────────┬────────────────────┐
+│ state ┆ youngest            ┆ oldest          ┆ alphabetical_first │
+│ ---   ┆ ---                 ┆ ---             ┆ ---                │
+│ cat   ┆ str                 ┆ str             ┆ str                │
+╞═══════╪═════════════════════╪═════════════════╪════════════════════╡
+│ OH    ┆ Amos Townsend       ┆ Paul Fearing    ┆ Aaron Harlan       │
+│ KY    ┆ Benjamin Grey       ┆ Matthew Lyon    ┆ Aaron Harding      │
+│ HI    ┆ Tulsi Gabbard       ┆ Robert Wilcox   ┆ Cecil Heftel       │
+│ LA    ┆ John Slidell        ┆ Thomas Posey    ┆ Adolph Meyer       │
+│ PR    ┆ Aníbal Acevedo-Vilá ┆ Tulio Larrinaga ┆ Antonio Colorado   │
+└───────┴─────────────────────┴─────────────────┴────────────────────┘

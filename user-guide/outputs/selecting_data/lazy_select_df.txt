@@ -1,0 +1,4 @@
+FAST_PROJECT: [Date]
+
+    Csv SCAN data/appleStock.csv
+    PROJECT 1/2 COLUMNS

@@ -1,0 +1,9 @@
+shape: (5,)
+Series: 'a' [str]
+[
+	"foo"
+	"bar"
+	"ham"
+	"spam"
+	"eggs"
+]

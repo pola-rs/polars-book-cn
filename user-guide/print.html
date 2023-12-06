@@ -1,0 +1,3480 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Polars - 用户指南</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="quickstart/intro.html"><strong aria-hidden="true">2.</strong> 开始使用</a></li><li class="chapter-item expanded "><a href="dsl/intro.html"><strong aria-hidden="true">3.</strong> Polars 表达式</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="dsl/expressions.html"><strong aria-hidden="true">3.1.</strong> 表达式</a></li><li class="chapter-item "><a href="dsl/contexts.html"><strong aria-hidden="true">3.2.</strong> 上下文</a></li><li class="chapter-item "><a href="dsl/groupby.html"><strong aria-hidden="true">3.3.</strong> 分组</a></li><li class="chapter-item "><a href="dsl/folds.html"><strong aria-hidden="true">3.4.</strong> 折叠</a></li><li class="chapter-item "><a href="dsl/custom_functions.html"><strong aria-hidden="true">3.5.</strong> 自定义函数</a></li><li class="chapter-item "><a href="dsl/window_functions.html"><strong aria-hidden="true">3.6.</strong> 窗口函数</a></li><li class="chapter-item "><a href="dsl/numpy.html"><strong aria-hidden="true">3.7.</strong> Numpy 通用函数</a></li><li class="chapter-item "><a href="notebooks/introduction_polars.html"><strong aria-hidden="true">3.8.</strong> 示例</a></li><li class="chapter-item "><a href="dsl/api.html"><strong aria-hidden="true">3.9.</strong> 方法</a></li><li class="chapter-item "><a href="dsl/video_intro.html"><strong aria-hidden="true">3.10.</strong> 视频介绍</a></li></ol></li><li class="chapter-item expanded "><a href="indexing.html"><strong aria-hidden="true">4.</strong> 索引</a></li><li class="chapter-item expanded "><a href="datatypes.html"><strong aria-hidden="true">5.</strong> 数据类型</a></li><li class="chapter-item expanded "><a href="coming_from_pandas.html"><strong aria-hidden="true">6.</strong> 来自 Pandas</a></li><li class="chapter-item expanded "><a href="coming_from_spark.html"><strong aria-hidden="true">7.</strong> 来自 Apache Spark</a></li><li class="chapter-item expanded "><a href="timeseries/intro.html"><strong aria-hidden="true">8.</strong> 时间序列</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="time-series.html"><strong aria-hidden="true">8.1.</strong> 示例</a></li></ol></li><li class="chapter-item expanded "><a href="howcani/intro.html"><strong aria-hidden="true">9.</strong> 使用范围</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="howcani/io/intro.html"><strong aria-hidden="true">9.1.</strong> IO</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="howcani/io/csv.html"><strong aria-hidden="true">9.1.1.</strong> CSV 文件</a></li><li class="chapter-item "><a href="howcani/io/parquet.html"><strong aria-hidden="true">9.1.2.</strong> Parquet 文件</a></li><li class="chapter-item "><a href="multiple_files/intro.html"><strong aria-hidden="true">9.1.3.</strong> 多文件</a></li><li class="chapter-item "><a href="howcani/io/read_db.html"><strong aria-hidden="true">9.1.4.</strong> 从数据库中读取</a></li><li class="chapter-item "><a href="howcani/io/aws.html"><strong aria-hidden="true">9.1.5.</strong> 与 AWS 交互</a></li><li class="chapter-item "><a href="howcani/io/google-big-query.html"><strong aria-hidden="true">9.1.6.</strong> 与 Google BigQuery 交互</a></li><li class="chapter-item "><a href="howcani/io/postgres.html"><strong aria-hidden="true">9.1.7.</strong> 与 Postgres 交互</a></li></ol></li><li class="chapter-item "><a href="howcani/interop/intro.html"><strong aria-hidden="true">9.2.</strong> 互通性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="howcani/interop/arrow.html"><strong aria-hidden="true">9.2.1.</strong> Arrow</a></li><li class="chapter-item "><a href="howcani/interop/numpy.html"><strong aria-hidden="true">9.2.2.</strong> Numpy</a></li></ol></li><li class="chapter-item "><a href="howcani/data/intro.html"><strong aria-hidden="true">9.3.</strong> 数据</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="howcani/data/strings.html"><strong aria-hidden="true">9.3.1.</strong> 字符串</a></li><li class="chapter-item "><a href="howcani/data/timestamps.html"><strong aria-hidden="true">9.3.2.</strong> 时间戳</a></li></ol></li><li class="chapter-item "><a href="howcani/df/intro.html"><strong aria-hidden="true">9.4.</strong> 数据帧</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="howcani/df/row_col_selection.html"><strong aria-hidden="true">9.4.1.</strong> 选中</a></li><li class="chapter-item "><a href="howcani/df/common-manipulations.html"><strong aria-hidden="true">9.4.2.</strong> 常用</a></li><li class="chapter-item "><a href="howcani/df/groupby.html"><strong aria-hidden="true">9.4.3.</strong> 分组</a></li><li class="chapter-item "><a href="howcani/df/aggregate.html"><strong aria-hidden="true">9.4.4.</strong> 聚合</a></li><li class="chapter-item "><a href="howcani/df/filter.html"><strong aria-hidden="true">9.4.5.</strong> 过滤</a></li><li class="chapter-item "><a href="howcani/df/join.html"><strong aria-hidden="true">9.4.6.</strong> 连接</a></li><li class="chapter-item "><a href="howcani/df/melt.html"><strong aria-hidden="true">9.4.7.</strong> 重塑</a></li><li class="chapter-item "><a href="howcani/df/pivot.html"><strong aria-hidden="true">9.4.8.</strong> 透视</a></li><li class="chapter-item "><a href="howcani/df/sorting.html"><strong aria-hidden="true">9.4.9.</strong> 排序</a></li><li class="chapter-item "><a href="howcani/df/conditionally-apply.html"><strong aria-hidden="true">9.4.10.</strong> 条件应用</a></li></ol></li><li class="chapter-item "><a href="howcani/apply/intro.html"><strong aria-hidden="true">9.5.</strong> 应用</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="howcani/apply/udfs.html"><strong aria-hidden="true">9.5.1.</strong> 自定义函数</a></li><li class="chapter-item "><a href="howcani/apply/window-functions.html"><strong aria-hidden="true">9.5.2.</strong> 窗口函数</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="performance/intro.html"><strong aria-hidden="true">10.</strong> 性能</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="performance/strings.html"><strong aria-hidden="true">10.1.</strong> 字符串</a></li></ol></li><li class="chapter-item expanded "><a href="optimizations/intro.html"><strong aria-hidden="true">11.</strong> 优化</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="optimizations/lazy/intro.html"><strong aria-hidden="true">11.1.</strong> 惰性方法</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="optimizations/lazy/predicate-pushdown.html"><strong aria-hidden="true">11.1.1.</strong> 谓词下推</a></li><li class="chapter-item "><a href="optimizations/lazy/projection-pushdown.html"><strong aria-hidden="true">11.1.2.</strong> 投影下推</a></li><li class="chapter-item "><a href="optimizations/lazy/other-optimizations.html"><strong aria-hidden="true">11.1.3.</strong> 其它优化</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">12.</strong> 参考指南</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Polars - 用户指南</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div style="margin: 30px auto; background-color: white; border-radius: 50%; width: 200px; height: 200px;"><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/logos/polars-logo-dark.svg" alt="Polars logo" style="width: 168px; height: 168px; padding: 10px 20px;"></div>
+<h1 id="介绍"><a class="header" href="#介绍">介绍</a></h1>
+<p>这是一个介绍<a href="https://github.com/pola-rs/polars"><code>Polars</code> DataFrame library</a>的指南。它的目标是通过示例演示以及与其他类似解决方案进行比较，向您介绍<code>Polars</code>。这里介绍了一些设计选择。该指南还将向您介绍<code>Polars</code>的最佳使用。</p>
+<p>尽管<code>Polars</code>完全是用<a href="https://www.rust-lang.org/"><code>Rust</code></a>写的（没有运行时开销！）使用 <a href="https://arrow.apache.org/"><code>Arrow</code></a> -- <a href="https://github.com/jorgecarleitao/arrow2">原生 <code>Rust</code> 实现的arrow2</a> -- 作为它的底基。本指南中的示例主要使用其更高级的语言绑定。高级绑定只作为核心库中实现的功能的简要的包装。</p>
+<p>对于 <a href="https://pandas.pydata.org/"><code>Pandas</code></a> 使用者, 我们的<a href="https://pypi.org/project/polars/">Python package</a> 提供最简单的方式来入门<code>Polars</code>.</p>
+<h2 id="目标与非目标"><a class="header" href="#目标与非目标">目标与非目标</a></h2>
+<p><code>Polars</code>的目标是提供一个闪电般的<code>DataFrame</code>库，利用所有机器上的可用核心。不像dask这样的工具——它试图并行化现有的单线程库，比如<code>NumPy</code>和<code>Pandas</code>——<code>Polars</code>是从头开始编写的，旨在并行化<code>DataFrame</code>上的查询。</p>
+<p><code>Polars</code>不遗余力地：</p>
+<ul>
+<li>减少冗余拷贝</li>
+<li>高效地遍历内存缓存</li>
+<li>最小化并行中的争用</li>
+</ul>
+<p><code>Polars</code>是懒惰和半懒惰的。它可以让你急切地完成大部分工作，就像<code>Pandas</code>一样，但是
+它还提供了强大的表达式语法，可以在查询引擎中对其进行优化和执行。</p>
+<p>在lazy <code>Polars</code>中，我们能够对整个查询进行查询优化，进一步提高性能和内存压力。</p>
+<p><code>Polars</code>以<em>逻辑计划</em>跟踪您的查询。这计划在运行前会经过优化和重新排序。当请求结果时，<code>Polars</code>将可执行的任务分发给不同的使用立即反馈的算法的API的<em>执行器</em>并获取结果。因为优化器和执行器知晓整个查询上下文，依赖于独立数据源的计算得以在运行时被动态地并行化。</p>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/docs/api.svg" alt="" /></p>
+<h3 id="性能-"><a class="header" href="#性能-">性能 🚀🚀</a></h3>
+<p>Polars的速度非常快，事实上是目前性能最好的解决方案之一。参见h2oai的db基准测试中的结果。下图显示了产生结果的最大数据集。</p>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-book-cn/main/user_guide/data/db-benchmark.png" alt="" /></p>
+<h3 id="当前状态"><a class="header" href="#当前状态">当前状态</a></h3>
+<p>下面是<code>Polars</code>能够实现其目标的功能的简明列表：</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Copy-on-write">Copy-on-write</a> (COW) 语义学
+<ul>
+<li>“自由”克隆（Clone）</li>
+<li>便捷的追加（append）</li>
+</ul>
+</li>
+<li>没有克隆（clone）的追加（append）</li>
+<li>面向列的数据存储
+<ul>
+<li>无区块管理器（即可预测的性能）</li>
+</ul>
+</li>
+<li>缺少用位掩码（bitmask）指示的值
+<ul>
+<li>NaN和missing不一样</li>
+<li>位掩码（bitmask）优化</li>
+</ul>
+</li>
+<li>高效算法</li>
+<li>非常快的IO
+<ul>
+<li>它的csv和parquet阅读器是现存速度最快的阅读器之一</li>
+</ul>
+</li>
+<li><a href="optimizations/lazy/intro.html">查询优化</a>
+<ul>
+<li>谓词（Predicate）下推
+<ul>
+<li>扫描级过滤</li>
+</ul>
+</li>
+<li>投影下推
+<ul>
+<li>扫描级投影</li>
+</ul>
+</li>
+<li>聚合下推
+<ul>
+<li>扫描级聚合</li>
+</ul>
+</li>
+<li>简化表达式</li>
+<li>物理计划的并行执行</li>
+<li>基于基数的分组调度
+<ul>
+<li>基于数据基数的分组策略</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SIMD矢量化</li>
+<li><a href="https://numpy.org/doc/stable/reference/ufuncs.html"><code>NumPy</code> 通用函数</a></li>
+</ul>
+<h2 id="致谢"><a class="header" href="#致谢">致谢</a></h2>
+<p><code>Polars</code>的开发是由</p>
+<p><a href="https://www.xomnia.com"><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/sponsors/xomnia.png" alt="Xomnia" /></a></p>
+<h1 id="快速入门"><a class="header" href="#快速入门">快速入门</a></h1>
+<h2 id="安装"><a class="header" href="#安装">安装</a></h2>
+<p>采用 <code>pip install</code> 即可安装 <code>Polars</code> 。</p>
+<pre><code class="language-shell">$ pip install polars
+</code></pre>
+<p>所有的二进制包都是基于 <code>Python</code> v3.6+ 构建的。</p>
+<h2 id="实例"><a class="header" href="#实例">实例</a></h2>
+<p>下面的例子中我们读入并解析一个 CSV 文件，过滤后紧跟一个 <code>groupby</code> 分组求和操作（该例子仅在Python中演示，因为对于Rust而言，即时执行的API并不推荐）：</p>
+<pre><code class="language-python">import polars as pl
+
+df = pl.read_csv(&quot;https://j.mp/iriscsv&quot;)
+print(df.filter(pl.col(&quot;sepal_length&quot;) &gt; 5)
+      .groupby(&quot;species&quot;)
+      .agg(pl.all().sum())
+)
+</code></pre>
+<p>上面的代码输出如下：</p>
+<pre><code class="language-text">shape: (3, 5)
+╭──────────────┬──────────────────┬─────────────────┬──────────────────┬─────────────────╮
+│ species      ┆ sepal_length_sum ┆ sepal_width_sum ┆ petal_length_sum ┆ petal_width_sum │
+│ ---          ┆ ---              ┆ ---             ┆ ---              ┆ ---             │
+│ str          ┆ f64              ┆ f64             ┆ f64              ┆ f64             │
+╞══════════════╪══════════════════╪═════════════════╪══════════════════╪═════════════════╡
+│ &quot;virginica&quot;  ┆ 324.5            ┆ 146.2           ┆ 273.1            ┆ 99.6            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ &quot;versicolor&quot; ┆ 281.9            ┆ 131.8           ┆ 202.9            ┆ 63.3            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ &quot;setosa&quot;     ┆ 116.9            ┆ 81.7            ┆ 33.2             ┆ 6.1             │
+╰──────────────┴──────────────────┴─────────────────┴──────────────────┴─────────────────╯
+</code></pre>
+<p>如上所示， <code>Polars</code> 可以格式化输出，包括作为表头的列名和数据类型。</p>
+<h2 id="延迟执行示例"><a class="header" href="#延迟执行示例">延迟执行示例</a></h2>
+<p>上面的例子我们也可以采用延迟执行方式执行：</p>
+<pre><code class="language-python">import polars as pl
+
+print(
+    pl.read_csv(&quot;https://j.mp/iriscsv&quot;)
+    .lazy()
+    .filter(pl.col(&quot;sepal_length&quot;) &gt; 5)
+    .groupby(&quot;species&quot;)
+    .agg(pl.all().sum())
+    .collect()
+)
+</code></pre>
+<p>如果数据文件保存在本地，我们还可以使用 <code>scan_csv</code> 来实现延迟执行查询。</p>
+<h2 id="参考"><a class="header" href="#参考">参考</a></h2>
+<p><code>Python</code> API 可以参考：<a href="https://pola-rs.github.io/polars/py-polars/html/reference">Fix Me</a>.</p>
+<h3 id="延迟执行-api"><a class="header" href="#延迟执行-api">延迟执行 API</a></h3>
+<p>延迟执行 API 会构建一个查询计划。在调用 <code>LazyFrame.collect()</code> 或者 <code>LazyFrame.fetch()</code> 之前，<code>Polars</code> 不会执行任何操作。这种方式可以让 <code>Polars</code> 了解查询的所有操作，并依据这些操作进行优化并选择最佳的算法执行。</p>
+<p>从即时执行变更为延迟执行非常简单，只需要在已有调用基础上添加 <code>.lazy()</code> 和 <code>.collect()</code> 即可。</p>
+<p>正如之前看到的例子一样：</p>
+<pre><code class="language-python">import polars as pl
+
+print(
+    pl.read_csv(&quot;https://j.mp/iriscsv&quot;)
+    .lazy()
+    .filter(pl.col(&quot;sepal_length&quot;) &gt; 5)
+    .groupby(&quot;species&quot;)
+    .agg(pl.all().sum())
+    .collect()
+)
+</code></pre>
+<h1 id="介绍-1"><a class="header" href="#介绍-1">介绍</a></h1>
+<p><code>Polars</code>有一个强大的概念叫做表达式，这是<code>Polars</code>表现十分高效的核心原因之一。</p>
+<p>表达式是许多数据科学计算的核心操作，常见的包括：</p>
+<ul>
+<li>从某列中取某行</li>
+<li>将某列乘上某些数</li>
+<li>从日期提取年份</li>
+<li>将一系列字符串转换成小写</li>
+<li>....</li>
+</ul>
+<p>当然，表达式也被用于其他操作中：</p>
+<ul>
+<li>通过<code>groupby</code>操作分组求均值</li>
+<li>通过<code>groupby</code>操作分组求数量</li>
+<li>多列求和</li>
+</ul>
+<p><code>Polars</code>通过以下方式实现高效的核心数据转换：</p>
+<ul>
+<li>对每个表达式进行自动的查询优化</li>
+<li>对多列表达式自动并行处理</li>
+</ul>
+<p><code>Polars</code>表达式是一个从列(<code>Series</code>)到列的映射(或者从数学角度上是<code>Fn(Series) -&gt; Series</code>)，可以在各种上下文中使用，这意味着它们有一个列(<code>Series</code>)作为输入，一个列(<code>Series</code>)作为输出。通过查看这个函数定义，我们可以看到<code>Expr</code>的输出也可以用作<code>Expr</code>的输入。</p>
+<p>这听起来可能有点抽象，所以让我们从一个例子开始。</p>
+<h1 id="polars-表达式"><a class="header" href="#polars-表达式">Polars 表达式</a></h1>
+<p>下面是一个表达式：</p>
+<p><code>pl.col(&quot;foo&quot;).sort().head(2)</code></p>
+<p>这个表达式的意思是：</p>
+<ol>
+<li>选择 <code>foo</code> 列</li>
+<li>给 <code>foo</code> 排序</li>
+<li>然后取排序后的前两个值</li>
+</ol>
+<p>表达式的强大之处在于：每一个表达式都会生成一个新的表达式，他们可以被串在一起。
+你也可以把多个表达式放入一个 <code>Polars</code> 的执行上下文中。</p>
+<p>比如，下面我们通过 <code>df.select</code> 将两个表达式放在同一个执行上下文中：</p>
+<pre><code class="language-python">df.select([
+    pl.col(&quot;foo&quot;).sort().head(2),
+    pl.col(&quot;bar&quot;).filter(pl.col(&quot;foo&quot;) == 1).sum()
+])
+</code></pre>
+<p>这里的两个表达式是并行执行的，这就意味着 <code>Polars</code> 表达式可以<strong>易并行计算</strong>（即无通讯并行）。
+值得注意的是，每一个表达式的执行可能同时存在更多的并行。</p>
+<h2 id="表达式举例"><a class="header" href="#表达式举例">表达式举例</a></h2>
+<p>这一小节我们通过例子了解表达式。首先，创建一个数据集：</p>
+<pre><code class="language-python">import polars as pl
+import numpy as np
+
+np.random.seed(12)  # 设置随机数种子（保证每次生成的随机数相同）
+
+df = pl.DataFrame(
+    {
+        &quot;nrs&quot;: [1, 2, 3, None, 5],
+        &quot;names&quot;: [&quot;foo&quot;, &quot;ham&quot;, &quot;spam&quot;, &quot;egg&quot;, None],
+        &quot;random&quot;: np.random.rand(5),
+        &quot;groups&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;B&quot;],
+    }
+)
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌──────┬───────┬──────────┬────────┐
+│ nrs  ┆ names ┆ random   ┆ groups │
+│ ---  ┆ ---   ┆ ---      ┆ ---    │
+│ i64  ┆ str   ┆ f64      ┆ str    │
+╞══════╪═══════╪══════════╪════════╡
+│ 1    ┆ foo   ┆ 0.154163 ┆ A      │
+│ 2    ┆ ham   ┆ 0.74005  ┆ A      │
+│ 3    ┆ spam  ┆ 0.263315 ┆ B      │
+│ null ┆ egg   ┆ 0.533739 ┆ C      │
+│ 5    ┆ null  ┆ 0.014575 ┆ B      │
+└──────┴───────┴──────────┴────────┘
+</code></pre>
+<p>你可以通过表达式做很多事情，他们的表达能力很强以至于很多时候你有多种不同的方法得到同一个计算结果。
+为了更好的理解表达式，让我们看更多的例子。</p>
+<h3 id="统计不重复元素数量"><a class="header" href="#统计不重复元素数量">统计不重复元素数量</a></h3>
+<p>我们可以统计一列中不重复元素的数量。注意这里我们采用了两种不同的方法得到了同一个结果。为了避免列名重复，
+我们使用 <code>alias</code> 即别名表达式来重命名列名。</p>
+<pre><code class="language-python">out = df.select(
+    [
+        pl.col(&quot;names&quot;).n_unique().alias(&quot;unique_names_1&quot;),
+        pl.col(&quot;names&quot;).unique().count().alias(&quot;unique_names_2&quot;),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (1, 2)
+┌────────────────┬────────────────┐
+│ unique_names_1 ┆ unique_names_2 │
+│ ---            ┆ ---            │
+│ u32            ┆ u32            │
+╞════════════════╪════════════════╡
+│ 5              ┆ 5              │
+└────────────────┴────────────────┘
+</code></pre>
+<h3 id="不同的聚合操作"><a class="header" href="#不同的聚合操作">不同的聚合操作</a></h3>
+<p>我们可以完成不同的聚合操作，下面是一些例子，当然还有更多操作比如：<code>median</code>, <code>mean</code>, <code>first</code>等等。</p>
+<pre><code class="language-python">out = df.select(
+    [
+        pl.sum(&quot;random&quot;).alias(&quot;sum&quot;),  # 对random列求和并新增一列
+        pl.min(&quot;random&quot;).alias(&quot;min&quot;),  # 对random列求最小值并新增一列
+        pl.max(&quot;random&quot;).alias(&quot;max&quot;),  # 对random列求最大值并新增一列
+        pl.col(&quot;random&quot;).max().alias(&quot;other_max&quot;),  # 另一种求最大值的方式
+        pl.std(&quot;random&quot;).alias(&quot;std dev&quot;),  # 对random列求标准差并新增一列
+        pl.var(&quot;random&quot;).alias(&quot;variance&quot;),  # 对random列求方差并新增一列
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (1, 6)
+┌──────────┬──────────┬─────────┬───────────┬──────────┬──────────┐
+│ sum      ┆ min      ┆ max     ┆ other_max ┆ std dev  ┆ variance │
+│ ---      ┆ ---      ┆ ---     ┆ ---       ┆ ---      ┆ ---      │
+│ f64      ┆ f64      ┆ f64     ┆ f64       ┆ f64      ┆ f64      │
+╞══════════╪══════════╪═════════╪═══════════╪══════════╪══════════╡
+│ 1.705842 ┆ 0.014575 ┆ 0.74005 ┆ 0.74005   ┆ 0.293209 ┆ 0.085971 │
+└──────────┴──────────┴─────────┴───────────┴──────────┴──────────┘
+</code></pre>
+<h3 id="过滤和条件选择"><a class="header" href="#过滤和条件选择">过滤和条件选择</a></h3>
+<p>当然，我们可以做一些复杂的事情，比如下面的例子中我们统计所有以 <code>am</code> 结尾的名字。</p>
+<pre><code class="language-python">out = df.select(
+    [
+        pl.col(&quot;names&quot;).filter(pl.col(&quot;names&quot;).str.contains(r&quot;am$&quot;)).count(),  # str命名空间使用正则表达式
+    ]
+)
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (1, 1)
+┌───────┐
+│ names │
+│ ---   │
+│ u32   │
+╞═══════╡
+│ 2     │
+└───────┘
+</code></pre>
+<h3 id="二元函数和修改"><a class="header" href="#二元函数和修改">二元函数和修改</a></h3>
+<p>下面的实例中，用一个条件语句创建一个表达式，我们使用 <code>when -&gt; then -&gt; otherwise</code> 的模式。
+<code>when</code> 函数需要一个谓词表达式 (Predicate expression，因此返回一个布尔类型的 <code>Series</code>) 。
+<code>then</code> 函数需要传入当谓词表达式结果为真时执行的表达式，而 <code>otherwise</code> 函数需要传入谓词表达式结果为
+假时的表达式。</p>
+<p>你可以传入任何表达式，包括简单的<code>pl.col(&quot;foo&quot;)</code>, <code>pl.lit(3)</code>, <code>pl.lit(&quot;bar&quot;)</code>等等。</p>
+<p>最终，我们把结果与一个 <code>sum</code> 表达式相乘。</p>
+<pre><code class="language-python">out = df.select(
+    [
+        pl.when(pl.col(&quot;random&quot;) &gt; 0.5).then(0).otherwise(pl.col(&quot;random&quot;)) * pl.sum(&quot;nrs&quot;),
+    ]
+)
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (5, 1)
+┌──────────┐
+│ literal  │
+│ ---      │
+│ f64      │
+╞══════════╡
+│ 1.695791 │
+│ 0.0      │
+│ 2.896465 │
+│ 0.0      │
+│ 0.160325 │
+└──────────┘
+</code></pre>
+<h3 id="窗口表达式"><a class="header" href="#窗口表达式">窗口表达式</a></h3>
+<p>一个 polars 表达式可以隐式地进行 GROUPBY（分组）、AGGREGATION（聚合） 以及 JOIN（联合） 操作。
+在下面的例子中，使用<code>over</code>函数，我们通过 <code>groups</code> 进行分组，在 <code>random</code> 列执行聚合加法。在下一个表达式中，
+通过 <code>names</code> 进行分组，在 <code>random</code> 列执行聚合列表操作。
+这些窗口函数还可以与其他表达式组合形成一个高效计算分组统计指标计算方法。
+更多的分组函数<a href="https://pola-rs.github.io/polars/py-polars/html/reference/expression.html#aggregation">参考这里</a>。</p>
+<pre><code class="language-python">df = df.select(
+    [
+        pl.col(&quot;*&quot;),  # 选择所有列
+        pl.col(&quot;random&quot;).sum().over(&quot;groups&quot;).alias(&quot;sum[random]/groups&quot;),
+    ]
+)
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (5, 5)
+┌──────┬───────┬──────────┬────────┬────────────────────┐
+│ nrs  ┆ names ┆ random   ┆ groups ┆ sum[random]/groups │
+│ ---  ┆ ---   ┆ ---      ┆ ---    ┆ ---                │
+│ i64  ┆ str   ┆ f64      ┆ str    ┆ f64                │
+╞══════╪═══════╪══════════╪════════╪════════════════════╡
+│ 1    ┆ foo   ┆ 0.154163 ┆ A      ┆ 0.894213           │
+│ 2    ┆ ham   ┆ 0.74005  ┆ A      ┆ 0.894213           │
+│ 3    ┆ spam  ┆ 0.263315 ┆ B      ┆ 0.27789            │
+│ null ┆ egg   ┆ 0.533739 ┆ C      ┆ 0.533739           │
+│ 5    ┆ null  ┆ 0.014575 ┆ B      ┆ 0.27789            │
+└──────┴───────┴──────────┴────────┴────────────────────┘
+</code></pre>
+<h2 id="结论"><a class="header" href="#结论">结论</a></h2>
+<p>这里我们看到的表达式仅仅是冰山一角。<code>Polars</code> 提供了很多表达式，而且他们可以通过多种方式组合。</p>
+<p>本篇文档是一个表达式的简介，帮助用户稍微了解如何使用表达式。下一章中我们会讨论在哪些场景
+中可以使用表达式。在接下来的章节中，我们还会介绍如何在不同的 <code>groupby</code> 场景中使用表达式，并
+确保 <code>Polars</code> 可以并行执行计算。</p>
+<h1 id="上下文"><a class="header" href="#上下文">上下文</a></h1>
+<p>表达式几乎可以在任何地方使用，但是表达式需要一个上下文，这些上下文包括：</p>
+<ul>
+<li>选择: <code>df.select([..])</code></li>
+<li>分组集合: <code>df.groupby(..).agg([..])</code></li>
+<li>横向堆叠(hstack) 或者增加列: <code>df.with_columns([..])</code></li>
+</ul>
+<h2 id="语法糖"><a class="header" href="#语法糖">语法糖</a></h2>
+<p>需要上下文的主要原因是：即使在即时执行中，你也在使用 Polars 的延迟执行API。
+比如如下代码实例：</p>
+<pre><code class="language-python">df.groupby(&quot;foo&quot;).agg([pl.col(&quot;bar&quot;).sum()])
+</code></pre>
+<p>去掉语法糖后：</p>
+<pre><code class="language-python">(df.lazy().groupby(&quot;foo&quot;).agg([pl.col(&quot;bar&quot;).sum()])).collect()
+</code></pre>
+<p>这种设计可以让 Polars 把表达式推送给查询引擎，进行一些优化和缓存操作。</p>
+<h2 id="select-上下文"><a class="header" href="#select-上下文"><code>select</code> 上下文</a></h2>
+<p>在 <code>select</code> 上下文中，选择操作是按照列进行的。在选择向下文的表达式必须要返回 <code>Series</code> 并且这些 <code>Series</code> 需要有相同的长度或者长度为1。</p>
+<p>一个长度为 1 的 <code>Series</code> 会将 <code>DataFrame</code> 的一列赋予完全一样的值(这个值来自<code>Series</code>)。
+注意，<code>select</code> 可能会返回一个新的列，这个列可能是一些聚合的结果、一些表达式的组合或者常量。</p>
+<h4 id="选择上下文"><a class="header" href="#选择上下文">选择上下文</a></h4>
+<pre><code class="language-python">out = df.select(
+    [
+        pl.sum(&quot;nrs&quot;),
+        pl.col(&quot;names&quot;).sort(),
+        pl.col(&quot;names&quot;).first().alias(&quot;first name&quot;),
+        (pl.mean(&quot;nrs&quot;) * 10).alias(&quot;10xnrs&quot;),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌─────┬───────┬────────────┬────────┐
+│ nrs ┆ names ┆ first name ┆ 10xnrs │
+│ --- ┆ ---   ┆ ---        ┆ ---    │
+│ i64 ┆ str   ┆ str        ┆ f64    │
+╞═════╪═══════╪════════════╪════════╡
+│ 11  ┆ null  ┆ foo        ┆ 27.5   │
+│ 11  ┆ egg   ┆ foo        ┆ 27.5   │
+│ 11  ┆ foo   ┆ foo        ┆ 27.5   │
+│ 11  ┆ ham   ┆ foo        ┆ 27.5   │
+│ 11  ┆ spam  ┆ foo        ┆ 27.5   │
+└─────┴───────┴────────────┴────────┘
+</code></pre>
+<p><strong>添加列</strong></p>
+<p>采用 <code>with_columns</code> 给 <code>DataFrame</code> 增加列同样也是选择上下文。</p>
+<pre><code class="language-python">df = df.with_columns(
+    [
+        pl.sum(&quot;nrs&quot;).alias(&quot;nrs_sum&quot;),
+        pl.col(&quot;random&quot;).count().alias(&quot;count&quot;),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (5, 6)
+┌──────┬───────┬──────────┬────────┬─────────┬───────┐
+│ nrs  ┆ names ┆ random   ┆ groups ┆ nrs_sum ┆ count │
+│ ---  ┆ ---   ┆ ---      ┆ ---    ┆ ---     ┆ ---   │
+│ i64  ┆ str   ┆ f64      ┆ str    ┆ i64     ┆ u32   │
+╞══════╪═══════╪══════════╪════════╪═════════╪═══════╡
+│ 1    ┆ foo   ┆ 0.154163 ┆ A      ┆ 11      ┆ 5     │
+│ 2    ┆ ham   ┆ 0.74005  ┆ A      ┆ 11      ┆ 5     │
+│ 3    ┆ spam  ┆ 0.263315 ┆ B      ┆ 11      ┆ 5     │
+│ null ┆ egg   ┆ 0.533739 ┆ C      ┆ 11      ┆ 5     │
+│ 5    ┆ null  ┆ 0.014575 ┆ B      ┆ 11      ┆ 5     │
+└──────┴───────┴──────────┴────────┴─────────┴───────┘
+</code></pre>
+<h2 id="groupby-上下文"><a class="header" href="#groupby-上下文">Groupby 上下文</a></h2>
+<p>在 <code>groupby</code> 上下文中的表达式主要作用域分组上，因此他们会返回任意长度（每个组可能有不同数量的成员）。</p>
+<pre><code class="language-python">out = df.groupby(&quot;groups&quot;).agg(
+    [
+        pl.sum(&quot;nrs&quot;),  # 通过groups列对nrs求和
+        pl.col(&quot;random&quot;).count().alias(&quot;count&quot;),  # 记录组数
+        # 如果name != null记录random列的和
+        pl.col(&quot;random&quot;).filter(pl.col(&quot;names&quot;).is_not_null()).sum().suffix(&quot;_sum&quot;),
+        pl.col(&quot;names&quot;).reverse().alias((&quot;reversed names&quot;)),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 5)
+┌────────┬─────┬───────┬────────────┬────────────────┐
+│ groups ┆ nrs ┆ count ┆ random_sum ┆ reversed names │
+│ ---    ┆ --- ┆ ---   ┆ ---        ┆ ---            │
+│ str    ┆ i64 ┆ u32   ┆ f64        ┆ list[str]      │
+╞════════╪═════╪═══════╪════════════╪════════════════╡
+│ C      ┆ 0   ┆ 1     ┆ 0.533739   ┆ [&quot;egg&quot;]        │
+│ A      ┆ 3   ┆ 2     ┆ 0.894213   ┆ [&quot;ham&quot;, &quot;foo&quot;] │
+│ B      ┆ 8   ┆ 2     ┆ 0.263315   ┆ [null, &quot;spam&quot;] │
+└────────┴─────┴───────┴────────────┴────────────────┘
+</code></pre>
+<p>除了标准的 <code>groupby</code>，还有 <code>groupby_dynamic</code> 和 <code>groupby_rolling</code> 也属于 Groupby 上下文。</p>
+<h1 id="分组"><a class="header" href="#分组">分组</a></h1>
+<h2 id="多线程"><a class="header" href="#多线程">多线程</a></h2>
+<p>处理表状数据最高效的方式就是通过“分割-处理-组合”的方式并行地进行。这样的操作正是 <code>Polars</code> 的
+分组操作的核心，也是 <code>Polars</code> 如此高效的秘密。特别指出，分割和处理都是多线程执行的。</p>
+<p>下面的例子展示了分组操作的流程：</p>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/docs/split-apply-combine.svg" alt="" /></p>
+<p>对于分割阶段的哈希操作，<code>Polars</code> 使用了无锁多线程方式，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/docs/lock-free-hash.svg" alt="" /></p>
+<p>这样的并行操作可以让分组和联合操作非常非常高效。</p>
+<blockquote>
+<p>更多解释参考 <a href="https://www.ritchievink.com/blog/2021/02/28/i-wrote-one-of-the-fastest-dataframe-libraries/">这篇博客</a></p>
+</blockquote>
+<h2 id="不要杀死并行"><a class="header" href="#不要杀死并行">不要“杀死”并行</a></h2>
+<p>众所周知，<code>Python</code> 慢、水平拓展不好。除了因为是解释型语言，Python 还收到全局解释器锁，GIL。
+这就意味着，如果你传入一个 <code>lambda</code> 或者 <code>Python</code> 自定义函数，<code>Polars</code> 速度会被限制，即
+无法使用多核进行并行计算。</p>
+<p>这是个很糟糕的情况，特别我们在做 <code>.groupby</code> 的时候会经常传入 <code>lambda</code> 函数。虽然 <code>Polars</code>
+支持这种操作，但是请注意 Python 的限制，特别是解释器和GIL。</p>
+<p>为了解决这个问题，<code>Polars</code> 实现了一种非常强大的语法，在其延迟执行API和即时执行API上都有定义。</p>
+<h2 id="polars-expressions"><a class="header" href="#polars-expressions">Polars Expressions</a></h2>
+<p>刚才我们提到自定义 Python 函数会损伤并行能力，<code>Polars</code> 提供了惰性 API 来应对这种情况。接下来
+我们看看这是什么意思。</p>
+<p>我们可以从这个数据集开始：<a href="https://github.com/unitedstates/congress-legislators">US congress dataset</a>.</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby(&quot;first_name&quot;)
+    .agg(
+        [
+            pl.count(),
+            pl.col(&quot;gender&quot;),
+            pl.first(&quot;last_name&quot;),
+        ]
+    )
+    .sort(&quot;count&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<h4 id="基本聚合操作"><a class="header" href="#基本聚合操作">基本聚合操作</a></h4>
+<p>你可以轻松地把多个聚合表达式放在一个 <code>list</code> 里面，并没有数量限制，你可以任意组合你放入任何数量的表达式。
+下面这段代码中我们做如下聚合操作：</p>
+<p>对于每一个 <code>first_name</code> 分组：</p>
+<ul>
+<li>统计每组的行数：
+<ul>
+<li>短版：<code>pl.count(&quot;party&quot;)</code></li>
+<li>长版：<code>pl.col(&quot;party&quot;).count()</code></li>
+</ul>
+</li>
+<li>把每组的性别放入一个列表:
+<ul>
+<li>长版： <code>pl.col(&quot;gender&quot;).list()</code></li>
+</ul>
+</li>
+<li>找到每组的第一个 <code>last_name</code>：
+<ul>
+<li>短版: <code>pl.first(&quot;last_name&quot;)</code></li>
+<li>长版: <code>pl.col(&quot;last_name&quot;).first()</code></li>
+</ul>
+</li>
+</ul>
+<p>除了聚合，我们还立即对结果进行排序，并取其中前5条记录，这样我们能更好地从宏观角度理解这组数据的特征。</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby(&quot;first_name&quot;)
+    .agg(
+        [
+            pl.count(),
+            pl.col(&quot;gender&quot;),
+            pl.first(&quot;last_name&quot;),
+        ]
+    )
+    .sort(&quot;count&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌────────────┬───────┬───────────────────┬───────────┐
+│ first_name ┆ count ┆ gender            ┆ last_name │
+│ ---        ┆ ---   ┆ ---               ┆ ---       │
+│ cat        ┆ u32   ┆ list[cat]         ┆ str       │
+╞════════════╪═══════╪═══════════════════╪═══════════╡
+│ John       ┆ 1256  ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Walker    │
+│ William    ┆ 1022  ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Few       │
+│ James      ┆ 714   ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Armstrong │
+│ Thomas     ┆ 454   ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Tucker    │
+│ Charles    ┆ 439   ┆ [&quot;M&quot;, &quot;M&quot;, … &quot;M&quot;] ┆ Carroll   │
+└────────────┴───────┴───────────────────┴───────────┘
+</code></pre>
+<h4 id="条件"><a class="header" href="#条件">条件</a></h4>
+<p>简单吧！我们加点料！假设我们想要知道对于每个 <code>state</code> 有多少 <code>Pro</code> 和 <code>Anti</code>。我们可以
+不用 <code>lambda</code> 而直接查询。</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby(&quot;state&quot;)
+    .agg(
+        [
+            (pl.col(&quot;party&quot;) == &quot;Anti-Administration&quot;).sum().alias(&quot;anti&quot;),
+            (pl.col(&quot;party&quot;) == &quot;Pro-Administration&quot;).sum().alias(&quot;pro&quot;),
+        ]
+    )
+    .sort(&quot;pro&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌───────┬──────┬─────┐
+│ state ┆ anti ┆ pro │
+│ ---   ┆ ---  ┆ --- │
+│ cat   ┆ u32  ┆ u32 │
+╞═══════╪══════╪═════╡
+│ NJ    ┆ 0    ┆ 3   │
+│ CT    ┆ 0    ┆ 3   │
+│ NC    ┆ 1    ┆ 2   │
+│ VA    ┆ 3    ┆ 1   │
+│ MA    ┆ 0    ┆ 1   │
+└───────┴──────┴─────┘
+</code></pre>
+<p>类似的，我们可以通过多层聚合实现，但是这不利于我显摆这些很酷的特征😉！</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+q = (
+    dataset.lazy()
+    .groupby([&quot;state&quot;, &quot;party&quot;])
+    .agg([pl.count(&quot;party&quot;).alias(&quot;count&quot;)])
+    .filter((pl.col(&quot;party&quot;) == &quot;Anti-Administration&quot;) | (pl.col(&quot;party&quot;) == &quot;Pro-Administration&quot;))
+    .sort(&quot;count&quot;, descending=True)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌───────┬─────────────────────┬───────┐
+│ state ┆ party               ┆ count │
+│ ---   ┆ ---                 ┆ ---   │
+│ cat   ┆ cat                 ┆ u32   │
+╞═══════╪═════════════════════╪═══════╡
+│ VA    ┆ Anti-Administration ┆ 3     │
+│ CT    ┆ Pro-Administration  ┆ 3     │
+│ NJ    ┆ Pro-Administration  ┆ 3     │
+│ NC    ┆ Pro-Administration  ┆ 2     │
+│ VA    ┆ Pro-Administration  ┆ 1     │
+└───────┴─────────────────────┴───────┘
+</code></pre>
+<h4 id="过滤"><a class="header" href="#过滤">过滤</a></h4>
+<p>我们也可以过滤分组。假设我们想要计算每组的均值，但是我们不希望计算所有值的均值，我们也不希望直接
+从 <code>DataFrame</code> 过滤，因为我们后需还需要那些行做其他操作。</p>
+<p>下面的例子说明我们是如何做到的。注意，我们可以写明 <code>Python</code> 的自定义函数，这些函数没有什么
+运行时开销。因为这些函数返回了 <code>Polars</code> 表达式，我们并没在运行时让 <code>Series</code> 调用自动函数。</p>
+<pre><code class="language-python">from datetime import date
+
+import polars as pl
+
+from .dataset import dataset
+
+
+def compute_age() -&gt; pl.Expr:
+    return date(2021, 1, 1).year - pl.col(&quot;birthday&quot;).dt.year()
+
+
+def avg_birthday(gender: str) -&gt; pl.Expr:
+    return compute_age().filter(pl.col(&quot;gender&quot;) == gender).mean().alias(f&quot;avg {gender} birthday&quot;)
+
+
+q = (
+    dataset.lazy()
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            avg_birthday(&quot;M&quot;),
+            avg_birthday(&quot;F&quot;),
+            (pl.col(&quot;gender&quot;) == &quot;M&quot;).sum().alias(&quot;# male&quot;),
+            (pl.col(&quot;gender&quot;) == &quot;F&quot;).sum().alias(&quot;# female&quot;),
+        ]
+    )
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 5)
+┌───────┬────────────────┬────────────────┬────────┬──────────┐
+│ state ┆ avg M birthday ┆ avg F birthday ┆ # male ┆ # female │
+│ ---   ┆ ---            ┆ ---            ┆ ---    ┆ ---      │
+│ cat   ┆ f64            ┆ f64            ┆ u32    ┆ u32      │
+╞═══════╪════════════════╪════════════════╪════════╪══════════╡
+│ WI    ┆ 152.939698     ┆ null           ┆ 199    ┆ 0        │
+│ LA    ┆ 157.195531     ┆ 97.8           ┆ 194    ┆ 5        │
+│ OH    ┆ 171.836735     ┆ 79.444444      ┆ 672    ┆ 9        │
+│ MO    ┆ 163.741433     ┆ 81.625         ┆ 329    ┆ 8        │
+│ PA    ┆ 179.724846     ┆ 91.857143      ┆ 1050   ┆ 7        │
+└───────┴────────────────┴────────────────┴────────┴──────────┘
+</code></pre>
+<h4 id="排序"><a class="header" href="#排序">排序</a></h4>
+<p>我们经常把一个 <code>DataFrame</code> 排序为了在分组操作的时候保持某种顺序。假设我们我们希望知道
+每个 <code>state</code> 政治家的名字，并按照年龄排序。我们可以用 <code>sort</code> 和 <code>groupby</code>：</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+
+def get_person() -&gt; pl.Expr:
+    return pl.col(&quot;first_name&quot;) + pl.lit(&quot; &quot;) + pl.col(&quot;last_name&quot;)
+
+
+q = (
+    dataset.lazy()
+    .sort(&quot;birthday&quot;, descending=True)
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            get_person().first().alias(&quot;youngest&quot;),
+            get_person().last().alias(&quot;oldest&quot;),
+        ]
+    )
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌───────┬──────────────────┬─────────────────┐
+│ state ┆ youngest         ┆ oldest          │
+│ ---   ┆ ---              ┆ ---             │
+│ cat   ┆ str              ┆ str             │
+╞═══════╪══════════════════╪═════════════════╡
+│ VT    ┆ Benjamin Deming  ┆ Moses Robinson  │
+│ MT    ┆ Greg Gianforte   ┆ James Cavanaugh │
+│ MN    ┆ Erik Paulsen     ┆ Cyrus Aldrich   │
+│ AS    ┆ Eni Faleomavaega ┆ Fofó Sunia      │
+│ NC    ┆ James McKay      ┆ Samuel Johnston │
+└───────┴──────────────────┴─────────────────┘
+</code></pre>
+<p>但是，<strong>如果</strong>我们想把名字也按照字母排序，上面的代码就不行了。
+幸运的是，我们可以在 <code>groupby</code> 上下文中进行排序，与 <code>DataFrame</code> 无关。</p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+
+def get_person() -&gt; pl.Expr:
+    return pl.col(&quot;first_name&quot;) + pl.lit(&quot; &quot;) + pl.col(&quot;last_name&quot;)
+
+
+q = (
+    dataset.lazy()
+    .sort(&quot;birthday&quot;, descending=True)
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            get_person().first().alias(&quot;youngest&quot;),
+            get_person().last().alias(&quot;oldest&quot;),
+            get_person().sort().first().alias(&quot;alphabetical_first&quot;),
+        ]
+    )
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌───────┬─────────────────────┬─────────────────┬────────────────────┐
+│ state ┆ youngest            ┆ oldest          ┆ alphabetical_first │
+│ ---   ┆ ---                 ┆ ---             ┆ ---                │
+│ cat   ┆ str                 ┆ str             ┆ str                │
+╞═══════╪═════════════════════╪═════════════════╪════════════════════╡
+│ OH    ┆ Amos Townsend       ┆ Paul Fearing    ┆ Aaron Harlan       │
+│ KY    ┆ Benjamin Grey       ┆ Matthew Lyon    ┆ Aaron Harding      │
+│ HI    ┆ Tulsi Gabbard       ┆ Robert Wilcox   ┆ Cecil Heftel       │
+│ LA    ┆ John Slidell        ┆ Thomas Posey    ┆ Adolph Meyer       │
+│ PR    ┆ Aníbal Acevedo-Vilá ┆ Tulio Larrinaga ┆ Antonio Colorado   │
+└───────┴─────────────────────┴─────────────────┴────────────────────┘
+</code></pre>
+<p>我们甚至可以在 <code>groupby</code> 上下文中增加另一个列，并且按照男女排序：
+<code>pl.col(&quot;gender&quot;).sort_by(&quot;first_name&quot;).first().alias(&quot;gender&quot;)</code></p>
+<pre><code class="language-python">import polars as pl
+
+from .dataset import dataset
+
+
+def get_person() -&gt; pl.Expr:
+    return pl.col(&quot;first_name&quot;) + pl.lit(&quot; &quot;) + pl.col(&quot;last_name&quot;)
+
+
+q = (
+    dataset.lazy()
+    .sort(&quot;birthday&quot;, descending=True)
+    .groupby([&quot;state&quot;])
+    .agg(
+        [
+            get_person().first().alias(&quot;youngest&quot;),
+            get_person().last().alias(&quot;oldest&quot;),
+            get_person().sort().first().alias(&quot;alphabetical_first&quot;),
+            pl.col(&quot;gender&quot;).sort_by(&quot;first_name&quot;).first().alias(&quot;gender&quot;),
+        ]
+    )
+    .sort(&quot;state&quot;)
+    .limit(5)
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 5)
+┌───────┬────────────────┬─────────────────┬────────────────────┬────────┐
+│ state ┆ youngest       ┆ oldest          ┆ alphabetical_first ┆ gender │
+│ ---   ┆ ---            ┆ ---             ┆ ---                ┆ ---    │
+│ cat   ┆ str            ┆ str             ┆ str                ┆ cat    │
+╞═══════╪════════════════╪═════════════════╪════════════════════╪════════╡
+│ CT    ┆ Samuel Simons  ┆ Roger Sherman   ┆ Abner Sibal        ┆ M      │
+│ KY    ┆ Benjamin Grey  ┆ Matthew Lyon    ┆ Aaron Harding      ┆ M      │
+│ FL    ┆ George Hawkins ┆ Joseph White    ┆ Abijah Gilbert     ┆ M      │
+│ NY    ┆ Robert Baker   ┆ Philip Schuyler ┆ A. Foster          ┆ M      │
+│ MI    ┆ Samuel Clark   ┆ Gabriel Richard ┆ Aaron Bliss        ┆ M      │
+└───────┴────────────────┴─────────────────┴────────────────────┴────────┘
+</code></pre>
+<h3 id="结论-1"><a class="header" href="#结论-1">结论</a></h3>
+<p>上面的例子中我们知道通过组合表达式可以完成复杂的查询。而且，我们避免了使用自定义 <code>Python</code> 函数
+带来的性能损失 （解释器和 GIL）。</p>
+<p>如果这里少了哪类表达式，清在这里开一个 Issue：
+<a href="https://github.com/pola-rs/polars/issues/new/choose">feature request</a>!</p>
+<h1 id="折叠"><a class="header" href="#折叠">折叠</a></h1>
+<p><code>Polars</code> 提供了横向表达式或者方法，比如<a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.sum.html"><code>sum</code></a>,
+<a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.min.html"><code>min</code></a>, <a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.mean.html"><code>mean</code></a> 等等，
+我们只需要设置 <code>axis=1</code> 即可实现横向聚合。但是，当我们需要复杂的聚合模式时，<code>Polars</code> 提供的基本函数可能不能胜任，这时候我们需要 <code>fold</code> 函数。</p>
+<p><code>fold</code> 函数在列方向的性能最佳，它很好的利用了数据的内存格局，通常还会伴随向量化操作。</p>
+<p>让我们通过里一个例子看看如何受使用 <code>fold</code> 实现 <code>sum</code> 函数。</p>
+<h2 id="手工-sum"><a class="header" href="#手工-sum">手工 <code>sum</code></a></h2>
+<pre><code class="language-python">    {
+        &quot;a&quot;: [1, 2, 3],
+        &quot;b&quot;: [10, 20, 30],
+    }
+)
+
+out = df.select(
+    pl.fold(acc=pl.lit(0), function=lambda acc, x: acc + x, exprs=pl.col(&quot;*&quot;)).alias(&quot;sum&quot;),
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 1)
+┌─────┐
+│ sum │
+│ --- │
+│ i64 │
+╞═════╡
+│ 11  │
+│ 22  │
+│ 33  │
+└─────┘
+</code></pre>
+<p>上面的例子中，函数 <code>f(acc, x) -&gt; acc</code> 被反复调用并把结果累加到 <code>acc</code> 变量，最终把结果放入 x 列。
+这个函数按照列执行，并且充分利用了缓存和向量化操作。</p>
+<h2 id="条件语句"><a class="header" href="#条件语句">条件语句</a></h2>
+<p>当我们希望对一个 <code>DataFrame</code> 的所有列是施加条件语句的时候，采用 <code>fold</code> 就非常简洁。</p>
+<pre><code class="language-python">    {
+        &quot;a&quot;: [1, 2, 3],
+        &quot;b&quot;: [0, 1, 2],
+    }
+)
+
+out = df.filter(
+    pl.fold(
+        acc=pl.lit(True),
+        function=lambda acc, x: acc &amp; x,
+        exprs=pl.col(&quot;*&quot;) &gt; 1,
+    )
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (1, 2)
+┌─────┬─────┐
+│ a   ┆ b   │
+│ --- ┆ --- │
+│ i64 ┆ i64 │
+╞═════╪═════╡
+│ 3   ┆ 2   │
+└─────┴─────┘
+</code></pre>
+<p>上面的例子中，我们选择所有行，这些行的每一列都大于 1。</p>
+<h2 id="fold-和-字符串数据"><a class="header" href="#fold-和-字符串数据"><code>fold</code> 和 字符串数据</a></h2>
+<p>Fold 可以用来连接字符串。但是由于这个操作会产生一些中间结果，这个操作是 <code>O(n^2)</code> 的时间复杂度。
+因此，我们推荐使用 <code>concat_str</code> 表达式。</p>
+<pre><code class="language-python">df = pl.DataFrame(
+    {
+        &quot;a&quot;: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;],
+        &quot;b&quot;: [1, 2, 3],
+    }
+)
+
+out = df.select(
+    [
+        pl.concat_str([&quot;a&quot;, &quot;b&quot;]),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 1)
+┌─────┐
+│ a   │
+│ --- │
+│ str │
+╞═════╡
+│ a1  │
+│ b2  │
+│ c3  │
+└─────┘
+</code></pre>
+<h1 id="自定义函数"><a class="header" href="#自定义函数">自定义函数</a></h1>
+<p>现在你应该相信，polar表达式是如此的强大和灵活，以至于对自定义python函数的需求比你在其他库中可能需要的要少得多。</p>
+<p>尽管如此，你仍然需要有能力将表达式传递给第三方库，或者将你的黑匣子函数应用于polar数据。</p>
+<p>为此，我们提供了以下几种表达式：</p>
+<ul>
+<li><code>map</code></li>
+<li><code>apply</code></li>
+</ul>
+<h2 id="map"><a class="header" href="#map">map</a></h2>
+<p>在操作方式上和最终向用户传递的数据上，<code>map</code>和<code>apply</code>函数有重要的区别。</p>
+<p><code>map</code>函数将表达式所支持的<code>Series</code>数据原封不动的传递。</p>
+<p><code>map</code>函数在<code>select</code>和<code>groupby</code>中遵循相同的规则，这将意味着<code>Series</code>代表<code>DataFrame</code>中的一个列。注意，在<code>groupby</code>情况下，该列还没有被分组！</p>
+<p><code>map</code>函数的用法是将表达式中的<code>Series</code>传递给第三方库。下面我们展示了如何使用<code>map</code>将一个表达式列传递给神经网络模型。</p>
+<pre><code class="language-python">df.with_column([
+    pl.col(&quot;features&quot;).map(lambda s: MyNeuralNetwork.forward(s.to_numpy())).alias(&quot;activations&quot;)
+])
+</code></pre>
+<p>在<code>groupby</code>中，<code>map</code>的使用情况很有限。它们只用于性能方面，但很容易导致不正确的结果。让我们来解释一下原因。</p>
+<pre><code class="language-python">df = pl.DataFrame(
+    {
+        &quot;keys&quot;: [&quot;a&quot;, &quot;a&quot;, &quot;b&quot;],
+        &quot;values&quot;: [10, 7, 1],
+    }
+)
+
+out = df.groupby(&quot;keys&quot;, maintain_order=True).agg(
+    [
+        pl.col(&quot;values&quot;).map(lambda s: s.shift()).alias(&quot;shift_map&quot;),
+        pl.col(&quot;values&quot;).shift().alias(&quot;shift_expression&quot;),
+    ]
+)
+print(df)
+shape: (3, 2)
+┌──────┬────────┐
+│ keys ┆ values │
+│ ---  ┆ ---    │
+│ str  ┆ i64    │
+╞══════╪════════╡
+│ a    ┆ 10     │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ a    ┆ 7      │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ b    ┆ 1      │
+└──────┴────────┘
+</code></pre>
+<p>在上面的片段中，我们按<code>&quot;keys&quot;</code>列分组。这意味着我们有以下几个组。</p>
+<pre><code class="language-c">&quot;a&quot; -&gt; [10, 7]
+&quot;b&quot; -&gt; [1]
+</code></pre>
+<p>如果我们再向右应用一个<code>shift</code>操作，我们就会发现。</p>
+<pre><code class="language-c">&quot;a&quot; -&gt; [null, 10]
+&quot;b&quot; -&gt; [null]
+</code></pre>
+<p>现在，让我们打印一下得到的结果：</p>
+<pre><code class="language-python">print(out)
+shape: (2, 3)
+┌──────┬────────────┬──────────────────┐
+│ keys ┆ shift_map  ┆ shift_expression │
+│ ---  ┆ ---        ┆ ---              │
+│ str  ┆ list[i64]  ┆ list[i64]        │
+╞══════╪════════════╪══════════════════╡
+│ a    ┆ [null, 10] ┆ [null, 10]       │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ b    ┆ [7]        ┆ [null]           │
+└──────┴────────────┴──────────────────┘
+</code></pre>
+<p>😯.. 很明显，我们得到了一个错误答案。<code>&quot;b&quot;</code>组甚至从<code>&quot;a&quot;</code>组拿到了一个值7😵.</p>
+<p>这是一个可怕的错误，因为<code>map</code>在我们聚合之前就应用了这个函数！这意味着整个列<code>[10, 7, 1]</code>先向右移向到了<code>[null, 10, 7]</code>，然后再被聚合。</p>
+<p>所以我们的建议是，除非你知道你需要使用<code>map</code>并且知道你在做什么，否则永远不要在<code>groupby</code>时使用<code>map</code>。</p>
+<h2 id="apply"><a class="header" href="#apply">apply</a></h2>
+<p>幸运的是，我们可以用<code>apply</code>来解决之前的例子。<code>apply</code>可以对该操作的最小的逻辑元素起作用。</p>
+<p>这就意味着:</p>
+<ul>
+<li><code>select</code>-&gt; 单个元素</li>
+<li><code>groupby</code>-&gt; 单个分组</li>
+</ul>
+<p>因此，我们可以用<code>apply</code>来解决我们上述的问题：</p>
+<pre><code class="language-python">out = df.groupby(&quot;keys&quot;, maintain_order=True).agg(
+    [
+        pl.col(&quot;values&quot;).apply(lambda s: s.shift()).alias(&quot;shift_map&quot;),
+        pl.col(&quot;values&quot;).shift().alias(&quot;shift_expression&quot;),
+    ]
+)
+print(out)
+shape: (2, 3)
+┌──────┬────────────┬──────────────────┐
+│ keys ┆ shift_map  ┆ shift_expression │
+│ ---  ┆ ---        ┆ ---              │
+│ str  ┆ list[i64]  ┆ list[i64]        │
+╞══════╪════════════╪══════════════════╡
+│ a    ┆ [null, 10] ┆ [null, 10]       │
+├╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ b    ┆ [null]     ┆ [null]           │
+└──────┴────────────┴──────────────────┘
+</code></pre>
+<p>可以看到，我们得到了正确的结果! 🎉</p>
+<h2 id="select中的apply"><a class="header" href="#select中的apply"><code>select</code>中的<code>apply</code></a></h2>
+<p>在<code>select</code>中，<code>apply</code>表达式将列的元素传递给python函数。</p>
+<p><em>注意，你现在正在运行Python，这将会很慢。</em></p>
+<p>让我们通过一些例子来看看会发生什么。我们将继续使用我们在本节开始时定义的<code>DataFrame</code>，并展示一个使用<code>apply</code>函数的例子和一个使用表达式API实现相同目标的反例。</p>
+<h3 id="添加一个计数器"><a class="header" href="#添加一个计数器">添加一个计数器</a></h3>
+<p>在这个例子中，我们创建了一个全局的 <code>counter</code> (计数器)，然后在每处理一个元素时将整数 <code>1</code> 添加到全局状态中。每个迭代的增量结果将被添加到元素值中。</p>
+<pre><code class="language-python">counter = 0
+
+
+def add_counter(val: int) -&gt; int:
+    global counter
+    counter += 1
+    return counter + val
+
+
+out = df.select(
+    [
+        pl.col(&quot;values&quot;).apply(add_counter).alias(&quot;solution_apply&quot;),
+        (pl.col(&quot;values&quot;) + pl.arange(1, pl.count() + 1)).alias(&quot;solution_expr&quot;),
+    ]
+)
+print(out)
+shape: (3, 2)
+┌────────────────┬───────────────┐
+│ solution_apply ┆ solution_expr │
+│ ---            ┆ ---           │
+│ i64            ┆ i64           │
+╞════════════════╪═══════════════╡
+│ 11             ┆ 11            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 9              ┆ 9             │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 4              ┆ 4             │
+└────────────────┴───────────────┘
+</code></pre>
+<h3 id="合并多列值"><a class="header" href="#合并多列值">合并多列值</a></h3>
+<p>如果我们想在一次<code>apply</code>函数调用中访问不同列的值，我们可以创建<code>struct</code>数据类型。这种数据类型将这些列作为字段收集在<code>struct</code>中。因此，如果我们从列<code>&quot;keys&quot;</code>和<code>&quot;values&quot;</code>中创建一个<code>struct</code>，我们会得到以下结构元素。</p>
+<pre><code class="language-python">[
+    {&quot;keys&quot;: &quot;a&quot;, &quot;values&quot;: 10},
+    {&quot;keys&quot;: &quot;a&quot;, &quot;values&quot;: 7},
+    {&quot;keys&quot;: &quot;b&quot;, &quot;values&quot;: 1},
+]
+</code></pre>
+<p>这些将作为<code>dict</code>传递给调用的Python函数，因此可以通过<code>field: str</code>进行索引。</p>
+<pre><code class="language-python">out = df.select(
+    [
+        pl.struct([&quot;keys&quot;, &quot;values&quot;]).apply(lambda x: len(x[&quot;keys&quot;]) + x[&quot;values&quot;]).alias(&quot;solution_apply&quot;),
+        (pl.col(&quot;keys&quot;).str.lengths() + pl.col(&quot;values&quot;)).alias(&quot;solution_expr&quot;),
+    ]
+)
+print(out)
+shape: (3, 2)
+┌────────────────┬───────────────┐
+│ solution_apply ┆ solution_expr │
+│ ---            ┆ ---           │
+│ i64            ┆ i64           │
+╞════════════════╪═══════════════╡
+│ 11             ┆ 11            │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 8              ┆ 8             │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2              ┆ 2             │
+└────────────────┴───────────────┘
+</code></pre>
+<h3 id="返回类型"><a class="header" href="#返回类型">返回类型</a></h3>
+<p>自定义Python函数对polar而言是黑箱。我们真的不知道你在做什么黑科技，所以我们不得不推断并尽力去理解你的意思。</p>
+<p>数据类型是自动推断出来的。我们通过等待第一个非空值来做到这一点。这个值将被用来确定<code>Series</code>的类型。</p>
+<p>python类型与polars数据类型的映射如下：</p>
+<ul>
+<li><code>int</code>-&gt;<code>Int64</code></li>
+<li><code>float</code>-&gt;<code>Float64</code></li>
+<li><code>bool</code>-&gt;<code>Boolean</code></li>
+<li><code>str</code>-&gt;<code>Utf8</code></li>
+<li><code>list[tp]</code>-&gt;<code>List[tp]</code>(其中内部类型的推断规则相同)</li>
+<li><code>dict[str, [tp]]</code>-&gt;<code>struct</code></li>
+<li><code>Any</code>-&gt;<code>object</code>(在任何时候都要防止这种情况)</li>
+</ul>
+<p>作为一个用户，我们希望您能了解我们的工作，以便能更好地利用自定义函数。</p>
+<h1 id="窗口函数-"><a class="header" href="#窗口函数-">窗口函数 🚀🚀</a></h1>
+<p>窗口函数是一种强大的表达式。它可以让用户在 <code>select</code> 上下文中分组进行类聚。
+让我们通过例子看看这是什么意思。首先，我们创建一个数据结构，这个数据包含如下列，分别代表口袋妖怪的一些信息：</p>
+<p><code>['#',  'Name',  'Type 1',  'Type 2',  'Total',  'HP',  'Attack',  'Defense',  'Sp. Atk',  'Sp. Def',  'Speed',  'Generation',  'Legendary']</code></p>
+<pre><code class="language-python">import polars as pl
+
+# 然后，让我们加载一些包pokemon信息的csv数据
+df = pl.read_csv(
+    &quot;https://gist.githubusercontent.com/ritchie46/cac6b337ea52281aa23c049250a4ff03/raw/89a957ff3919d90e6ef2d34235e6bf22304f3366/pokemon.csv&quot;
+)
+</code></pre>
+<pre><code class="language-text">shape: (163, 13)
+┌─────┬───────────────────────┬─────────┬────────┬───┬─────────┬───────┬────────────┬───────────┐
+│ #   ┆ Name                  ┆ Type 1  ┆ Type 2 ┆ … ┆ Sp. Def ┆ Speed ┆ Generation ┆ Legendary │
+│ --- ┆ ---                   ┆ ---     ┆ ---    ┆   ┆ ---     ┆ ---   ┆ ---        ┆ ---       │
+│ i64 ┆ str                   ┆ str     ┆ str    ┆   ┆ i64     ┆ i64   ┆ i64        ┆ bool      │
+╞═════╪═══════════════════════╪═════════╪════════╪═══╪═════════╪═══════╪════════════╪═══════════╡
+│ 1   ┆ Bulbasaur             ┆ Grass   ┆ Poison ┆ … ┆ 65      ┆ 45    ┆ 1          ┆ false     │
+│ 2   ┆ Ivysaur               ┆ Grass   ┆ Poison ┆ … ┆ 80      ┆ 60    ┆ 1          ┆ false     │
+│ 3   ┆ Venusaur              ┆ Grass   ┆ Poison ┆ … ┆ 100     ┆ 80    ┆ 1          ┆ false     │
+│ 3   ┆ VenusaurMega Venusaur ┆ Grass   ┆ Poison ┆ … ┆ 120     ┆ 80    ┆ 1          ┆ false     │
+│ …   ┆ …                     ┆ …       ┆ …      ┆ … ┆ …       ┆ …     ┆ …          ┆ …         │
+│ 147 ┆ Dratini               ┆ Dragon  ┆ null   ┆ … ┆ 50      ┆ 50    ┆ 1          ┆ false     │
+│ 148 ┆ Dragonair             ┆ Dragon  ┆ null   ┆ … ┆ 70      ┆ 70    ┆ 1          ┆ false     │
+│ 149 ┆ Dragonite             ┆ Dragon  ┆ Flying ┆ … ┆ 100     ┆ 80    ┆ 1          ┆ false     │
+│ 150 ┆ Mewtwo                ┆ Psychic ┆ null   ┆ … ┆ 90      ┆ 130   ┆ 1          ┆ true      │
+└─────┴───────────────────────┴─────────┴────────┴───┴─────────┴───────┴────────────┴───────────┘
+</code></pre>
+<h2 id="groupby-类聚"><a class="header" href="#groupby-类聚">Groupby 类聚</a></h2>
+<p>下面我们看看如何用窗口函数对不同的列分组并且类聚。这样我们可以在一次查询中并行的运行多个分组操作。
+类聚的结果会投射会原有的行。因此，窗口函数永远返回一个跟原有 <code>DataFrame</code> 一样规格的 <code>DataFrame</code>。</p>
+<p>注意，我们使用了 <code>.over(&quot;Type 1&quot;)</code> 和 <code>.over([&quot;Type 1&quot;, &quot;Type 2&quot;])</code>，利用窗口函数我们可以一个
+<code>select</code> 语境中实现多个分组类聚。</p>
+<p>更好的是，计算过的分组会被缓存并且在不同的窗口函数中共享。</p>
+<pre><code class="language-python">
+out = df.select(
+    [
+        &quot;Type 1&quot;,
+        &quot;Type 2&quot;,
+        pl.col(&quot;Attack&quot;).mean().over(&quot;Type 1&quot;).alias(&quot;avg_attack_by_type&quot;),
+        pl.col(&quot;Defense&quot;).mean().over([&quot;Type 1&quot;, &quot;Type 2&quot;]).alias(&quot;avg_defense_by_type_combination&quot;),
+        pl.col(&quot;Attack&quot;).mean().alias(&quot;avg_attack&quot;),
+    ]
+)
+</code></pre>
+<pre><code class="language-text">shape: (163, 5)
+┌─────────┬────────┬────────────────────┬─────────────────────────────────┬────────────┐
+│ Type 1  ┆ Type 2 ┆ avg_attack_by_type ┆ avg_defense_by_type_combination ┆ avg_attack │
+│ ---     ┆ ---    ┆ ---                ┆ ---                             ┆ ---        │
+│ str     ┆ str    ┆ f64                ┆ f64                             ┆ f64        │
+╞═════════╪════════╪════════════════════╪═════════════════════════════════╪════════════╡
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+│ Grass   ┆ Poison ┆ 72.923077          ┆ 67.8                            ┆ 75.349693  │
+│ …       ┆ …      ┆ …                  ┆ …                               ┆ …          │
+│ Dragon  ┆ null   ┆ 94.0               ┆ 55.0                            ┆ 75.349693  │
+│ Dragon  ┆ null   ┆ 94.0               ┆ 55.0                            ┆ 75.349693  │
+│ Dragon  ┆ Flying ┆ 94.0               ┆ 95.0                            ┆ 75.349693  │
+│ Psychic ┆ null   ┆ 53.875             ┆ 51.428571                       ┆ 75.349693  │
+└─────────┴────────┴────────────────────┴─────────────────────────────────┴────────────┘
+</code></pre>
+<h2 id="分组操作"><a class="header" href="#分组操作">分组操作</a></h2>
+<p>窗口函数不仅仅可以类聚，还可以用来按照组施加自定义函数。例如，如果你想要在某一组中排序，你可以：
+<code>.col(&quot;value&quot;).sort().over(&quot;group&quot;)</code>。</p>
+<p>让我们试着过滤一些行：</p>
+<pre><code class="language-python">filtered = df.filter(pl.col(&quot;Type 2&quot;) == &quot;Psychic&quot;).select(
+    [
+        &quot;Name&quot;,
+        &quot;Type 1&quot;,
+        &quot;Speed&quot;,
+    ]
+)
+print(filtered)
+</code></pre>
+<pre><code class="language-text">shape: (7, 3)
+┌─────────────────────┬────────┬───────┐
+│ Name                ┆ Type 1 ┆ Speed │
+│ ---                 ┆ ---    ┆ ---   │
+│ str                 ┆ str    ┆ i64   │
+╞═════════════════════╪════════╪═══════╡
+│ Slowpoke            ┆ Water  ┆ 15    │
+│ Slowbro             ┆ Water  ┆ 30    │
+│ SlowbroMega Slowbro ┆ Water  ┆ 30    │
+│ Exeggcute           ┆ Grass  ┆ 40    │
+│ Exeggutor           ┆ Grass  ┆ 55    │
+│ Starmie             ┆ Water  ┆ 115   │
+│ Jynx                ┆ Ice    ┆ 95    │
+└─────────────────────┴────────┴───────┘
+</code></pre>
+<p>注意到，分组 <code>Water</code> 的列 <code>Type 1</code> 并不连续，中间有两行 <code>Grass</code>。而且，同组中的每一个口袋妖股
+被按照 <code>Speed</code> 升序排列。不幸的是，这个例子我们希望降序排列，幸运的是，这很简单：</p>
+<pre><code class="language-python">out = filtered.with_columns(
+    [
+        pl.col([&quot;Name&quot;, &quot;Speed&quot;]).sort(descending=True).over(&quot;Type 1&quot;),
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (7, 3)
+┌─────────────────────┬────────┬───────┐
+│ Name                ┆ Type 1 ┆ Speed │
+│ ---                 ┆ ---    ┆ ---   │
+│ str                 ┆ str    ┆ i64   │
+╞═════════════════════╪════════╪═══════╡
+│ Starmie             ┆ Water  ┆ 115   │
+│ Slowpoke            ┆ Water  ┆ 30    │
+│ SlowbroMega Slowbro ┆ Water  ┆ 30    │
+│ Exeggutor           ┆ Grass  ┆ 55    │
+│ Exeggcute           ┆ Grass  ┆ 40    │
+│ Slowbro             ┆ Water  ┆ 15    │
+│ Jynx                ┆ Ice    ┆ 95    │
+└─────────────────────┴────────┴───────┘
+</code></pre>
+<p><code>Polars</code> 会追踪每个组的位置，并把相应的表达式映射到适当的行。这个操作可以在一个 select 环境中完成。</p>
+<p>窗口函数的强大之处在于：你通常不需要 <code>groupby -&gt; explode</code> 组合，而是把逻辑放入一个表达式中。
+这也使得 API 更加简洁：</p>
+<ul>
+<li><code>groupby</code> -&gt; 标记类聚的分组，返回一个跟组的个数一致的 <code>DataFrame</code></li>
+<li><code>over</code> -&gt; 标记我们希望对这个分组进行计算，但是不会更改原有 <code>DataFrame</code> 的形状</li>
+</ul>
+<h2 id="窗口表达式的规则"><a class="header" href="#窗口表达式的规则">窗口表达式的规则</a></h2>
+<p>窗口表达式的计算规则如下（假设我们有一个 <code>pl.Int32</code> 列）：</p>
+<pre><code class="language-python"># 分组内类聚且广播
+# 输出类型: -&gt; Int32
+pl.sum(&quot;foo&quot;).over(&quot;groups&quot;)
+
+# 组内加和，然后乘以组内的元素
+# 输出类型: -&gt; Int32
+(pl.col(&quot;x&quot;).sum() * pl.col(&quot;y&quot;)).over(&quot;groups&quot;)
+
+# 组内加和，然后乘以组内的元素
+# 并且组内类聚成一个列表
+# 输出类型: -&gt; List(Int32)
+(pl.col(&quot;x&quot;).sum() * pl.col(&quot;y&quot;)).list().over(&quot;groups&quot;)
+
+# 注意这里需要一个显式的 `list` 调用
+# 组内加和，然后乘以组内的元素
+# 并且组内类聚成一个列表
+# list() 会展开
+
+# 如果组内是有序的，这是最快的操作方法：
+(pl.col(&quot;x&quot;).sum() * pl.col(&quot;y&quot;)).list().over(&quot;groups&quot;).flatten()
+</code></pre>
+<h2 id="展开窗口函数"><a class="header" href="#展开窗口函数">展开窗口函数</a></h2>
+<p>就像刚刚的例子，如果你的窗口函数返回一个 <code>list</code>：</p>
+<p><code>pl.col(&quot;Name&quot;).sort_by(pl.col(&quot;Speed&quot;)).head(3).list().over(&quot;Type 1&quot;)</code></p>
+<p>这样可以，但是这样会返回一个类型为 <code>List</code> 的列，这可能不是我们想要的，而且会增加内存使用。</p>
+<p>这是我们可以采用 <code>flatten</code>。这个函数会把一个 2D 列表转换成 1D，然后把列投射到我们的 <code>DataFrame</code>。
+这个操作非常快，因为 reshape 基本没有成本，给原有 <code>DataFrame</code> 增加列也非常快，因为我们不需要
+一般窗口函数的联合（Join）操作。</p>
+<p>但是，想要正确的使用这个操作，我们要保证用于 <code>over</code> 的列是有序的。</p>
+<h1 id="与-numpy-交互"><a class="header" href="#与-numpy-交互">与 Numpy 交互</a></h1>
+<p><code>Polars</code> 表达式支持<code>NumPy</code> <a href="https://numpy.org/doc/stable/reference/ufuncs.html">ufuncs</a>。 <a href="https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs">这里</a>查看所有受支持的numpy函数的列表。</p>
+<p>这意味着，如果一个函数不是由<code>Polars</code>提供的，我们可以使用<code>NumPy</code>，我们仍然可以通过<code>NumPy</code>API进行快速的列操作。</p>
+<h2 id="实例-1"><a class="header" href="#实例-1">实例</a></h2>
+<pre><code class="language-python">import polars as pl
+import numpy as np
+
+df = pl.DataFrame({&quot;a&quot;: [1, 2, 3], &quot;b&quot;: [4, 5, 6]})
+
+out = df.select(
+    [
+        np.log(pl.all()).suffix(&quot;_log&quot;),  # 对df所有列求对数
+    ]
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 2)
+┌──────────┬──────────┐
+│ a_log    ┆ b_log    │
+│ ---      ┆ ---      │
+│ f64      ┆ f64      │
+╞══════════╪══════════╡
+│ 0.0      ┆ 1.386294 │
+│ 0.693147 ┆ 1.609438 │
+│ 1.098612 ┆ 1.791759 │
+└──────────┴──────────┘
+</code></pre>
+<h2 id="gotchas"><a class="header" href="#gotchas">Gotcha's</a></h2>
+<p>阅读更多关于 <a href="dsl//polars-book/user-guide/howcani/interop/numpy.html">gotcha's 这里</a>.</p>
+<h1 id="实例-2"><a class="header" href="#实例-2">实例</a></h1>
+<ul>
+<li><a href="notebooks/introduction_polars-py.ipynb">介绍 Python 版本的 polars</a></li>
+<li><a href="notebooks/introduction_polars-rs.ipynb">介绍 Rust 版本的 polars</a></li>
+</ul>
+<h1 id="表达式方法"><a class="header" href="#表达式方法">表达式方法</a></h1>
+<p>可以在<a href="https://pola-rs.github.io/polars/py-polars/html/reference/expression.html"><code>Expr</code></a>上找到可能的表达式的完整列表，参考指南中的定义。</p>
+<h1 id="视频介绍"><a class="header" href="#视频介绍">视频介绍</a></h1>
+<p>你不喜欢阅读文档吗？看看这段关于<code>Polars</code>及其表达的介绍视频。</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iwGIuGk5nCE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h1 id="索引"><a class="header" href="#索引">索引</a></h1>
+<p><code>Polars</code> <code>DataFrame</code>没有索引，因此索引行为可以是一致的，而不需要  <code>df.loc</code>,
+<code>df.iloc</code>, or a <code>df.at</code> 操作。</p>
+<p>规则如下（取决于值的数据类型）:</p>
+<ul>
+<li>
+<p><strong>数值型</strong></p>
+<ul>
+<li>axis 0: 行（row）</li>
+<li>axis 1: 列（column）</li>
+</ul>
+</li>
+<li>
+<p><strong>数值型 + 字符串</strong></p>
+<ul>
+<li>axis 0: 行（这里只接收数字)</li>
+<li>axis 1: 列（接受数字+字符串值）</li>
+</ul>
+</li>
+<li>
+<p><strong>仅字符串</strong></p>
+<ul>
+<li>axis 0: 列（column）</li>
+<li>axis 1: 报错（error）</li>
+</ul>
+</li>
+<li>
+<p><strong>表达式</strong></p>
+<p><em>所有表达式求值都是并行执行的</em></p>
+<ul>
+<li>axis 0: 列（column）</li>
+<li>axis 1: 列（column）</li>
+<li>..</li>
+<li>axis n: 列（column）</li>
+</ul>
+</li>
+</ul>
+<h2 id="与pandas的对比"><a class="header" href="#与pandas的对比">与Pandas的对比</a></h2>
+<table><thead><tr><th>pandas</th><th>polars</th></tr></thead><tbody>
+<tr><td>选择列<br> <code>df.iloc[2]</code></td><td><code>df[2, :]</code></td></tr>
+<tr><td>按索引选择几行<br> <code>df.iloc[[2, 5, 6]]</code></td><td><code>df[[2, 5, 6], :]</code></td></tr>
+<tr><td>选择行的切片<br> <code>df.iloc[2:6]</code></td><td><code>df[2:6, :]</code></td></tr>
+<tr><td>使用布尔掩码（boolean mask）选择行<br> <code>df.iloc[True, True, False]</code></td><td><code>df[[True, True, False]]</code></td></tr>
+<tr><td>按谓词（predicate）条件选择行<br> <code>df.loc[df[&quot;A&quot;] &gt; 3]</code></td><td><code>df[df[&quot;A&quot;] &gt; 3]</code></td></tr>
+<tr><td>选择列的切片<br> <code>df.iloc[:, 1:3]</code></td><td><code>df[:, 1:3]</code></td></tr>
+<tr><td>按字符串顺序选择列的切片<br> <code>df.loc[:, &quot;A&quot;:&quot;Z&quot;]</code></td><td><code>df[:, &quot;A&quot;:&quot;Z&quot;]</code></td></tr>
+<tr><td>选择单个值（标量）<br> <code>df.loc[2, &quot;A&quot;]</code></td><td><code>df[2, &quot;A&quot;]</code></td></tr>
+<tr><td>选择单个值（标量）<br> <code>df.iloc[2, 1]</code></td><td><code>df[2, 1]</code></td></tr>
+<tr><td>选择单个值（Series或DataFrame）<br> <code>df.loc[2, [&quot;A&quot;]]</code></td><td><code>df[2, [&quot;A&quot;]]</code></td></tr>
+<tr><td>选择单个值 (Series或DataFrame)<br> <code>df.iloc[2, [1]]</code></td><td><code>df[2, [1]]</code></td></tr>
+</tbody></table>
+<h2 id="表达式"><a class="header" href="#表达式">表达式</a></h2>
+<p>表达式也可以用于索引（它是<code>df.select</code>的语法糖）。</p>
+<p>这可以用来做一些很有别致的选择。</p>
+<pre><code class="language-python">df[[
+    pl.col(&quot;A&quot;).head(5),  # 从“A”的首部开始获取
+    pl.col(&quot;B&quot;).tail(5).reverse(), # 以逆序的方式获取“B”的后部
+    pl.col(&quot;B&quot;).filter(pl.col(&quot;B&quot;) &gt; 5).head(5), # 首先得到满足谓词的“B”
+    pl.sum(&quot;A&quot;).over(&quot;B&quot;).head(5) # 获取“A”在“B”组上的总和，并返回前5个
+</code></pre>
+<h1 id="数据类型"><a class="header" href="#数据类型">数据类型</a></h1>
+<p><code>Polars</code>完全基于<code>Arrow</code>数据类型，并由<code>Arrow</code>内存阵列支持。这使得数据处理缓存效率高，支持进程间通信。大多数数据类型遵循确切的实现来自<code>Arrow</code>，除了<code>Utf8</code>（实际上是<code>LargeUtf8</code>）、<code>category</code>和<code>Object</code>（支持有限）。</p>
+<p>这些数据类型是:</p>
+<ul>
+<li><code>Int8</code>: 8位有符号整数。</li>
+<li><code>Int16</code>: 16位有符号整数。</li>
+<li><code>Int32</code>: 32位有符号整数。</li>
+<li><code>Int64</code>: 64位有符号整数。</li>
+<li><code>UInt8</code>: 8位有符号整数。</li>
+<li><code>UInt16</code>: 16位无符号整数。</li>
+<li><code>UInt32</code>: 32位无符号整数。</li>
+<li><code>UInt64</code>: 64位无符号整数。</li>
+<li><code>Float32</code>: 32位浮点数。</li>
+<li><code>Float64</code>: 64位浮点数。</li>
+<li><code>Boolean</code>: 布尔型有效位压缩。</li>
+<li><code>Utf8</code>: 字符串数据（内部实际上是<code>Arrow </code> <code>LargeUtf8</code>）。</li>
+<li><code>List</code>: 列表数组包含着包含列表值的子数组和偏移数组。（这实际上是内部的<code>Arrow</code> <code>LargeList</code>）。</li>
+<li><code>Date</code>: 日期表示，内部表示为自UNIX纪元以来的天数，由32位有符号整数编码。</li>
+<li><code>Datetime</code>: Datetime表示法，内部表示为自UNIX纪元以来的纳秒，由64位有符号整数编码。</li>
+<li><code>Duration</code>: 时间型。在减去<code>Date/Datetime</code>时创建。</li>
+<li><code>Time</code>: 时间表示法，从午夜开始在内部表示为纳秒。</li>
+<li><code>Object</code>: 受支持的有限数据类型，可以是任何值。</li>
+</ul>
+<p>要了解有关这些数据类型的内部表示形式的更多信息，请查看<a href="https://arrow.apache.org/docs/format/Columnar.html"><code>Arrow</code>柱状格式</a>。</p>
+<h1 id="来自-pandas"><a class="header" href="#来自-pandas">来自 Pandas</a></h1>
+<p>如果你很熟悉<code>Pandas</code>，那么你只需要知道一件事：</p>
+<pre><code>polars != pandas
+</code></pre>
+<p>如果你的<code>Polars</code>代码写起来很像<code>Pandas</code>，程序也许可以运行，但是很有可能会慢于它本该有的速度。</p>
+<p>下面我们就通过几段经典<code>Pandas</code>代码来对比同样功能的<code>Polars</code>代码。</p>
+<h2 id="列运算"><a class="header" href="#列运算">列运算</a></h2>
+<h3 id="pandas"><a class="header" href="#pandas"><code>Pandas</code></a></h3>
+<pre><code class="language-python"># 以下代码是顺序执行的
+df[&quot;a&quot;] = df[&quot;b&quot;] * 10
+df[&quot;c&quot;] = df[&quot;b&quot;] * 100
+</code></pre>
+<h3 id="polars"><a class="header" href="#polars"><code>Polars</code></a></h3>
+<pre><code class="language-python"># 以下代码是并发执行的
+df.with_columns([
+    (pl.col(&quot;b&quot;) * 10).alias(&quot;a&quot;),
+    (pl.col(&quot;b&quot;) * 100).alias(&quot;c&quot;),
+])
+</code></pre>
+<h3 id="基于判定的列运算"><a class="header" href="#基于判定的列运算">基于判定的列运算</a></h3>
+<h3 id="pandas-1"><a class="header" href="#pandas-1"><code>Pandas</code></a></h3>
+<pre><code class="language-python">df.loc[df[&quot;c&quot;] == 2, &quot;a&quot;] = df.loc[df[&quot;c&quot;] == 2, &quot;b&quot;]
+</code></pre>
+<h3 id="polars-1"><a class="header" href="#polars-1"><code>Polars</code></a></h3>
+<pre><code class="language-python">df.with_column(
+    pl.when(pl.col(&quot;c&quot;) == 2)
+    .then(pl.col(&quot;b&quot;))
+    .otherwise(pl.col(&quot;a&quot;)).alias(&quot;a&quot;)
+)
+</code></pre>
+<p>注意，<code>Polars</code>的方式更“干净”，因而原始<code>DataFrame</code>中的数据并没有被修改。并且，<code>mask</code>（掩膜）也不像在<code>Pandas</code>中那样被计算了两次。</p>
+<p>当然，你可以在<code>Pandas</code>中防止原始<code>DataFrame</code>中的数据在这一步被修改，但这需要借助临时变量。</p>
+<p>另外，<code>Polars</code>能并行计算每一个 <code>if -&gt; then -&gt; otherwise</code>的分支。当分支的计算复杂度提高时，就能体现并行计算的优势了。</p>
+<h2 id="筛选"><a class="header" href="#筛选">筛选</a></h2>
+<h3 id="pandas-2"><a class="header" href="#pandas-2"><code>Pandas</code></a></h3>
+<pre><code class="language-python">df.loc[(df['sqft_living'] &gt; 2500) &amp; (df['price'] &lt; 300000)]
+</code></pre>
+<h3 id="polars-2"><a class="header" href="#polars-2"><code>Polars</code></a></h3>
+<pre><code class="language-python">df.filter(
+    (pl.col(&quot;m2_living&quot;) &gt; 2500) &amp; (pl.col(&quot;price&quot;) &lt; 300000)
+)
+</code></pre>
+<blockquote>
+<p>PS: 这部分内容还在建设中，内容有缺少？欢迎提交PR!</p>
+</blockquote>
+<h2 id="没有索引列"><a class="header" href="#没有索引列">没有索引列</a></h2>
+<p>根本不需要索引列！没有索引列会让处理变得更简单。如果你不相信来说服我们吧!</p>
+<h2 id="pandas重塑"><a class="header" href="#pandas重塑">Pandas重塑</a></h2>
+<p>在<code>Pandas</code>文档中演示了一种聚合操作 <code>transform</code>（重塑）：</p>
+<h3 id="pandas-3"><a class="header" href="#pandas-3"><code>Pandas</code></a></h3>
+<pre><code class="language-python">df = pd.DataFrame({
+    &quot;c&quot;: [1, 1, 1, 2, 2, 2, 2],
+    &quot;type&quot;: [&quot;m&quot;, &quot;n&quot;, &quot;o&quot;, &quot;m&quot;, &quot;m&quot;, &quot;n&quot;, &quot;n&quot;]
+})
+
+df[&quot;size&quot;] = df.groupby(&quot;c&quot;)[&quot;type&quot;].transform(len)
+</code></pre>
+<p>使用<code>Pandas</code> 要先聚合<code>&quot;c&quot;</code>列、截取出<code>&quot;type&quot;</code>列、计算组的<code>长度</code>，最后将结果拼接回原始<code>DataFrame</code>中。</p>
+<p>其结果是:</p>
+<pre><code>   c type size
+0  1    m    3
+1  1    n    3
+2  1    o    3
+3  2    m    4
+4  2    m    4
+5  2    n    4
+6  2    n    4
+</code></pre>
+<h3 id="polars-3"><a class="header" href="#polars-3"><code>Polars</code></a></h3>
+<p>在 <code>Polars</code>中可以用 <code>窗口</code> 函数来达到相同的目的。</p>
+<pre><code class="language-python">df.select([
+    pl.all(),
+    pl.col(&quot;type&quot;).count().over(&quot;c&quot;).alias(&quot;size&quot;)
+])
+</code></pre>
+<pre><code>shape: (7, 3)
+┌─────┬──────┬──────┐
+│ c   ┆ type ┆ size │
+│ --- ┆ ---  ┆ ---  │
+│ i64 ┆ str  ┆ u32  │
+╞═════╪══════╪══════╡
+│ 1   ┆ m    ┆ 3    │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┤
+│ 1   ┆ n    ┆ 3    │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┤
+│ 1   ┆ o    ┆ 3    │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┤
+│ 2   ┆ m    ┆ 4    │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┤
+│ 2   ┆ m    ┆ 4    │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┤
+│ 2   ┆ n    ┆ 4    │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┤
+│ 2   ┆ n    ┆ 4    │
+└─────┴──────┴──────┘
+</code></pre>
+<p>因为我们可以将所有的操作放在一个语句中，因此结合多个<code>窗口</code>函数，甚至结合不同的组都是可以的!</p>
+<p><code>Polars</code>会将应用于相同组的<code>窗口</code>函数表达式缓存，所以将多个表达式入在一个<code>select</code>语句中既方便<strong>且</strong>优雅。</p>
+<p>例如：</p>
+<pre><code class="language-python">df.select([
+    pl.all(),
+    pl.col(&quot;c&quot;).count().over(&quot;c&quot;).alias(&quot;size&quot;),
+    pl.col(&quot;c&quot;).sum().over(&quot;type&quot;).alias(&quot;sum&quot;),
+    pl.col(&quot;c&quot;).reverse().over(&quot;c&quot;).flatten().alias(&quot;reverse_type&quot;)
+])
+</code></pre>
+<pre><code>shape: (7, 5)
+┌─────┬──────┬──────┬─────┬──────────────┐
+│ c   ┆ type ┆ size ┆ sum ┆ reverse_type │
+│ --- ┆ ---  ┆ ---  ┆ --- ┆ ---          │
+│ i64 ┆ str  ┆ u32  ┆ i64 ┆ i64          │
+╞═════╪══════╪══════╪═════╪══════════════╡
+│ 1   ┆ m    ┆ 3    ┆ 5   ┆ 2            │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 1   ┆ n    ┆ 3    ┆ 5   ┆ 2            │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 1   ┆ o    ┆ 3    ┆ 1   ┆ 2            │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2   ┆ m    ┆ 4    ┆ 5   ┆ 2            │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2   ┆ m    ┆ 4    ┆ 5   ┆ 1            │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2   ┆ n    ┆ 4    ┆ 5   ┆ 1            │
+├╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2   ┆ n    ┆ 4    ┆ 5   ┆ 1            │
+└─────┴──────┴──────┴─────┴──────────────┘
+</code></pre>
+<h1 id="来自-apache-spark"><a class="header" href="#来自-apache-spark">来自 Apache Spark</a></h1>
+<h2 id="基于列的方法-vs-基于行的方法"><a class="header" href="#基于列的方法-vs-基于行的方法">基于列的方法 vs. 基于行的方法</a></h2>
+<p><code>Spark</code> <code>DataFrame</code> 类似于一个行的集合，而 <code>Polars</code> <code>DataFrame</code> 更接近于一个列的集合。这意味着你可以在 <code>Polars</code> 中以 <code>Spark</code> 中不可能的方式组合列，因为 <code>Spark</code> 保留了每一行中的数据关系。</p>
+<p>考虑下面这个样本数据集。</p>
+<pre><code class="language-python">import polars as pl
+
+df = pl.DataFrame({
+    &quot;foo&quot;: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;d&quot;],
+    &quot;bar&quot;: [1, 2, 3, 4, 5],
+})
+
+dfs = spark.createDataFrame(
+    [
+        (&quot;a&quot;, 1),
+        (&quot;b&quot;, 2),
+        (&quot;c&quot;, 3),
+        (&quot;d&quot;, 4),
+        (&quot;d&quot;, 5),
+    ],
+    schema=[&quot;foo&quot;, &quot;bar&quot;],
+)
+</code></pre>
+<h3 id="案例-1-合并-head-与-sum"><a class="header" href="#案例-1-合并-head-与-sum">案例 1: 合并 <code>head</code> 与 <code>sum</code></a></h3>
+<p>在 <code>Polars</code> 中你可以写出下面的语句：</p>
+<pre><code class="language-python">df.select([
+    pl.col(&quot;foo&quot;).sort().head(2),
+    pl.col(&quot;bar&quot;).filter(pl.col(&quot;foo&quot;) == &quot;d&quot;).sum()
+])
+</code></pre>
+<p>该代码段输出:</p>
+<pre><code>shape: (2, 2)
+┌─────┬─────┐
+│ foo ┆ bar │
+│ --- ┆ --- │
+│ str ┆ i64 │
+╞═════╪═════╡
+│ a   ┆ 9   │
+├╌╌╌╌╌┼╌╌╌╌╌┤
+│ b   ┆ 9   │
+└─────┴─────┘
+</code></pre>
+<p>列 <code>foo</code> 和 <code>bar</code> 上的表达式是完全独立的。由于 <code>bar</code> 上的表达式返回一个单一的值，这个值在 <code>foo</code> 表达式输出的每个值中都会重复，但是 <code>a</code> 和 <code>b</code> 与产生 <code>9</code> 没有关系。</p>
+<p>要在 <code>Spark</code> 中做类似的事情，你需要单独计算总和，并将其作为字面值返回：</p>
+<pre><code class="language-python">from pyspark.sql.functions import col, sum, lit
+
+bar_sum = (
+    dfs
+    .where(col(&quot;foo&quot;) == &quot;d&quot;)
+    .groupBy()
+    .agg(sum(col(&quot;bar&quot;)))
+    .take(1)[0][0]
+)
+
+(
+    dfs
+    .orderBy(&quot;foo&quot;)
+    .limit(2)
+    .withColumn(&quot;bar&quot;, lit(bar_sum))
+    .show()
+)
+</code></pre>
+<p>该代码段输出:</p>
+<pre><code>+---+---+
+|foo|bar|
++---+---+
+|  a|  9|
+|  b|  9|
++---+---+
+</code></pre>
+<h3 id="案例-2-合并两个-head"><a class="header" href="#案例-2-合并两个-head">案例 2: 合并两个 <code>head</code></a></h3>
+<p>在 <code>Polars</code> 中你可以在同一个 DataFrame 上结合两个不同的 <code>head</code> 表达式，只要它们返回相同数量的值。</p>
+<pre><code class="language-python">df.select([
+    pl.col(&quot;foo&quot;).sort().head(2),
+    pl.col(&quot;bar&quot;).sort(reverse=True).head(2),
+])
+</code></pre>
+<p>该代码段输出:</p>
+<pre><code>shape: (3, 2)
+┌─────┬─────┐
+│ foo ┆ bar │
+│ --- ┆ --- │
+│ str ┆ i64 │
+╞═════╪═════╡
+│ a   ┆ 5   │
+├╌╌╌╌╌┼╌╌╌╌╌┤
+│ b   ┆ 4   │
+└─────┴─────┘
+</code></pre>
+<p>同样，这里的两个 <code>head</code> 表达式是完全独立的，<code>a</code> 与 <code>5</code> 和 <code>b</code> 与 <code>4</code> 的配对纯粹是表达式输出的两列并列的结果。</p>
+<p>为了在 <code>Spark</code> 中完成类似的工作，你需要生成一个人工的 key 使你能够以相同的方式连接这些值。</p>
+<pre><code class="language-python">from pyspark.sql import Window
+from pyspark.sql.functions import row_number
+
+foo_dfs = (
+    dfs
+    .withColumn(
+        &quot;rownum&quot;,
+        row_number().over(Window.orderBy(&quot;foo&quot;))
+    )
+)
+
+bar_dfs = (
+    dfs
+    .withColumn(
+        &quot;rownum&quot;,
+        row_number().over(Window.orderBy(col(&quot;bar&quot;).desc()))
+    )
+)
+
+(
+    foo_dfs.alias(&quot;foo&quot;)
+    .join(bar_dfs.alias(&quot;bar&quot;), on=&quot;rownum&quot;)
+    .select(&quot;foo.foo&quot;, &quot;bar.bar&quot;)
+    .limit(2)
+    .show()
+)
+</code></pre>
+<p>该代码段输出:</p>
+<pre><code>+---+---+
+|foo|bar|
++---+---+
+|  a|  5|
+|  b|  4|
++---+---+
+</code></pre>
+<h1 id="时间序列"><a class="header" href="#时间序列">时间序列</a></h1>
+<p><code>Polars</code> 为时间序列重采样提供了强大的方法支持。许多人都知道 <code>Pandas</code> 中 <code>df.resample</code> 提供了重采样功能。</p>
+<p><code>Polars</code> 在以下两个方面与 <code>Pandas</code> 有所区别：</p>
+<ul>
+<li>上采样 (Up Sampling)</li>
+<li>下采样 (Down Sampling)</li>
+</ul>
+<h2 id="上采样-up-sampling"><a class="header" href="#上采样-up-sampling">上采样 (Up Sampling)</a></h2>
+<p>上采样实际上相当于将一个日期范围与你的数据集进行左关联 (left join) 操作，并填充缺失数据。<code>Polars</code> 为此操作
+提供了封装方法，你可以参考下面的一个示例。</p>
+<pre><code class="language-python">df = pl.DataFrame(
+    {
+        &quot;time&quot;: pl.date_range(start=datetime(2021, 12, 16), end=datetime(2021, 12, 16, 3), interval=&quot;30m&quot;, eager=True),
+        &quot;groups&quot;: [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;],
+        &quot;values&quot;: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0],
+    }
+)
+out1 = df.upsample(time_column=&quot;time&quot;, every=&quot;15m&quot;).fill_null(strategy=&quot;forward&quot;)
+
+out2 = df.upsample(time_column=&quot;time&quot;, every=&quot;15m&quot;).interpolate().fill_null(strategy=&quot;forward&quot;)
+</code></pre>
+<h2 id="下采样-down-sampling"><a class="header" href="#下采样-down-sampling">下采样 (Down Sampling)</a></h2>
+<p>下采样很有意思。你需要处理日期间隔、窗口持续时间、聚合等问题。</p>
+<p><code>Polars</code> 将下采样视为分组（groupby）操作的一个特例，因此表达式 API 为分组（groupby）上下文（contexts）提供了两个额外的入口。</p>
+<ul>
+<li><a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.groupby_dynamic.html">groupby_dynamic</a></li>
+<li><a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.groupby_rolling.html">groupby_rolling</a></li>
+</ul>
+<p>你可以通过调用二者其中任何一个函数来获取对表达式方法的完整访问，它有着强大的性能！</p>
+<p>让我们通过下面几个示例来理解这样做的意义。</p>
+<pre><code class="language-python">df = pl.DataFrame(
+    {
+        &quot;time&quot;: pl.date_range(
+            start=datetime(2021, 12, 16),
+            end=datetime(2021, 12, 16, 3),
+            interval=&quot;30m&quot;,
+            eager=True,
+        ),
+        &quot;groups&quot;: [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;],
+    }
+)
+</code></pre>
+<pre><code class="language-python">out = df.groupby_dynamic(
+    &quot;time&quot;,
+    every=&quot;1h&quot;,
+    closed=&quot;both&quot;,
+    by=&quot;groups&quot;,
+    include_boundaries=True,
+).agg([pl.count()])
+</code></pre>
+<h2 id="动态分组-groupby-dynamic"><a class="header" href="#动态分组-groupby-dynamic">动态分组 (Groupby Dynamic)</a></h2>
+<p>在下面的一段代码中，我们以 <strong>天</strong> (<code>&quot;1d&quot;</code>) 为单位，把关于 2021 年的 <code>日期范围 (date range)</code> 创建为一个 <code>DataFrame</code>。</p>
+<p>接下来，我们创建起始于每 <strong>月</strong> (<code>&quot;1mo&quot;</code>)，长度为 <code>1</code> 个月的动态窗口 (dynamic windows)。动态窗口的大小并不由 <code>DataFrame</code>
+中的行数决定，而是由一个时间单位 (temporal unit) 决定，比如一天 (<code>&quot;1d&quot;</code>)，三周 (<code>&quot;3w&quot;</code>)，亦或是五纳秒 (<code>&quot;5ns&quot;</code>) ...
+希望这个例子有助于让你理解动态窗口的含义。</p>
+<p>匹配某个动态窗口的值会被分配到该窗口所对应的组中，接下来你可以用强大的表达式方法进行聚合操作。</p>
+<p>下面的示例使用 <strong>groupby_dynamic</strong> 来计算：</p>
+<ul>
+<li>距离月底的天数</li>
+<li>一个月里的天数</li>
+</ul>
+<pre><code class="language-python"># 时间轴（从low到high，间隔为1天，轴名称为&quot;time&quot;）
+df = pl.date_range(start=datetime(2021, 1, 1), 
+                   end=datetime(2021, 12, 31), 
+                   interval=&quot;1d&quot;, 
+                   name=&quot;time&quot;, 
+                   eager=True).to_frame()
+
+out = (
+    df.groupby_dynamic(&quot;time&quot;, every=&quot;1mo&quot;, period=&quot;1mo&quot;, closed=&quot;left&quot;)
+    .agg(
+        [
+            pl.col(&quot;time&quot;).cumcount().reverse().head(3).alias(&quot;day/eom&quot;),
+            ((pl.col(&quot;time&quot;) - pl.col(&quot;time&quot;).first()).last().dt.days() + 1).alias(&quot;days_in_month&quot;),
+        ]
+    )
+    .explode(&quot;day/eom&quot;)
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (36, 3)
+┌─────────────────────┬─────────┬───────────────┐
+│ time                ┆ day/eom ┆ days_in_month │
+│ ---                 ┆ ---     ┆ ---           │
+│ datetime[μs]        ┆ u32     ┆ i64           │
+╞═════════════════════╪═════════╪═══════════════╡
+│ 2021-01-01 00:00:00 ┆ 30      ┆ 31            │
+│ 2021-01-01 00:00:00 ┆ 29      ┆ 31            │
+│ 2021-01-01 00:00:00 ┆ 28      ┆ 31            │
+│ 2021-02-01 00:00:00 ┆ 27      ┆ 28            │
+│ …                   ┆ …       ┆ …             │
+│ 2021-11-01 00:00:00 ┆ 27      ┆ 30            │
+│ 2021-12-01 00:00:00 ┆ 30      ┆ 31            │
+│ 2021-12-01 00:00:00 ┆ 29      ┆ 31            │
+│ 2021-12-01 00:00:00 ┆ 28      ┆ 31            │
+└─────────────────────┴─────────┴───────────────┘
+</code></pre>
+<p>要定义一个动态窗口，需要提供以下三个参数：</p>
+<ul>
+<li><strong>every</strong>：窗口的时间间隔</li>
+<li><strong>period</strong>：窗口的持续时间</li>
+<li><strong>offset</strong>：可以对窗口的开始进行偏移</li>
+</ul>
+<p>因为 <em><strong>every</strong></em> 并不总是需要等于 <em><strong>period</strong></em>，我们可以用一种非常灵活的方式来创建很多组别。它们可以互相重叠，也可以在组间留出边界。</p>
+<p>我们先从简单的例子开始 🥱 想想看下面几组参数会创建出怎么样的窗口。</p>
+<blockquote>
+</blockquote>
+<ul>
+<li>every: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+<li>period: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+</ul>
+<pre><code class="language-text">创建出的窗口相邻，且长度相等
+|--|
+   |--|
+      |--|
+</code></pre>
+<blockquote>
+</blockquote>
+<ul>
+<li>every: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+<li>period: 2 天 -&gt; <code>&quot;2d&quot;</code></li>
+</ul>
+<pre><code class="language-text">窗口之间有 1 天的重叠
+|----|
+   |----|
+      |----|
+</code></pre>
+<blockquote>
+</blockquote>
+<ul>
+<li>every: 2 天 -&gt; <code>&quot;2d&quot;</code></li>
+<li>period: 1 天 -&gt; <code>&quot;1d&quot;</code></li>
+</ul>
+<pre><code class="language-text">两个窗口之间留有间隔，在这段范围内的数据不属于任何一个组别
+|--|
+       |--|
+              |--|
+</code></pre>
+<h2 id="滚动分组-rolling-groupby"><a class="header" href="#滚动分组-rolling-groupby">滚动分组 (Rolling Groupby)</a></h2>
+<p>滚动分组是分组（groupby）上下文的另一个入口。但与 <code>groupby_dynamic</code> 不同的是，窗口的设置不接受参数 <code>every</code> 和 <code>period</code> —— 对于一个滚动分组，窗口不是固定的！它们由 <code>index_column</code> 中的值决定。</p>
+<p>想象一下，你有一个值为<code>{2021-01-01, 20210-01-05}</code> 的时间序列，使用参数 <code>period=&quot;5d&quot;</code> 将创建以下窗口：</p>
+<pre><code class="language-text">
+2021-01-01   2021-01-06
+    |----------|
+
+       2021-01-05   2021-01-10
+             |----------|
+</code></pre>
+<p>由于滚动分组的窗口总是由 <code>DataFrame</code> 列中的值决定，组别的数目总是与原 <code>DataFrame</code> 相等。</p>
+<h2 id="将动态分组与滚动分组结合起来"><a class="header" href="#将动态分组与滚动分组结合起来">将动态分组与滚动分组结合起来</a></h2>
+<p>用正常的 groupby 操作，我们可以将这两种分组方式结合起来。</p>
+<p>下面是一个使用动态分组的例子：</p>
+<pre><code class="language-python">from datetime import datetime
+
+import polars as pl
+
+df = pl.DataFrame(
+    {
+        &quot;time&quot;: pl.date_range(
+            start=datetime(2021, 12, 16),
+            end=datetime(2021, 12, 16, 3),
+            interval=&quot;30m&quot;,
+            eager=True,
+        ),
+        &quot;groups&quot;: [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;],
+    }
+)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (7, 2)
+┌─────────────────────┬────────┐
+│ time                ┆ groups │
+│ ---                 ┆ ---    │
+│ datetime[μs]        ┆ str    │
+╞═════════════════════╪════════╡
+│ 2021-12-16 00:00:00 ┆ a      │
+│ 2021-12-16 00:30:00 ┆ a      │
+│ 2021-12-16 01:00:00 ┆ a      │
+│ 2021-12-16 01:30:00 ┆ b      │
+│ 2021-12-16 02:00:00 ┆ b      │
+│ 2021-12-16 02:30:00 ┆ a      │
+│ 2021-12-16 03:00:00 ┆ a      │
+└─────────────────────┴────────┘
+</code></pre>
+<pre><code class="language-python"># 动态分组
+out = df.groupby_dynamic(
+    &quot;time&quot;,
+    every=&quot;1h&quot;,
+    closed=&quot;both&quot;,
+    by=&quot;groups&quot;,
+    include_boundaries=True,
+).agg([pl.count()])
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (7, 5)
+┌────────┬─────────────────────┬─────────────────────┬─────────────────────┬───────┐
+│ groups ┆ _lower_boundary     ┆ _upper_boundary     ┆ time                ┆ count │
+│ ---    ┆ ---                 ┆ ---                 ┆ ---                 ┆ ---   │
+│ str    ┆ datetime[μs]        ┆ datetime[μs]        ┆ datetime[μs]        ┆ u32   │
+╞════════╪═════════════════════╪═════════════════════╪═════════════════════╪═══════╡
+│ a      ┆ 2021-12-15 23:00:00 ┆ 2021-12-16 00:00:00 ┆ 2021-12-15 23:00:00 ┆ 1     │
+│ a      ┆ 2021-12-16 00:00:00 ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 00:00:00 ┆ 3     │
+│ a      ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 01:00:00 ┆ 1     │
+│ a      ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 02:00:00 ┆ 2     │
+│ a      ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 04:00:00 ┆ 2021-12-16 03:00:00 ┆ 1     │
+│ b      ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 01:00:00 ┆ 2     │
+│ b      ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 02:00:00 ┆ 1     │
+└────────┴─────────────────────┴─────────────────────┴─────────────────────┴───────┘
+</code></pre>
+<h1 id="时间序列-1"><a class="header" href="#时间序列-1">时间序列</a></h1>
+<pre><code class="language-python">import polars as pl
+from datetime import datetime
+# 创建一个数据帧实例
+df = pl.DataFrame(
+    {
+        &quot;time&quot;: pl.date_range(
+            low=datetime(2021, 12, 16),
+            high=datetime(2021, 12, 16, 3),
+            interval=&quot;30m&quot;,
+        ),
+        &quot;n&quot;: range(7),
+    }
+)
+df
+</code></pre>
+<pre><code>shape: (7, 2)
+┌─────────────────────┬─────┐
+│ time                ┆ n   │
+│ ---                 ┆ --- │
+│ datetime            ┆ i64 │
+╞═════════════════════╪═════╡
+│ 2021-12-16 00:00:00 ┆ 0   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2021-12-16 00:30:00 ┆ 1   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2021-12-16 01:00:00 ┆ 2   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2021-12-16 01:30:00 ┆ 3   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2021-12-16 02:00:00 ┆ 4   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2021-12-16 02:30:00 ┆ 5   │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌┤
+│ 2021-12-16 03:00:00 ┆ 6   │
+└─────────────────────┴─────┘
+</code></pre>
+<p>从2021-12-16 00:00:00开始，按1小时的窗口分组。</p>
+<pre><code class="language-python">(
+    df.groupby_dynamic(&quot;time&quot;, every=&quot;1h&quot;).agg(
+        [pl.col(&quot;time&quot;).min(), pl.col(&quot;time&quot;).max()]
+    )
+)
+</code></pre>
+<pre><code>shape: (3, 3)
+┌─────────────────────┬─────────────────────┬─────────────────────┐
+│ time                ┆ time_min            ┆ time_max            │
+│ ---                 ┆ ---                 ┆ ---                 │
+│ datetime            ┆ datetime            ┆ datetime            │
+╞═════════════════════╪═════════════════════╪═════════════════════╡
+│ 2021-12-16 00:00:00 ┆ 2021-12-16 00:30:00 ┆ 2021-12-16 01:00:00 │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:00:00 ┆ 2021-12-16 01:30:00 ┆ 2021-12-16 02:00:00 │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:00:00 ┆ 2021-12-16 02:30:00 ┆ 2021-12-16 03:00:00 │
+└─────────────────────┴─────────────────────┴─────────────────────┘
+</code></pre>
+<p>窗口边界也可以添加到聚合结果中</p>
+<pre><code class="language-python">(
+    df.groupby_dynamic(&quot;time&quot;, every=&quot;1h&quot;, include_boundaries=True).agg(
+        [pl.col(&quot;time&quot;).count()]
+    )
+)
+</code></pre>
+<pre><code>shape: (3, 4)
+┌─────────────────────┬─────────────────────┬─────────────────────┬────────────┐
+│ _lower_boundary     ┆ _upper_boundary     ┆ time                ┆ time_count │
+│ ---                 ┆ ---                 ┆ ---                 ┆ ---        │
+│ datetime            ┆ datetime            ┆ datetime            ┆ u32        │
+╞═════════════════════╪═════════════════════╪═════════════════════╪════════════╡
+│ 2021-12-16 00:00:00 ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 00:00:00 ┆ 2          │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:00:00 ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 01:00:00 ┆ 2          │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:00:00 ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 02:00:00 ┆ 2          │
+└─────────────────────┴─────────────────────┴─────────────────────┴────────────┘
+</code></pre>
+<p>当closed=“left”，不应包括区间[下限、上限]的右端</p>
+<pre><code class="language-python">(
+    df.groupby_dynamic(&quot;time&quot;, every=&quot;1h&quot;, closed=&quot;left&quot;).agg(
+        [pl.col(&quot;time&quot;).count(), pl.col(&quot;time&quot;).list()]
+    )
+)
+</code></pre>
+<pre><code>shape: (3, 3)
+┌─────────────────────┬────────────┬─────────────────────────────────────┐
+│ time                ┆ time_count ┆ time_agg_list                       │
+│ ---                 ┆ ---        ┆ ---                                 │
+│ datetime            ┆ u32        ┆ list [datetime]                     │
+╞═════════════════════╪════════════╪═════════════════════════════════════╡
+│ 2021-12-16 00:00:00 ┆ 2          ┆ [2021-12-16 00:00:00, 2021-12-16... │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:00:00 ┆ 2          ┆ [2021-12-16 01:00:00, 2021-12-16... │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:00:00 ┆ 2          ┆ [2021-12-16 02:00:00, 2021-12-16... │
+└─────────────────────┴────────────┴─────────────────────────────────────┘
+</code></pre>
+<p>当closed=&quot;both&quot;，窗口边界处的时间值分为两组。</p>
+<pre><code class="language-python">(
+    df.groupby_dynamic(&quot;time&quot;, every=&quot;1h&quot;, closed=&quot;both&quot;).agg(
+        [pl.col(&quot;time&quot;).count()]
+    )
+)
+</code></pre>
+<pre><code>shape: (3, 2)
+┌─────────────────────┬────────────┐
+│ time                ┆ time_count │
+│ ---                 ┆ ---        │
+│ datetime            ┆ u32        │
+╞═════════════════════╪════════════╡
+│ 2021-12-16 00:00:00 ┆ 3          │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:00:00 ┆ 3          │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:00:00 ┆ 3          │
+└─────────────────────┴────────────┘
+</code></pre>
+<p>动态groupbys还可以与普通键上的分组相结合</p>
+<pre><code class="language-python">pl.DataFrame(
+    {
+        &quot;time&quot;: pl.date_range(
+            low=datetime(2021, 12, 16),
+            high=datetime(2021, 12, 16, 3),
+            interval=&quot;30m&quot;,
+        ),
+        &quot;groups&quot;: [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;],
+    }
+)
+</code></pre>
+<pre><code>shape: (7, 2)
+┌─────────────────────┬────────┐
+│ time                ┆ groups │
+│ ---                 ┆ ---    │
+│ datetime            ┆ str    │
+╞═════════════════════╪════════╡
+│ 2021-12-16 00:00:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 00:30:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:00:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 01:30:00 ┆ b      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:00:00 ┆ b      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 02:30:00 ┆ a      │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌┤
+│ 2021-12-16 03:00:00 ┆ a      │
+└─────────────────────┴────────┘
+</code></pre>
+<pre><code class="language-python">(
+    df.groupby_dynamic(
+        &quot;time&quot;,
+        every=&quot;1h&quot;,
+        closed=&quot;both&quot;,
+        by=&quot;groups&quot;,
+        include_boundaries=True,
+    ).agg([pl.col(&quot;time&quot;).count()])
+)
+</code></pre>
+<pre><code>shape: (4, 5)
+┌────────┬─────────────────────┬─────────────────────┬─────────────────────┬────────────┐
+│ groups ┆ _lower_boundary     ┆ _upper_boundary     ┆ time                ┆ time_count │
+│ ---    ┆ ---                 ┆ ---                 ┆ ---                 ┆ ---        │
+│ str    ┆ datetime            ┆ datetime            ┆ datetime            ┆ u32        │
+╞════════╪═════════════════════╪═════════════════════╪═════════════════════╪════════════╡
+│ a      ┆ 2021-12-16 00:00:00 ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 00:00:00 ┆ 3          │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ a      ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 01:00:00 ┆ 1          │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ a      ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 03:00:00 ┆ 2021-12-16 02:00:00 ┆ 2          │
+├╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌┤
+│ b      ┆ 2021-12-16 01:00:00 ┆ 2021-12-16 02:00:00 ┆ 2021-12-16 01:00:00 ┆ 2          │
+└────────┴─────────────────────┴─────────────────────┴─────────────────────┴────────────┘
+</code></pre>
+<h1 id="使用范围"><a class="header" href="#使用范围">使用范围</a></h1>
+<p>本章包含一些片段，可以帮助您了解用<code>Polars</code>完成事情的惯用方法的最新信息。</p>
+<h1 id="io"><a class="header" href="#io">IO</a></h1>
+<p><code>Polars</code>支持不同的文件类型，其各自的解析器都是最快的。</p>
+<p>例如，在将CSV文件交给<code>Pandas</code>之前，通过<code>Polars</code>加载CSV文件比使用<code>Pandas</code>加载要快。只需运行 <code>pl.read_csv（&quot;&lt;FILE&gt;&quot;，rechunk=False）.to_pandas()</code>。</p>
+<h1 id="csv-文件"><a class="header" href="#csv-文件">CSV 文件</a></h1>
+<h2 id="读与写"><a class="header" href="#读与写">读与写</a></h2>
+<p>读取CSV文件应该看起来很熟悉:</p>
+<pre><code class="language-python">df = pl.read_csv(&quot;path.csv&quot;)
+</code></pre>
+<p>CSV文件会有非常多的样式，所以一定要去看一下
+<a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.read_csv.html"><code>read_csv()</code></a> API。</p>
+<p>写入CSV文件可以用
+<a href="https://pola-rs.github.io/polars/py-polars/html/reference/api/polars.DataFrame.write_csv.html"><code>write_csv()</code></a>方法。</p>
+<pre><code class="language-python">df = pl.DataFrame({&quot;foo&quot;: [1, 2, 3], &quot;bar&quot;: [None, &quot;bak&quot;, &quot;baz&quot;]})
+df.write_csv(&quot;path.csv&quot;)
+</code></pre>
+<h2 id="扫描"><a class="header" href="#扫描">扫描</a></h2>
+<p><code>Polars</code>允许你<em>扫描</em>CSV文件。扫描操作延迟了对文件的实际解析，
+并返回一个延迟计算的容器<code>LazyFrame</code>。</p>
+<pre><code class="language-python">df = pl.scan_csv(&quot;path.csv&quot;)
+</code></pre>
+<p>如果你想了解更多这样设计的精妙之处，请移步<code>Polars</code><a href="howcani/io/../../optimizations/intro.html">Optimizations</a>这一章。</p>
+<h1 id="parquet-文件"><a class="header" href="#parquet-文件">Parquet 文件</a></h1>
+<p>加载或写入 <a href="https://parquet.apache.org/"><code>Parquet</code>文件</a>快如闪电。</p>
+<p><code>Pandas</code> 使用 <a href="https://arrow.apache.org/docs/python/"><code>PyArrow</code></a>（用于Apache <code>Arrow</code>的<code>Python</code>库）将<code>Parquet</code>数据加载到内存，但不得不将数据复制到了<code>Pandas</code>的内存空间中。</p>
+<p><code>Polars</code>就没有这部分额外的内存开销，因为读取<code>Parquet</code>时，<code>Polars</code>会直接复制进<code>Arrow</code>的内存空间，且<em>始终使用这块内存</em>。</p>
+<h2 id="读写"><a class="header" href="#读写">读&amp;写</a></h2>
+<pre><code class="language-python">df = pl.read_parquet(&quot;path.parquet&quot;)
+</code></pre>
+<pre><code class="language-python">df = pl.DataFrame({&quot;foo&quot;: [1, 2, 3], &quot;bar&quot;: [None, &quot;bak&quot;, &quot;baz&quot;]})
+df.write_parquet(&quot;path.parquet&quot;)
+</code></pre>
+<h2 id="扫描-1"><a class="header" href="#扫描-1">扫描</a></h2>
+<p>Polars允许你扫描<code>Parquet</code>输入。扫描操作延迟了对文件的实际解析，并返回一个延迟计算的容器<code>LazyFrame</code>。</p>
+<pre><code class="language-python">df = pl.scan_parquet(&quot;path.parquet&quot;)
+</code></pre>
+<p>如果你想了解更多这样设计的精妙之处，请移步<code>Polars</code><a href="howcani/io/../../optimizations/intro.html">Optimizations</a>这一章。</p>
+<h2 id="处理多个文件"><a class="header" href="#处理多个文件">处理多个文件</a></h2>
+<p><code>Polars</code>可以根据您的需要和内存紧张程度，以不同的方式处理多个文件。</p>
+<p>让我们创建一些文件来使用一些上下文（context）：</p>
+<pre><code class="language-python">import polars as pl
+
+df = pl.DataFrame({&quot;foo&quot;: [1, 2, 3], &quot;bar&quot;: [None, &quot;ham&quot;, &quot;spam&quot;]})
+
+for i in range(5):
+    df.write_csv(f&quot;my_many_files_{i}.csv&quot;)
+</code></pre>
+<h2 id="读入单个dataframe"><a class="header" href="#读入单个dataframe">读入单个<code>DataFrame</code></a></h2>
+<p>要将多个文件读入一个<code>DataFrame</code>，我们可以使用全局模式：</p>
+<pre><code class="language-python">df = pl.read_csv(&quot;my_many_files_*.csv&quot;)
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (15, 2)
+┌─────┬──────┐
+│ foo ┆ bar  │
+│ --- ┆ ---  │
+│ i64 ┆ str  │
+╞═════╪══════╡
+│ 1   ┆ null │
+│ 2   ┆ ham  │
+│ 3   ┆ spam │
+│ 1   ┆ null │
+│ …   ┆ …    │
+│ 3   ┆ spam │
+│ 1   ┆ null │
+│ 2   ┆ ham  │
+│ 3   ┆ spam │
+└─────┴──────┘
+</code></pre>
+<p>要了解这是如何工作的，我们可以看看查询计划。下面我们可以看到，所有文件都是单独读取并连接成一个<code>DataFrame</code> 。<code>Polars</code>将尝试将读取并行化。</p>
+<pre><code class="language-python">pl.scan_csv(&quot;my_many_files_*.csv&quot;).show_graph()
+</code></pre>
+<p><img src="multiple_files/../outputs/multiple_files/single_df_graph.png" alt="single_df_graph" /></p>
+<h2 id="并行读取和处理"><a class="header" href="#并行读取和处理">并行读取和处理</a></h2>
+<p>如果您的文件不必位于单个表中，您还可以为每个文件构建一个查询计划，并在<code>Polars</code>线程池中并行执行它们。所有查询计划的执行都是极好的并行执行，不需要任何通信。</p>
+<pre><code class="language-python">import polars as pl
+import glob
+
+queries = []
+for file in glob.glob(&quot;my_many_files_*.csv&quot;):
+    q = pl.scan_csv(file).groupby(&quot;bar&quot;).agg([pl.count(), pl.sum(&quot;foo&quot;)])
+    queries.append(q)
+
+dataframes = pl.collect_all(queries)
+print(dataframes)
+</code></pre>
+<pre><code class="language-text">[shape: (3, 3)
+┌──────┬───────┬─────┐
+│ bar  ┆ count ┆ foo │
+│ ---  ┆ ---   ┆ --- │
+│ str  ┆ u32   ┆ i64 │
+╞══════╪═══════╪═════╡
+│ spam ┆ 1     ┆ 3   │
+│ null ┆ 1     ┆ 1   │
+│ ham  ┆ 1     ┆ 2   │
+└──────┴───────┴─────┘, shape: (3, 3)
+┌──────┬───────┬─────┐
+│ bar  ┆ count ┆ foo │
+│ ---  ┆ ---   ┆ --- │
+│ str  ┆ u32   ┆ i64 │
+╞══════╪═══════╪═════╡
+│ null ┆ 1     ┆ 1   │
+│ ham  ┆ 1     ┆ 2   │
+│ spam ┆ 1     ┆ 3   │
+└──────┴───────┴─────┘, shape: (3, 3)
+┌──────┬───────┬─────┐
+│ bar  ┆ count ┆ foo │
+│ ---  ┆ ---   ┆ --- │
+│ str  ┆ u32   ┆ i64 │
+╞══════╪═══════╪═════╡
+│ ham  ┆ 1     ┆ 2   │
+│ spam ┆ 1     ┆ 3   │
+│ null ┆ 1     ┆ 1   │
+└──────┴───────┴─────┘, shape: (3, 3)
+┌──────┬───────┬─────┐
+│ bar  ┆ count ┆ foo │
+│ ---  ┆ ---   ┆ --- │
+│ str  ┆ u32   ┆ i64 │
+╞══════╪═══════╪═════╡
+│ ham  ┆ 1     ┆ 2   │
+│ spam ┆ 1     ┆ 3   │
+│ null ┆ 1     ┆ 1   │
+└──────┴───────┴─────┘, shape: (3, 3)
+┌──────┬───────┬─────┐
+│ bar  ┆ count ┆ foo │
+│ ---  ┆ ---   ┆ --- │
+│ str  ┆ u32   ┆ i64 │
+╞══════╪═══════╪═════╡
+│ ham  ┆ 1     ┆ 2   │
+│ null ┆ 1     ┆ 1   │
+│ spam ┆ 1     ┆ 3   │
+└──────┴───────┴─────┘]
+</code></pre>
+<h1 id="读取mysqlpostgressqliteredshiftclickhouse"><a class="header" href="#读取mysqlpostgressqliteredshiftclickhouse">读取MySQL、Postgres、Sqlite、Redshift、Clickhouse</a></h1>
+<p>从以上数据库中读取数据，请先安装<code>connector-x</code>。</p>
+<pre><code class="language-shell">$  pip install connectorx&gt;=0.2.0a3
+</code></pre>
+<pre><code class="language-python">import polars as pl
+
+conn = &quot;postgres://username:password@server:port/database&quot;
+query = &quot;SELECT * FROM foo&quot;
+
+pl.read_sql(query, conn)
+</code></pre>
+<h1 id="与-aws-交互"><a class="header" href="#与-aws-交互">与 AWS 交互</a></h1>
+<p>要读取或写入AWS存储桶，需要额外的依赖项：</p>
+<pre><code class="language-shell">$ pip install s3fs
+</code></pre>
+<p>在接下来的几个片段中，我们将演示如何与<code>Parquet</code>文件交互位于AWS桶上。</p>
+<h2 id="读入"><a class="header" href="#读入">读入</a></h2>
+<p>使用如下加载一个<code>.parquet</code>：</p>
+<pre><code class="language-python">import polars as pl
+import pyarrow.parquet as pq
+import s3fs
+
+fs = s3fs.S3FileSystem()
+bucket = &quot;&lt;YOUR_BUCKET&gt;&quot;
+path = &quot;&lt;YOUR_PATH&gt;&quot;
+
+dataset = pq.ParquetDataset(f&quot;s3://{bucket}/{path}&quot;, filesystem=fs)
+df = pl.from_arrow(dataset.read())
+</code></pre>
+<h1 id="与-google-bigquery-交互"><a class="header" href="#与-google-bigquery-交互">与 Google BigQuery 交互</a></h1>
+<p>读写BigQuery数据库，需要额外依赖项：</p>
+<pre><code class="language-shell">$ pip install google-cloud-bigquery
+</code></pre>
+<h2 id="读取"><a class="header" href="#读取">读取</a></h2>
+<p>从BigQuery查询并得到<code>DataFrame</code>，可以像这样：</p>
+<pre><code class="language-python">import polars as pl
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+# 执行查询
+QUERY = (
+    'SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` '
+    'WHERE state = &quot;TX&quot; '
+    'LIMIT 100')
+query_job = client.query(QUERY)  # API 请求
+rows = query_job.result()  # 等待查询完成
+
+df = pl.from_arrow(rows.to_arrow())
+</code></pre>
+<h2 id="写入"><a class="header" href="#写入">写入</a></h2>
+<pre><code class="language-python">from google.cloud import bigquery
+
+client = bigquery.Client()
+
+with io.BytesIO() as stream:
+    df.write_parquet(stream)
+    stream.seek(0)
+    job = client.load_table_from_file(
+        stream,
+        destination='tablename',
+        project='projectname',
+        job_config=bigquery.LoadJobConfig(
+            source_format=bigquery.SourceFormat.PARQUET,
+        ),
+    )
+job.result() 
+</code></pre>
+<h1 id="与-postgres-交互"><a class="header" href="#与-postgres-交互">与 Postgres 交互</a></h1>
+<h2 id="读取-1"><a class="header" href="#读取-1">读取</a></h2>
+<p>从postgres数据库中读取数据，需要额外依赖项:</p>
+<pre><code class="language-shell">$  pip install connectorx&gt;=0.2.0a3
+</code></pre>
+<pre><code class="language-python">import polars as pl
+
+conn = &quot;postgresql://username:password@server:port/database&quot;
+query = &quot;SELECT * FROM foo&quot;
+
+pl.read_sql(query, conn)
+</code></pre>
+<h2 id="写入-1"><a class="header" href="#写入-1">写入</a></h2>
+<p>写入postgres数据库，需要额外依赖项:</p>
+<pre><code class="language-shell">$ pip install psycopg2-binary
+</code></pre>
+<p>用<code>psycopg2</code>写入postgres数据库，我们会用<code>批处理</code>的方法，限制与服务器的往返行程以提高写入性能。</p>
+<p>我们首先要保证所有的数据类型可以被<code>psycopg2</code>所识别，再使用<code>DataFrame.rows</code>轻松将每列数据转置成数据库驱动程序可以处理的行。</p>
+<pre><code class="language-python">from psycopg2 import sql
+import psycopg2.extras
+import polars as pl
+
+# 不仿假设有一个DataFrame，其列分别为：浮点，整数，字符串，日期（date64）类型的数据
+df = pl.read_parquet(&quot;somefile.parquet&quot;)
+
+# 首先将 polars 的 date64 数据类型转换成 python 的 datetime 对象
+for col in df:
+    # 只转换date64类型数据
+    if col.dtype == pl.Date64:
+        df = df.with_column(col.dt.to_python_datetime())
+
+# 为字段名创建 sql 标识符
+# 这一步是为了在sql语句中安全插入数据
+columns = sql.SQL(&quot;,&quot;).join(sql.Identifier(name) for name in df.columns)
+
+# 为值创建占位符，之后再被值填充
+values = sql.SQL(&quot;,&quot;).join([sql.Placeholder() for _ in df.columns])
+
+table_id = &quot;mytable&quot;
+
+# 准备insert语句
+insert_stmt = sql.SQL(&quot;INSERT INTO ({}) VALUES({});&quot;).format(
+    sql.Identifier(table_id), columns, values
+)
+
+# 创建与数据库的连接
+conn = psycopg2.connect()
+cur = conn.cursort()
+
+# 执行insert语句
+psycopg2.extras.execute_batch(cur, insert_stmt, df.rows())
+conn.commit()
+</code></pre>
+<h1 id="互通性"><a class="header" href="#互通性">互通性</a></h1>
+<h1 id="arrow"><a class="header" href="#arrow">Arrow</a></h1>
+<p><code>Arrow</code> 正在迅速地成为列式数据 <em>事实上</em> 的标准。这意味着对 <code>Arrow</code> 的支持（包括语言与工具）也在迅速增加。
+由于开发者在这种格式的背后投入了大量的努力与支持，使用 <code>Arrow</code> 可能是完成下面任务最快的方式：</p>
+<ul>
+<li>读写 <code>Parquet</code> 格式的文件</li>
+<li>从 CSV 读取列式数据</li>
+<li>交换列式数据</li>
+</ul>
+<p><code>Polars</code> 使用 <code>Arrow</code> 内存缓冲作为 <code>Polars</code> <code>Series</code> 最基本的构建模块。
+这意味着当我们要在 <code>Polars</code> 和 <code>Arrow</code> 之间交换数据时，无需对数据进行<strong>拷贝</strong>操作。
+这也意味着 <code>Polars</code> 获得了 <code>Arrow</code> 带来的一切性能提升。</p>
+<p>要将 <code>Polars</code> 的 <code>DataFrame</code> 或者 <code>Series</code> 转换为 <code>Arrow</code>，只需使用 <code>.to_arrow()</code> 函数。
+类似的，要从 <code>Arrow</code> 格式导入数据，可以调用 <code>.from_arrow()</code> 函数。</p>
+<h1 id="numpy"><a class="header" href="#numpy">Numpy</a></h1>
+<p><code>Polars</code> 的 <code>Series</code> 支持 <code>NumPy</code> 的
+<a href="https://numpy.org/doc/stable/reference/ufuncs.html">通用函数 (ufuncs)</a>。
+调用元素层面的 (element-wise) 函数，比如 <code>np.exp()</code>、<code>np.cos()</code> 或 <code>np.div()</code>，基本上没有额外开销。</p>
+<p>需要注意的是，<code>Polars</code> 中的缺失值是一个独立的比特掩码 —— 其在 <code>NumPy</code> 中是不可见的。
+这可能导致窗口函数或 <code>np.convolve()</code> 输出有缺陷或不完整的结果。</p>
+<p>要将一个 <code>Polars</code> <code>Series</code> 转换为 <code>NumPy</code> 数组，可以调用 <code>.to_numpy()</code> 函数。
+转换时，此函数将会把缺失值替换为 <code>np.nan</code>。如果 <code>Series</code> 中没有缺失值，或转换后不再需要这些值，
+可以使用 <code>.view()</code> 函数作为代替，这将为数据生成一个零拷贝的 <code>NumPy</code> 数组。</p>
+<h1 id="数据"><a class="header" href="#数据">数据</a></h1>
+<h1 id="字符串"><a class="header" href="#字符串">字符串</a></h1>
+<p>由于 <code>Arrow</code> 后端, <code>Polars</code>字符串操作比使用<code>NumPy</code>或<code>Pandas</code>执行的相同操作快得多。在后者中，字符串存储为<code>Python</code>对象。 在遍历<code>np.array</code> or the <code>pd.Series</code>时，CPU需要跟踪所有字符串指针，并跳转到许多随机内存位置——这是非常低效的缓存。在<code>Polars</code>（通过<code>Arrow</code>数据结构）中，字符串在内存中是连续的。因此，对于CPU来说，遍历缓存是最优的，也是可预测的。</p>
+<p><code>Polars</code>中可用的字符串处理函数可以在 <a href="https://pola-rs.github.io/polars/py-polars/html/reference/series.html#strings">``str` namespace</a> 中找到。</p>
+<p>下面是几个例子。要计算字符串长度，请执行以下操作：</p>
+<pre><code class="language-python">import polars as pl
+
+df = pl.DataFrame({&quot;shakespeare&quot;: &quot;All that glitters is not gold&quot;.split(&quot; &quot;)})
+
+df = df.with_columns(pl.col(&quot;shakespeare&quot;).str.lengths().alias(&quot;letter_count&quot;))
+</code></pre>
+<p>返回：</p>
+<pre><code class="language-text">shape: (6, 2)
+┌─────────────┬──────────────┐
+│ shakespeare ┆ letter_count │
+│ ---         ┆ ---          │
+│ str         ┆ u32          │
+╞═════════════╪══════════════╡
+│ All         ┆ 3            │
+│ that        ┆ 4            │
+│ glitters    ┆ 8            │
+│ is          ┆ 2            │
+│ not         ┆ 3            │
+│ gold        ┆ 4            │
+└─────────────┴──────────────┘
+</code></pre>
+<p>下面是从句子中过滤出冠词（<code>the</code>、<code>a</code>、<code>and</code>、<em>etc.</em>）的正则表达式模式：</p>
+<pre><code class="language-python">import polars as pl
+
+df = pl.DataFrame({&quot;a&quot;: &quot;The man that ate a whole cake&quot;.split(&quot; &quot;)})
+
+df = df.filter(pl.col(&quot;a&quot;).str.contains(r&quot;(?i)^the$|^a$&quot;).is_not())
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-text">shape: (5, 1)
+┌───────┐
+│ a     │
+│ ---   │
+│ str   │
+╞═══════╡
+│ man   │
+│ that  │
+│ ate   │
+│ whole │
+│ cake  │
+└───────┘
+</code></pre>
+<h1 id="时间戳"><a class="header" href="#时间戳">时间戳</a></h1>
+<p><code>Polars</code> 提供了<code>4</code>时间数据类型：</p>
+<ul>
+<li><code>pl.Date</code>, 用于<strong>日期</strong>对象：自UNIX纪元以来的天数，为32位有符号整数。</li>
+<li><code>pl.Datetime</code>, 用于<strong>datetime</strong>项目：自UNIX纪元以来的纳秒数，为64位有符号整数。</li>
+<li><code>pl.Time</code>, 编码为午夜后的纳秒数。</li>
+</ul>
+<p><code>Polars</code> 字符串(<code>pl.Utf8</code>) 数据类型可以解析为它们中的任何一个。您可以让<code>Polars</code>尝试猜测日期[time]的格式，或者显式提供<code>fmt</code>规则。</p>
+<p>举例来说（查看此<a href="https://strftime.org/">此链接</a>以获取全面列表）：</p>
+<ul>
+<li><code>&quot;%Y-%m-%d&quot;</code> 对于 <code>&quot;2020-12-31&quot;</code></li>
+<li><code>&quot;%Y/%B/%d&quot;</code> 对于 <code>&quot;2020/December/31&quot;</code></li>
+<li><code>&quot;%B %y&quot;</code> 对于 <code>&quot;December 20&quot;</code></li>
+</ul>
+<p>下面是一个简单的例子：</p>
+<pre><code class="language-python">import polars as pl
+
+dataset = pl.DataFrame({&quot;date&quot;: [&quot;2020-01-02&quot;, &quot;2020-01-03&quot;, &quot;2020-01-04&quot;], &quot;index&quot;: [1, 2, 3]})
+
+q = dataset.lazy().with_columns(pl.col(&quot;date&quot;).str.strptime(pl.Date, &quot;%Y-%m-%d&quot;))
+
+df = q.collect()
+</code></pre>
+<p>返回：</p>
+<pre><code class="language-text">shape: (3, 2)
+┌────────────┬───────┐
+│ date       ┆ index │
+│ ---        ┆ ---   │
+│ date       ┆ i64   │
+╞════════════╪═══════╡
+│ 2020-01-02 ┆ 1     │
+│ 2020-01-03 ┆ 2     │
+│ 2020-01-04 ┆ 3     │
+└────────────┴───────┘
+</code></pre>
+<p>所有datetime功能都显示在 <a href="https://pola-rs.github.io/polars/py-polars/html/reference/series.html#timeseries"><code>dt</code> 命名空间</a>中。</p>
+<h1 id="数据帧"><a class="header" href="#数据帧">数据帧</a></h1>
+<h1 id="选中行或列"><a class="header" href="#选中行或列">选中行或列</a></h1>
+<p>对行或列进行选择的操作与其他数据框架库类似。</p>
+<h2 id="选中列"><a class="header" href="#选中列">选中列</a></h2>
+<pre><code class="language-python"># 推荐写法
+df.select([&quot;a&quot;, &quot;b&quot;])
+# 也可以写成这样
+df([&quot;a&quot;, &quot;b&quot;])
+</code></pre>
+<pre><code class="language-text">shape: (5, 2)
+┌──────┬──────┐
+│ a    ┆ b    │
+│ ---  ┆ ---  │
+│ i64  ┆ str  │
+╞══════╪══════╡
+│ 1    ┆ foo  │
+│ 2    ┆ ham  │
+│ 3    ┆ spam │
+│ null ┆ egg  │
+│ 5    ┆ null │
+└──────┴──────┘
+</code></pre>
+<h2 id="选中行"><a class="header" href="#选中行">选中行</a></h2>
+<pre><code class="language-python">df[0:2]
+</code></pre>
+<pre><code class="language-text">shape: (2, 4)
+┌─────┬─────┬──────────┬─────┐
+│ a   ┆ b   ┆ c        ┆ d   │
+│ --- ┆ --- ┆ ---      ┆ --- │
+│ i64 ┆ str ┆ f64      ┆ str │
+╞═════╪═════╪══════════╪═════╡
+│ 1   ┆ foo ┆ 0.37454  ┆ a   │
+│ 2   ┆ ham ┆ 0.950714 ┆ b   │
+└─────┴─────┴──────────┴─────┘
+</code></pre>
+<h1 id="常用操作"><a class="header" href="#常用操作">常用操作</a></h1>
+<p>与许多其他数据框架库一样，Polars 提供了大量的常用函数来对 Dataframe 进行操作。
+熟悉 Dataframes 的用户会发现 Polars 与 <code>Pandas</code> 或 <code>R</code> 的实现有许多相似之处。</p>
+<h2 id="添加列"><a class="header" href="#添加列">添加列</a></h2>
+<pre><code class="language-python">out = df.with_columns(pl.Series([&quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;s&quot;, &quot;t&quot;]).alias(&quot;e&quot;))  # .alias方法增加一列
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (5, 5)
+┌──────┬──────┬──────────┬─────┬─────┐
+│ a    ┆ b    ┆ c        ┆ d   ┆ e   │
+│ ---  ┆ ---  ┆ ---      ┆ --- ┆ --- │
+│ i64  ┆ str  ┆ f64      ┆ str ┆ str │
+╞══════╪══════╪══════════╪═════╪═════╡
+│ 1    ┆ foo  ┆ 0.37454  ┆ a   ┆ p   │
+│ 2    ┆ ham  ┆ 0.950714 ┆ b   ┆ q   │
+│ 3    ┆ spam ┆ 0.731994 ┆ c   ┆ r   │
+│ null ┆ egg  ┆ 0.598658 ┆ d   ┆ s   │
+│ 5    ┆ null ┆ 0.156019 ┆ e   ┆ t   │
+└──────┴──────┴──────────┴─────┴─────┘
+</code></pre>
+<h2 id="类型转换"><a class="header" href="#类型转换">类型转换</a></h2>
+<p>这个例子使用的是 Python 数据类型，但我们也可以在 Polars <code>dtypes</code>
+（如 <code>pl.Float32</code>、<code>pl.Float64</code>）之间进行转换。</p>
+<pre><code class="language-python">out = df.with_columns(pl.col(&quot;a&quot;).cast(float))
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌──────┬──────┬──────────┬─────┐
+│ a    ┆ b    ┆ c        ┆ d   │
+│ ---  ┆ ---  ┆ ---      ┆ --- │
+│ f64  ┆ str  ┆ f64      ┆ str │
+╞══════╪══════╪══════════╪═════╡
+│ 1.0  ┆ foo  ┆ 0.37454  ┆ a   │
+│ 2.0  ┆ ham  ┆ 0.950714 ┆ b   │
+│ 3.0  ┆ spam ┆ 0.731994 ┆ c   │
+│ null ┆ egg  ┆ 0.598658 ┆ d   │
+│ 5.0  ┆ null ┆ 0.156019 ┆ e   │
+└──────┴──────┴──────────┴─────┘
+</code></pre>
+<h2 id="重命名列"><a class="header" href="#重命名列">重命名列</a></h2>
+<pre><code class="language-python">import numpy as np
+import polars as pl
+
+df = pl.DataFrame(
+    {
+        &quot;a&quot;: [1, 2, 3, None, 5],
+        &quot;b&quot;: [&quot;foo&quot;, &quot;ham&quot;, &quot;spam&quot;, &quot;egg&quot;, None],
+        &quot;c&quot;: np.random.rand(5),
+        &quot;d&quot;: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;],
+    }
+)
+
+df.columns = [&quot;banana&quot;, &quot;orange&quot;, &quot;apple&quot;, &quot;grapefruit&quot;]  # 重命名列
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌────────┬────────┬──────────┬────────────┐
+│ banana ┆ orange ┆ apple    ┆ grapefruit │
+│ ---    ┆ ---    ┆ ---      ┆ ---        │
+│ i64    ┆ str    ┆ f64      ┆ str        │
+╞════════╪════════╪══════════╪════════════╡
+│ 1      ┆ foo    ┆ 0.155995 ┆ a          │
+│ 2      ┆ ham    ┆ 0.058084 ┆ b          │
+│ 3      ┆ spam   ┆ 0.866176 ┆ c          │
+│ null   ┆ egg    ┆ 0.601115 ┆ d          │
+│ 5      ┆ null   ┆ 0.708073 ┆ e          │
+└────────┴────────┴──────────┴────────────┘
+</code></pre>
+<h2 id="删除列"><a class="header" href="#删除列">删除列</a></h2>
+<pre><code class="language-python">
+# 删除单独的列
+out = df.drop(&quot;d&quot;)
+
+# 删除多个列
+out = df.drop([&quot;b&quot;, &quot;c&quot;])
+
+# 选择所有列但是不包括('b', 'c')
+out = df.select(pl.all().exclude([&quot;b&quot;, &quot;c&quot;]))
+
+# 仅选择列&quot;a&quot;
+out = df.select(pl.col(&quot;a&quot;))
+</code></pre>
+<pre><code class="language-text">shape: (5, 1)
+┌──────┐
+│ a    │
+│ ---  │
+│ i64  │
+╞══════╡
+│ 1    │
+│ 2    │
+│ 3    │
+│ null │
+│ 5    │
+└──────┘
+</code></pre>
+<h2 id="删除空值"><a class="header" href="#删除空值">删除空值</a></h2>
+<pre><code class="language-python">df.drop_nulls()
+</code></pre>
+<pre><code class="language-text">shape: (3, 4)
+┌─────┬──────┬──────────┬─────┐
+│ a   ┆ b    ┆ c        ┆ d   │
+│ --- ┆ ---  ┆ ---      ┆ --- │
+│ i64 ┆ str  ┆ f64      ┆ str │
+╞═════╪══════╪══════════╪═════╡
+│ 1   ┆ foo  ┆ 0.37454  ┆ a   │
+│ 2   ┆ ham  ┆ 0.950714 ┆ b   │
+│ 3   ┆ spam ┆ 0.731994 ┆ c   │
+└─────┴──────┴──────────┴─────┘
+</code></pre>
+<h2 id="填充缺失值na"><a class="header" href="#填充缺失值na">填充缺失值（NA）</a></h2>
+<p>策略:</p>
+<ul>
+<li><code>mean</code>：平均值</li>
+<li><code>backward</code>：上一值</li>
+<li><code>min</code>：最小值</li>
+<li><code>max</code>：最大值</li>
+</ul>
+<pre><code class="language-python">df.fill_none(&quot;forward&quot;)
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌─────┬──────┬──────────┬─────┐
+│ a   ┆ b    ┆ c        ┆ d   │
+│ --- ┆ ---  ┆ ---      ┆ --- │
+│ i64 ┆ str  ┆ f64      ┆ str │
+╞═════╪══════╪══════════╪═════╡
+│ 1   ┆ foo  ┆ 0.37454  ┆ a   │
+│ 2   ┆ ham  ┆ 0.950714 ┆ b   │
+│ 3   ┆ spam ┆ 0.731994 ┆ c   │
+│ 3   ┆ egg  ┆ 0.598658 ┆ d   │
+│ 5   ┆ egg  ┆ 0.156019 ┆ e   │
+└─────┴──────┴──────────┴─────┘
+</code></pre>
+<h2 id="获取所有列"><a class="header" href="#获取所有列">获取所有列</a></h2>
+<pre><code class="language-python">df.columns
+</code></pre>
+<pre><code class="language-text">['a', 'b', 'c', 'd']
+</code></pre>
+<h2 id="空值计数"><a class="header" href="#空值计数">空值计数</a></h2>
+<pre><code class="language-python">df.null_count()
+</code></pre>
+<pre><code class="language-text">shape: (1, 4)
+┌─────┬─────┬─────┬─────┐
+│ a   ┆ b   ┆ c   ┆ d   │
+│ --- ┆ --- ┆ --- ┆ --- │
+│ u32 ┆ u32 ┆ u32 ┆ u32 │
+╞═════╪═════╪═════╪═════╡
+│ 1   ┆ 1   ┆ 0   ┆ 0   │
+└─────┴─────┴─────┴─────┘
+</code></pre>
+<h2 id="列排序"><a class="header" href="#列排序">列排序</a></h2>
+<pre><code class="language-python">df.sort(&quot;a&quot;, reverse=True)
+</code></pre>
+<pre><code class="language-text">shape: (5, 4)
+┌──────┬──────┬──────────┬─────┐
+│ a    ┆ b    ┆ c        ┆ d   │
+│ ---  ┆ ---  ┆ ---      ┆ --- │
+│ i64  ┆ str  ┆ f64      ┆ str │
+╞══════╪══════╪══════════╪═════╡
+│ null ┆ egg  ┆ 0.598658 ┆ d   │
+│ 5    ┆ null ┆ 0.156019 ┆ e   │
+│ 3    ┆ spam ┆ 0.731994 ┆ c   │
+│ 2    ┆ ham  ┆ 0.950714 ┆ b   │
+│ 1    ┆ foo  ┆ 0.37454  ┆ a   │
+└──────┴──────┴──────────┴─────┘
+</code></pre>
+<h2 id="转为-numpy"><a class="header" href="#转为-numpy">转为 NumPy</a></h2>
+<pre><code class="language-python">df.to_numpy()
+</code></pre>
+<pre><code class="language-text">[[1.0 'foo' 0.3745401188473625 'a']
+ [2.0 'ham' 0.9507143064099162 'b']
+ [3.0 'spam' 0.7319939418114051 'c']
+ [nan 'egg' 0.5986584841970366 'd']
+ [5.0 None 0.15601864044243652 'e']]
+</code></pre>
+<h2 id="转为-pandas"><a class="header" href="#转为-pandas">转为 Pandas</a></h2>
+<pre><code class="language-python">df.to_pandas()
+</code></pre>
+<pre><code class="language-text">     a     b         c  d
+0  1.0   foo  0.374540  a
+1  2.0   ham  0.950714  b
+2  3.0  spam  0.731994  c
+3  NaN   egg  0.598658  d
+4  5.0  None  0.156019  e
+</code></pre>
+<h1 id="分组-1"><a class="header" href="#分组-1">分组</a></h1>
+<h2 id="急性--惰性"><a class="header" href="#急性--惰性">急性 &amp; 惰性</a></h2>
+<p>分组操作的语法在两个 API 中是类似的 —— 二者中均可使用表达式。
+要完成分组操作，先调用 <code>.groupby()</code> 函数，并跟随一个 <code>.agg()</code> 函数。</p>
+<p>在 <code>.agg()</code> 函数中，你可以对任意数量的列进行任意聚合操作。
+要对所有列进行聚合，可以使用通配符表达式：
+<code>.agg(pl.col(&quot;*&quot;).sum())</code>。</p>
+<p>来看一个简单的（惰性）例子：</p>
+<pre><code class="language-python">import polars as pl
+
+q = (
+    pl.scan_csv(&quot;data/reddit.csv&quot;)
+    .groupby(&quot;comment_karma&quot;)
+    .agg([pl.col(&quot;name&quot;).n_unique().alias(&quot;unique_names&quot;), pl.max(&quot;link_karma&quot;)])
+    .sort(by=&quot;unique_names&quot;, descending=True)  # 逆序排列，reverse=True
+)
+
+df = q.fetch()
+</code></pre>
+<p>这将返回下面的结果：</p>
+<pre><code class="language-text">shape: (100, 3)
+┌───────────────┬──────────────┬────────────┐
+│ comment_karma ┆ unique_names ┆ link_karma │
+│ ---           ┆ ---          ┆ ---        │
+│ i64           ┆ u32          ┆ i64        │
+╞═══════════════╪══════════════╪════════════╡
+│ 0             ┆ 367          ┆ 611        │
+│ 1             ┆ 9            ┆ 22         │
+│ 3             ┆ 6            ┆ 1          │
+│ 38            ┆ 4            ┆ 291        │
+│ …             ┆ …            ┆ …          │
+│ -5            ┆ 1            ┆ 0          │
+│ 232           ┆ 1            ┆ 47         │
+│ 835           ┆ 1            ┆ 1154       │
+│ 431           ┆ 1            ┆ 8          │
+└───────────────┴──────────────┴────────────┘
+</code></pre>
+<h1 id="聚合"><a class="header" href="#聚合">聚合</a></h1>
+<p>你可以调用 <code>.select()</code> 函数或使用 <code>.with_column()</code>/<code>.with_columns()</code> 上下文进行列聚合操作。</p>
+<p>要对所有列进行聚合，可以使用通配符表达式：
+<code>.select(pl.col(&quot;*&quot;).sum())</code>。</p>
+<p>以下面的代码为例：</p>
+<pre><code class="language-python">import polars as pl
+
+# 扫描级导入csv数据集
+q = pl.scan_csv(&quot;data/reddit.csv&quot;).select([pl.sum(&quot;comment_karma&quot;), pl.min(&quot;link_karma&quot;)])
+
+df = q.fetch()
+</code></pre>
+<p>其结果为：</p>
+<pre><code class="language-text">shape: (1, 2)
+┌───────────────┬────────────┐
+│ comment_karma ┆ link_karma │
+│ ---           ┆ ---        │
+│ i64           ┆ i64        │
+╞═══════════════╪════════════╡
+│ 242649        ┆ -109       │
+└───────────────┴────────────┘
+</code></pre>
+<p>更多内容请参见<a href="https://pola-rs.github.io/polars/py-polars/html/reference/expression.html#aggregation">表达式</a> 的 API 文档。</p>
+<h1 id="过滤-1"><a class="header" href="#过滤-1">过滤</a></h1>
+<h2 id="急性"><a class="header" href="#急性">急性</a></h2>
+<p>Polars 的急性过滤操作与 <code>Pandas</code> 中的非常相似。</p>
+<pre><code class="language-python">import polars as pl
+
+df = pl.DataFrame({&quot;a&quot;: [1, 2, 3], &quot;b&quot;: [None, &quot;b&quot;, &quot;c&quot;]})
+
+mask = df[&quot;a&quot;] &gt; 2  # 谓词表达式
+out = df[mask]  # 谓词过滤
+</code></pre>
+<p>或者用下面更符合 <code>Polars</code> 习惯的方式：</p>
+<pre><code class="language-python">df.filter(pl.col(&quot;a&quot;) &gt; 2)
+</code></pre>
+<h2 id="惰性"><a class="header" href="#惰性">惰性</a></h2>
+<p>惰性过滤操作通常使用以下表达：</p>
+<pre><code class="language-python">
+df = pl.DataFrame({&quot;a&quot;: [1, 2, 3], &quot;b&quot;: [None, &quot;b&quot;, &quot;c&quot;]})
+
+out = df.lazy().filter(pl.col(&quot;a&quot;) &gt; 2).collect()  # 惰性过滤
+</code></pre>
+<p>两者的结果都是：</p>
+<pre><code class="language-text">shape: (1, 2)
+┌─────┬─────┐
+│ a   ┆ b   │
+│ --- ┆ --- │
+│ i64 ┆ str │
+╞═════╪═════╡
+│ 3   ┆ c   │
+└─────┴─────┘
+</code></pre>
+<h1 id="连接"><a class="header" href="#连接">连接</a></h1>
+<p>类似于其他数据框架库，Polars 支持一系列连接操作。</p>
+<ul>
+<li>在单个或多个列上进行连接</li>
+<li>左连接</li>
+<li>内连接</li>
+<li>外连接</li>
+</ul>
+<h2 id="数据集"><a class="header" href="#数据集">数据集</a></h2>
+<pre><code class="language-python">import polars as pl
+
+df_a = pl.DataFrame({&quot;a&quot;: [1, 2, 1, 1], &quot;b&quot;: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;c&quot;], &quot;c&quot;: [0, 1, 2, 3]})
+
+df_b = pl.DataFrame({&quot;foo&quot;: [1, 1, 1], &quot;bar&quot;: [&quot;a&quot;, &quot;c&quot;, &quot;c&quot;], &quot;ham&quot;: [&quot;let&quot;, &quot;var&quot;, &quot;const&quot;]})
+print(df_a)
+</code></pre>
+<pre><code class="language-text">shape: (4, 3)
+┌─────┬─────┬─────┐
+│ a   ┆ b   ┆ c   │
+│ --- ┆ --- ┆ --- │
+│ i64 ┆ str ┆ i64 │
+╞═════╪═════╪═════╡
+│ 1   ┆ a   ┆ 0   │
+│ 2   ┆ b   ┆ 1   │
+│ 1   ┆ c   ┆ 2   │
+│ 1   ┆ c   ┆ 3   │
+└─────┴─────┴─────┘
+</code></pre>
+<pre><code class="language-python">print(df_b)
+</code></pre>
+<pre><code class="language-text">shape: (3, 3)
+┌─────┬─────┬───────┐
+│ foo ┆ bar ┆ ham   │
+│ --- ┆ --- ┆ ---   │
+│ i64 ┆ str ┆ str   │
+╞═════╪═════╪═══════╡
+│ 1   ┆ a   ┆ let   │
+│ 1   ┆ c   ┆ var   │
+│ 1   ┆ c   ┆ const │
+└─────┴─────┴───────┘
+</code></pre>
+<h2 id="急性-1"><a class="header" href="#急性-1">急性</a></h2>
+<pre><code class="language-python">
+out = df_a.join(df_b, left_on=[&quot;a&quot;, &quot;b&quot;], right_on=[&quot;foo&quot;, &quot;bar&quot;], how=&quot;left&quot;)
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (6, 4)
+┌─────┬─────┬─────┬───────┐
+│ a   ┆ b   ┆ c   ┆ ham   │
+│ --- ┆ --- ┆ --- ┆ ---   │
+│ i64 ┆ str ┆ i64 ┆ str   │
+╞═════╪═════╪═════╪═══════╡
+│ 1   ┆ a   ┆ 0   ┆ let   │
+│ 2   ┆ b   ┆ 1   ┆ null  │
+│ 1   ┆ c   ┆ 2   ┆ var   │
+│ 1   ┆ c   ┆ 2   ┆ const │
+│ 1   ┆ c   ┆ 3   ┆ var   │
+│ 1   ┆ c   ┆ 3   ┆ const │
+└─────┴─────┴─────┴───────┘
+</code></pre>
+<h2 id="惰性-1"><a class="header" href="#惰性-1">惰性</a></h2>
+<pre><code class="language-python">
+q = df_a.lazy().join(df_b.lazy(), left_on=&quot;a&quot;, right_on=&quot;foo&quot;, how=&quot;outer&quot;)
+out = q.collect()
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (10, 5)
+┌─────┬─────┬─────┬──────┬───────┐
+│ a   ┆ b   ┆ c   ┆ bar  ┆ ham   │
+│ --- ┆ --- ┆ --- ┆ ---  ┆ ---   │
+│ i64 ┆ str ┆ i64 ┆ str  ┆ str   │
+╞═════╪═════╪═════╪══════╪═══════╡
+│ 1   ┆ a   ┆ 0   ┆ a    ┆ let   │
+│ 1   ┆ a   ┆ 0   ┆ c    ┆ var   │
+│ 1   ┆ a   ┆ 0   ┆ c    ┆ const │
+│ 2   ┆ b   ┆ 1   ┆ null ┆ null  │
+│ …   ┆ …   ┆ …   ┆ …    ┆ …     │
+│ 1   ┆ c   ┆ 2   ┆ c    ┆ const │
+│ 1   ┆ c   ┆ 3   ┆ a    ┆ let   │
+│ 1   ┆ c   ┆ 3   ┆ c    ┆ var   │
+│ 1   ┆ c   ┆ 3   ┆ c    ┆ const │
+└─────┴─────┴─────┴──────┴───────┘
+</code></pre>
+<h1 id="重塑"><a class="header" href="#重塑">重塑</a></h1>
+<p>重塑操作将一个宽格式的 DataFrame 逆透视为长格式。</p>
+<h2 id="数据集-1"><a class="header" href="#数据集-1">数据集</a></h2>
+<pre><code class="language-python">import polars as pl
+
+df = pl.DataFrame({&quot;A&quot;: [&quot;a&quot;, &quot;b&quot;, &quot;a&quot;], &quot;B&quot;: [1, 3, 5], &quot;C&quot;: [10, 11, 12], &quot;D&quot;: [2, 4, 6]})
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (3, 4)
+┌─────┬─────┬─────┬─────┐
+│ A   ┆ B   ┆ C   ┆ D   │
+│ --- ┆ --- ┆ --- ┆ --- │
+│ str ┆ i64 ┆ i64 ┆ i64 │
+╞═════╪═════╪═════╪═════╡
+│ a   ┆ 1   ┆ 10  ┆ 2   │
+│ b   ┆ 3   ┆ 11  ┆ 4   │
+│ a   ┆ 5   ┆ 12  ┆ 6   │
+└─────┴─────┴─────┴─────┘
+</code></pre>
+<h2 id="急性--惰性-1"><a class="header" href="#急性--惰性-1">急性 + 惰性</a></h2>
+<p><code>急性</code> 与 <code>惰性</code> 操作的 API 相同。</p>
+<pre><code class="language-python">out = df.melt(id_vars=[&quot;A&quot;, &quot;B&quot;], value_vars=[&quot;C&quot;, &quot;D&quot;])
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (6, 4)
+┌─────┬─────┬──────────┬───────┐
+│ A   ┆ B   ┆ variable ┆ value │
+│ --- ┆ --- ┆ ---      ┆ ---   │
+│ str ┆ i64 ┆ str      ┆ i64   │
+╞═════╪═════╪══════════╪═══════╡
+│ a   ┆ 1   ┆ C        ┆ 10    │
+│ b   ┆ 3   ┆ C        ┆ 11    │
+│ a   ┆ 5   ┆ C        ┆ 12    │
+│ a   ┆ 1   ┆ D        ┆ 2     │
+│ b   ┆ 3   ┆ D        ┆ 4     │
+│ a   ┆ 5   ┆ D        ┆ 6     │
+└─────┴─────┴──────────┴───────┘
+</code></pre>
+<h1 id="透视"><a class="header" href="#透视">透视</a></h1>
+<p>在 <code>DataFrame</code> 中透视一列，并执行下列其中一种聚合。</p>
+<ul>
+<li>first：第一项</li>
+<li>sum：求和</li>
+<li>min：最小值</li>
+<li>max：最大值</li>
+<li>mean：平均值</li>
+<li>median：中位数</li>
+</ul>
+<p>透视操作包括一个或多个列的分组（它们将成为新的 y 轴），将被透视的列（它们将成为新的 x 轴）以及一个聚合。</p>
+<h2 id="数据集-2"><a class="header" href="#数据集-2">数据集</a></h2>
+<pre><code class="language-python">import polars as pl
+
+# 构造DataFrame（数据帧）
+df = pl.DataFrame(
+    {
+        &quot;foo&quot;: [&quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;],
+        &quot;N&quot;: [1, 2, 2, 4, 2],
+        &quot;bar&quot;: [&quot;k&quot;, &quot;l&quot;, &quot;m&quot;, &quot;n&quot;, &quot;o&quot;],
+    }
+)
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌─────┬─────┬─────┐
+│ foo ┆ N   ┆ bar │
+│ --- ┆ --- ┆ --- │
+│ str ┆ i64 ┆ str │
+╞═════╪═════╪═════╡
+│ A   ┆ 1   ┆ k   │
+│ A   ┆ 2   ┆ l   │
+│ B   ┆ 2   ┆ m   │
+│ B   ┆ 4   ┆ n   │
+│ C   ┆ 2   ┆ o   │
+└─────┴─────┴─────┘
+</code></pre>
+<h2 id="急性-2"><a class="header" href="#急性-2">急性</a></h2>
+<pre><code class="language-python">
+out = df.pivot(
+    index=&quot;foo&quot;,
+    columns=&quot;bar&quot;,
+    values=&quot;N&quot;,
+)
+</code></pre>
+<h2 id="惰性-2"><a class="header" href="#惰性-2">惰性</a></h2>
+<p>惰性操作的 API 中并不包含转置操作，因此想要<code>惰性地</code>使用转置，我们可以使用 <code>map</code> 来
+在惰性计算节点中执行一个急性的自定义函数。</p>
+<pre><code class="language-python">
+q = (
+    df.lazy()
+    .collect()
+    .pivot(
+        index=&quot;foo&quot;,
+        columns=&quot;bar&quot;,
+        values=&quot;N&quot;,
+    )
+    .lazy()
+)
+out = q.collect()
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 6)
+┌─────┬──────┬──────┬──────┬──────┬──────┐
+│ foo ┆ k    ┆ l    ┆ m    ┆ n    ┆ o    │
+│ --- ┆ ---  ┆ ---  ┆ ---  ┆ ---  ┆ ---  │
+│ str ┆ i64  ┆ i64  ┆ i64  ┆ i64  ┆ i64  │
+╞═════╪══════╪══════╪══════╪══════╪══════╡
+│ A   ┆ 1    ┆ 2    ┆ null ┆ null ┆ null │
+│ B   ┆ null ┆ null ┆ 2    ┆ 4    ┆ null │
+│ C   ┆ null ┆ null ┆ null ┆ null ┆ 2    │
+└─────┴──────┴──────┴──────┴──────┴──────┘
+</code></pre>
+<h1 id="排序-1"><a class="header" href="#排序-1">排序</a></h1>
+<p>Polars 支持与其他数据框架库类似的排序行为，即按一个或多个列以及多个（不同的）顺序进行排序。</p>
+<h2 id="数据集-3"><a class="header" href="#数据集-3">数据集</a></h2>
+<pre><code class="language-python">import numpy as np
+import polars as pl
+
+df = pl.DataFrame({&quot;a&quot;: np.arange(1, 4), &quot;b&quot;: [&quot;a&quot;, &quot;a&quot;, &quot;b&quot;]})  # np.arange(1, 4): 生成[1, 4)的数组
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (3, 2)
+┌─────┬─────┐
+│ a   ┆ b   │
+│ --- ┆ --- │
+│ i64 ┆ str │
+╞═════╪═════╡
+│ 1   ┆ a   │
+│ 2   ┆ a   │
+│ 3   ┆ b   │
+└─────┴─────┘
+</code></pre>
+<h2 id="急性-3"><a class="header" href="#急性-3">急性</a></h2>
+<pre><code class="language-python">out = df.sort([&quot;b&quot;, &quot;a&quot;], descending=[True, False])  # 分别对两列&quot;b&quot;, &quot;a&quot;进行排序，&quot;b&quot;逆序，&quot;a&quot;顺序
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 2)
+┌─────┬─────┐
+│ a   ┆ b   │
+│ --- ┆ --- │
+│ i64 ┆ str │
+╞═════╪═════╡
+│ 1   ┆ a   │
+│ 2   ┆ a   │
+│ 3   ┆ b   │
+└─────┴─────┘
+</code></pre>
+<h2 id="惰性-3"><a class="header" href="#惰性-3">惰性</a></h2>
+<pre><code class="language-python">import polars as pl
+
+q = df.lazy().sort(pl.col(&quot;a&quot;), descending=True)  # 惰性排序，对&quot;a&quot;列
+df = q.collect()
+print(out)
+</code></pre>
+<pre><code class="language-text">shape: (3, 2)
+┌─────┬─────┐
+│ a   ┆ b   │
+│ --- ┆ --- │
+│ i64 ┆ str │
+╞═════╪═════╡
+│ 3   ┆ b   │
+│ 2   ┆ a   │
+│ 1   ┆ a   │
+└─────┴─────┘
+</code></pre>
+<h1 id="条件应用"><a class="header" href="#条件应用">条件应用</a></h1>
+<p>要修改一个 <code>Series</code> 或 <code>DataFrame</code> 中的一列，需要以下两步。</p>
+<ol>
+<li>基于一些谓词创建一个 <code>boolean</code> 掩码</li>
+<li>替换掉掩码评估为 <code>True</code> 的值</li>
+<li>（仅当惰性操作时） 定义掩码评估为 <code>False</code> 的值</li>
+</ol>
+<h2 id="数据集-4"><a class="header" href="#数据集-4">数据集</a></h2>
+<pre><code class="language-python">import numpy as np
+import polars as pl
+
+# 构造数据帧
+df = pl.DataFrame({&quot;range&quot;: np.arange(10), &quot;left&quot;: [&quot;foo&quot;] * 10, &quot;right&quot;: [&quot;bar&quot;] * 10})
+df.head()
+</code></pre>
+<pre><code class="language-text">shape: (5, 3)
+┌───────┬──────┬───────┐
+│ range ┆ left ┆ right │
+│ ---   ┆ ---  ┆ ---   │
+│ i64   ┆ str  ┆ str   │
+╞═══════╪══════╪═══════╡
+│ 0     ┆ foo  ┆ bar   │
+│ 1     ┆ foo  ┆ bar   │
+│ 2     ┆ foo  ┆ bar   │
+│ 3     ┆ foo  ┆ bar   │
+│ 4     ┆ foo  ┆ bar   │
+└───────┴──────┴───────┘
+</code></pre>
+<p>我们可以使用 <code>.when()</code>/<code>.then()</code>/<code>.otherwise()</code> 表达式。</p>
+<ul>
+<li><code>when</code> - 接受一个谓词表达式</li>
+<li><code>then</code> - 当 <code>谓词 == True</code> 时使用的表达式</li>
+<li><code>otherwise</code> - 当 <code>谓词 == False</code> 时使用的表达式</li>
+</ul>
+<p>请参见以下例子。</p>
+<pre><code class="language-python">
+q = df.lazy().with_columns(
+    pl.when(pl.col(&quot;range&quot;) &gt;= 5).then(pl.col(&quot;left&quot;)).otherwise(pl.col(&quot;right&quot;)).alias(&quot;foo_or_bar&quot;)  # .alias增加一列
+)
+
+df = q.collect()
+print(df)
+</code></pre>
+<pre><code class="language-text">shape: (10, 4)
+┌───────┬──────┬───────┬────────────┐
+│ range ┆ left ┆ right ┆ foo_or_bar │
+│ ---   ┆ ---  ┆ ---   ┆ ---        │
+│ i64   ┆ str  ┆ str   ┆ str        │
+╞═══════╪══════╪═══════╪════════════╡
+│ 0     ┆ foo  ┆ bar   ┆ bar        │
+│ 1     ┆ foo  ┆ bar   ┆ bar        │
+│ 2     ┆ foo  ┆ bar   ┆ bar        │
+│ 3     ┆ foo  ┆ bar   ┆ bar        │
+│ …     ┆ …    ┆ …     ┆ …          │
+│ 6     ┆ foo  ┆ bar   ┆ foo        │
+│ 7     ┆ foo  ┆ bar   ┆ foo        │
+│ 8     ┆ foo  ┆ bar   ┆ foo        │
+│ 9     ┆ foo  ┆ bar   ┆ foo        │
+└───────┴──────┴───────┴────────────┘
+</code></pre>
+<h1 id="应用"><a class="header" href="#应用">应用</a></h1>
+<h1 id="自定义函数-1"><a class="header" href="#自定义函数-1">自定义函数</a></h1>
+<p>总会有一个操作非常特殊，以至于人们无法用<code>Polars</code>的公共方法来完成它。幸运的是，polars允许您应用自定义函数。这意味着可以定义一个<code>Python</code>函数（或<code>lambda</code>），并将其传递给逻辑计划。</p>
+<p>假设我们想要以一种迫切（eager）的方式将一个映射操作应用于一个<code>Polars</code> <code>Series</code>。这可以按如下所示进行：</p>
+<pre><code class="language-python">import polars as pl
+
+my_map = {1: &quot;foo&quot;, 2: &quot;bar&quot;, 3: &quot;ham&quot;, 4: &quot;spam&quot;, 5: &quot;eggs&quot;}
+
+s = pl.Series(&quot;a&quot;, [1, 2, 3, 4, 5])  # 构建Series
+s = s.apply(lambda x: my_map[x])  # 用lambda表达式添加Series
+</code></pre>
+<p>返回：</p>
+<pre><code class="language-text">shape: (5,)
+Series: 'a' [str]
+[
+	&quot;foo&quot;
+	&quot;bar&quot;
+	&quot;ham&quot;
+	&quot;spam&quot;
+	&quot;eggs&quot;
+]
+</code></pre>
+<p>然而，由于<code>Polars</code> <code>Series</code>只能包含一个数据类型，因此存在一些问题。</p>
+<p>在上面的<code>apply()</code>方法中我们没有指定<code>Series</code>应该包含的数据类型<code>Polars</code>试图通过调用提供的函数本身来提前推断输出数据类型。如果它后来得到的数据类型与最初推断的类型不匹配，则该值将被指示为缺失（<code>null</code>）。</p>
+<p>如果输出数据类型已知，建议将该信息提供给<code>Polars</code>（通过<code>.apply()</code>的<code>dtype</code>选项）。</p>
+<p>注意，应用函数后可能会更改数据类型：我们上面使用的<code>lambda</code>得到一个整数作为输入，并在<code>my_map</code>字典中找到正确的键后返回一个字符串（<code>pl.Utf8</code>）。</p>
+<h1 id="使用map或者apply"><a class="header" href="#使用map或者apply">使用map或者apply?</a></h1>
+<p>使用自定义函数有两种方法，一种是使用<code>map</code>，另一种是使用<code>apply</code>。您需要哪一个取决于使用自定义函数的上下文：</p>
+<ul>
+<li>
+<p><code>apply</code></p>
+<ul>
+<li>选择上下文：自定义函数应用于所有值 <code>Fn(value) -&gt; y</code></li>
+<li>聚合上下文：自定义函数应用于所有组 <code>Fn([group_value_1, ... group_value_n]) -&gt; y</code></li>
+</ul>
+</li>
+<li>
+<p><code>map</code></p>
+<ul>
+<li>选择上下文：自定义函数应用于<code>Series</code>，并且必须生成一个新的<code>Series</code> <code>Fn(Series) -&gt; Series</code></li>
+<li>聚合上下文：自定义函数应用于<code>Series</code>，并且必须生成一个新的<code>Series</code> <code>Fn(Series) -&gt; Series</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="窗口函数"><a class="header" href="#窗口函数">窗口函数</a></h1>
+<p><code>Polars</code> 支持窗口函数，灵感来自于<a href="https://www.postgresql.org/docs/current/tutorial-window.html">PostgreSQL</a>. <code>Pandas</code> 用户可能会将其识别为a <code>groupby.transform(aggregation)</code>.</p>
+<p><code>Polars</code> 窗口函数比<code>Pandas</code>转换（transform）函数更加优雅. 我们可以在一个表达式中的多个列上应用多个函数！</p>
+<pre><code class="language-python">import polars as pl
+
+dataset = pl.DataFrame(
+    {
+        &quot;A&quot;: [1, 2, 3, 4, 5],
+        &quot;fruits&quot;: [&quot;banana&quot;, &quot;banana&quot;, &quot;apple&quot;, &quot;apple&quot;, &quot;banana&quot;],
+        &quot;B&quot;: [5, 4, 3, 2, 1],
+        &quot;cars&quot;: [&quot;beetle&quot;, &quot;audi&quot;, &quot;beetle&quot;, &quot;beetle&quot;, &quot;beetle&quot;],
+    }
+)
+
+q = dataset.lazy().with_columns(
+    [
+        pl.sum(&quot;A&quot;).over(&quot;fruits&quot;).alias(&quot;fruit_sum_A&quot;),  # 在&quot;fruits&quot;列的基础上进行&quot;A&quot;的加和，并另起一列
+        pl.first(&quot;B&quot;).over(&quot;fruits&quot;).alias(&quot;fruit_first_B&quot;),
+        pl.max(&quot;B&quot;).over(&quot;cars&quot;).alias(&quot;cars_max_B&quot;),
+    ]
+)
+
+df = q.collect()
+</code></pre>
+<pre><code class="language-text">shape: (5, 7)
+┌─────┬────────┬─────┬────────┬─────────────┬───────────────┬────────────┐
+│ A   ┆ fruits ┆ B   ┆ cars   ┆ fruit_sum_A ┆ fruit_first_B ┆ cars_max_B │
+│ --- ┆ ---    ┆ --- ┆ ---    ┆ ---         ┆ ---           ┆ ---        │
+│ i64 ┆ str    ┆ i64 ┆ str    ┆ i64         ┆ i64           ┆ i64        │
+╞═════╪════════╪═════╪════════╪═════════════╪═══════════════╪════════════╡
+│ 1   ┆ banana ┆ 5   ┆ beetle ┆ 8           ┆ 5             ┆ 5          │
+│ 2   ┆ banana ┆ 4   ┆ audi   ┆ 8           ┆ 5             ┆ 4          │
+│ 3   ┆ apple  ┆ 3   ┆ beetle ┆ 7           ┆ 3             ┆ 5          │
+│ 4   ┆ apple  ┆ 2   ┆ beetle ┆ 7           ┆ 3             ┆ 5          │
+│ 5   ┆ banana ┆ 1   ┆ beetle ┆ 8           ┆ 5             ┆ 5          │
+└─────┴────────┴─────┴────────┴─────────────┴───────────────┴────────────┘
+</code></pre>
+<h1 id="性能"><a class="header" href="#性能">性能</a></h1>
+<p>本章介绍了一些<code>Polars</code>实现最大性能所需的技巧。
+如果使用得当，<code>Polars</code>可以以极快的速度运行。请在<a href="https://h2oai.github.io/db-benchmark/">H2O AI database benchmark</a>中看结果。</p>
+<h1 id="字符串-1"><a class="header" href="#字符串-1">字符串</a></h1>
+<p>了解<code>Arrow</code>和<code>Polars</code>使用的内存格式可以真正提高查询的性能. 对于大型字符串数据尤其如此。下图显示了<code>Arrow</code> <code>UTF8</code>数组在内存中的布局。</p>
+<p>数组<code>[“foo”、“bar”、“ham”]</code>由以下编码：</p>
+<ul>
+<li>连接字符串<code>foobarham</code>，</li>
+<li>一个偏移数组，指示每个字符串<code>[0,2,5,8]</code>的开始（和结束），</li>
+<li>空位图，指示空值。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/docs/arrow-string.svg" alt="" /></p>
+<p>如果我们要读取字符串值，这种内存结构的缓存效率非常高。
+尤其是如果我们将它与<code>Vec&lt;String&gt;</code>（在<code>Rust</code>中由堆分配的字符串数据组成的数组）进行比较。</p>
+<p><img src="https://raw.githubusercontent.com/pola-rs/polars-static/master/docs/pandas-string.svg" alt="" /></p>
+<p>然而，如果我们需要对<code>Arrow</code> <code>UTF8</code>数组重新排序，我们需要交换字符串值的所有字节，这在处理大型字符串时可能会非常昂贵。另一方面，对于<code>Vec&lt;String&gt;</code>，我们只需要交换指针，只需移动8字节的数据，成本很低。
+由于一项操作（过滤、连接、分组<em>等</em>）而嵌入大量<code>Utf8</code> <code>Series</code>的<code>DataFrame</code>的重新排序可能很快变得非常昂贵。</p>
+<h2 id="范畴型"><a class="header" href="#范畴型">范畴型</a></h2>
+<p>因此，<code>Polars</code>有一个<code>CategoricalType</code>。<code>category</code> <code>Series</code>是一个数组，其中填充了<code>u32</code>值，每个值代表一个唯一的字符串值。因此，在保持缓存效率的同时，移动值的成本也很低。</p>
+<p>在下面的示例中，我们将演示如何将一个<code>Utf8</code> <code>Series</code>列强制转换为一个<code>Categorical</code> <code>Series</code>。</p>
+<pre><code class="language-python">import polars as pl
+
+df[&quot;utf8-column&quot;].cast(pl.Categorical)
+</code></pre>
+<h3 id="在分类数据上加入多个数据帧"><a class="header" href="#在分类数据上加入多个数据帧">在分类数据上加入多个数据帧</a></h3>
+<p>当需要基于字符串数据连接两个<code>DataFrame</code>时，需要同步<code>Category</code>数据（<code>df1</code>的<code>A</code>列中的数据需要指向与<code>df2</code>中的<code>B</code>列相同的底层字符串数据）。可以通过在<code>StringCache</code>上下文管理器中强制转换数据来实现。这将在该上下文管理器期间同步所有可发现的字符串值。如果希望全局字符串缓存在整个运行期间存在，可以将<code>toggle_string_cache</code>设置为<code>True</code>。</p>
+<pre><code class="language-python">import polars as pl
+
+df1 = pl.DataFrame({&quot;a&quot;: [&quot;foo&quot;, &quot;bar&quot;, &quot;ham&quot;], &quot;b&quot;: [1, 2, 3]})
+df2 = pl.DataFrame({&quot;a&quot;: [&quot;foo&quot;, &quot;spam&quot;, &quot;eggs&quot;], &quot;c&quot;: [3, 2, 2]})
+
+with pl.StringCache():
+    df1.with_columns(pl.col(&quot;a&quot;).cast(pl.Categorical))
+    df2.with_columns(pl.col(&quot;a&quot;).cast(pl.Categorical))
+</code></pre>
+<h3 id="惰性连接分类数据上的多个数据帧"><a class="header" href="#惰性连接分类数据上的多个数据帧">惰性连接分类数据上的多个数据帧</a></h3>
+<p>在查询期间（直到调用<code>.collect()</code>），惰性查询始终具有全局字符串缓存（除非您选择退出）。下面的示例显示了如何将两个<code>DataFrame</code>与<code>Category</code>类型连接起来。</p>
+<pre><code class="language-python">import polars as pl
+
+lf1 = pl.DataFrame({&quot;a&quot;: [&quot;foo&quot;, &quot;bar&quot;, &quot;ham&quot;], &quot;b&quot;: [1, 2, 3]}).lazy()
+lf2 = pl.DataFrame({&quot;a&quot;: [&quot;foo&quot;, &quot;spam&quot;, &quot;eggs&quot;], &quot;c&quot;: [3, 2, 2]}).lazy()
+
+lf1 = lf1.with_columns(pl.col(&quot;a&quot;).cast(pl.Categorical))
+lf2 = lf2.with_columns(pl.col(&quot;a&quot;).cast(pl.Categorical))
+
+lf1.join(lf2, on=&quot;a&quot;, how=&quot;inner&quot;)
+</code></pre>
+<h1 id="优化"><a class="header" href="#优化">优化</a></h1>
+<p>本章将研究<code>Polars</code>应用的一些查询优化器，通过查看一些示例来了解<code>Polars</code>如何修改原始查询计划。</p>
+<h1 id="惰性方法"><a class="header" href="#惰性方法">惰性方法</a></h1>
+<p>为了展示惰性<code>Polars</code>功能，我们将探索两种中大型用户名数据集：</p>
+<p><a href="https://www.reddit.com/r/datasets/comments/9i8s5j/dataset_metadata_for_69_million_reddit_users_in/">Reddit用户名数据集</a>
+包含6900多万行</p>
+<pre><code class="language-python">import polars as pl
+
+from ..paths import DATA_DIR
+
+dataset = pl.read_csv(f&quot;{DATA_DIR}/reddit.csv&quot;, n_rows=10)
+</code></pre>
+<pre><code class="language-text">shape: (5, 6)
+┌─────┬──────────────────────────┬─────────────┬────────────┬───────────────┬────────────┐
+│ id  ┆ name                     ┆ created_utc ┆ updated_on ┆ comment_karma ┆ link_karma │
+│ --- ┆ ---                      ┆ ---         ┆ ---        ┆ ---           ┆ ---        │
+│ i64 ┆ str                      ┆ i64         ┆ i64        ┆ i64           ┆ i64        │
+╞═════╪══════════════════════════╪═════════════╪════════════╪═══════════════╪════════════╡
+│ 1   ┆ truman48lamb_jasonbroken ┆ 1397113470  ┆ 1536527864 ┆ 0             ┆ 0          │
+│ 2   ┆ johnethen06_jasonbroken  ┆ 1397113483  ┆ 1536527864 ┆ 0             ┆ 0          │
+│ 3   ┆ yaseinrez_jasonbroken    ┆ 1397113483  ┆ 1536527864 ┆ 0             ┆ 1          │
+│ 4   ┆ Valve92_jasonbroken      ┆ 1397113503  ┆ 1536527864 ┆ 0             ┆ 0          │
+│ 5   ┆ srbhuyan_jasonbroken     ┆ 1397113506  ┆ 1536527864 ┆ 0             ┆ 0          │
+└─────┴──────────────────────────┴─────────────┴────────────┴───────────────┴────────────┘
+</code></pre>
+<p>以及<a href="https://github.com/RuneStar/name-cleanup-2014">Runescape用户名数据集</a>
+包含约5500多万条记录。</p>
+<pre><code class="language-python">import polars as pl
+
+from ..paths import DATA_DIR
+
+dataset = pl.read_csv(f&quot;{DATA_DIR}/runescape.csv&quot;, has_header=False, n_rows=10)
+</code></pre>
+<pre><code class="language-text">shape: (5, 1)
+┌─────────────┐
+│ column_1    │
+│ ---         │
+│ str         │
+╞═════════════╡
+│ a000        │
+│ a0000       │
+│ a000000     │
+│ a0000000    │
+│ a0000000000 │
+└─────────────┘
+</code></pre>
+<h1 id="谓词下推"><a class="header" href="#谓词下推">谓词下推</a></h1>
+<p>谓词下推是<code>Polars</code>所做的优化，可以减少查询时间和内存使用。谓词是数据库行话，用于在某个表上应用过滤器，从而减少该表上的行数。</p>
+<p>那么，让我们看看是否可以加载一些Reddit数据并对几个谓词进行过滤。</p>
+<pre><code class="language-python">import polars as pl
+
+from ..paths import DATA_DIR
+
+q1 = (
+    pl.scan_csv(f&quot;{DATA_DIR}/reddit.csv&quot;)
+    .filter(pl.col(&quot;comment_karma&quot;) &gt; 0)  # 谓词过滤
+    .filter(pl.col(&quot;link_karma&quot;) &gt; 0)
+    .filter(pl.col(&quot;name&quot;).str.contains(r&quot;^a&quot;))  # filter name that start with an &quot;a&quot;
+)
+</code></pre>
+<p>如果我们在上面运行这个查询，什么都不会发生！这是由于懒惰的评估。
+除非特别要求，否则不会发生任何事情。这使Polars能够看到查询的整个上下文，并及时优化以执行。</p>
+<p><code>.collect</code>方法请求执行。这将查询所有可用数据。
+在编写、优化和检查查询时，这通常是不可取的。另一个调用执行的方法是<code>.fetch</code>方法。<code>.fetch</code>接受一个参数<code>n_rows</code>，并尝试在数据源上'获取'该数量的行（尽管没有给出任何保证）。</p>
+<p>因此，让我们从源文件中“获取”约1000万行，并应用谓词。</p>
+<pre><code class="language-python">q1.fetch(n_rows=int(1e7))
+</code></pre>
+<pre><code class="language-text">shape: (656, 6)
+┌─────────┬─────────────┬─────────────┬────────────┬───────────────┬────────────┐
+│ id      ┆ name        ┆ created_utc ┆ updated_on ┆ comment_karma ┆ link_karma │
+│ ---     ┆ ---         ┆ ---         ┆ ---        ┆ ---           ┆ ---        │
+│ i64     ┆ str         ┆ i64         ┆ i64        ┆ i64           ┆ i64        │
+╞═════════╪═════════════╪═════════════╪════════════╪═══════════════╪════════════╡
+│ 77860   ┆ aquarin     ┆ 1137474000  ┆ 1536528294 ┆ 150           ┆ 11         │
+│ 77974   ┆ aadvaark    ┆ 1137301200  ┆ 1536528294 ┆ 26            ┆ 47         │
+│ 78004   ┆ apoisel     ┆ 1137301200  ┆ 1536497404 ┆ 42            ┆ 2549       │
+│ 78041   ┆ aonic       ┆ 1137301200  ┆ 1536497404 ┆ 2931          ┆ 2095       │
+│ …       ┆ …           ┆ …           ┆ …          ┆ …             ┆ …          │
+│ 1192656 ┆ atothedrian ┆ 1162785880  ┆ 1536497412 ┆ 748           ┆ 585        │
+│ 1204607 ┆ akbusiness  ┆ 1162899425  ┆ 1536532995 ┆ 73            ┆ 512        │
+│ 1214809 ┆ aaminics    ┆ 1162969322  ┆ 1536533034 ┆ 22            ┆ 6          │
+│ 1225341 ┆ antonulrich ┆ 1163110623  ┆ 1536497412 ┆ 9304          ┆ 1782       │
+└─────────┴─────────────┴─────────────┴────────────┴───────────────┴────────────┘
+</code></pre>
+<p>上面我们看到，从1000万行中，61503行匹配我们的谓词。</p>
+<h2 id="分解"><a class="header" href="#分解">分解</a></h2>
+<p>在<code>Polars</code>中，我们可以可视化查询计划。我们来看看。</p>
+<pre><code class="language-python">q1.show_graph(optimized=False)
+</code></pre>
+<p><img src="optimizations/lazy/../../outputs/predicate_pushdown/graph1.png" alt="" /></p>
+<p>精明的读者可能会注意到，我们的查询不是很理想，因为我们有三个独立的<em>FILTER</em>节点。这意味着在每一个<em>过滤器</em>分配一个新的<code>DataFrame</code>，它将被输入到下一个<em>过滤器</em>中，然后从内存中删除--这一定是多余的，你知道吗... 他们是对的。谓词应该组合在一起。我们应该写下这个问题：</p>
+<pre><code class="language-python">import polars as pl
+
+from ..paths import DATA_DIR
+
+q2 = pl.scan_csv(f&quot;{DATA_DIR}/reddit.csv&quot;).filter(
+    (pl.col(&quot;comment_karma&quot;) &gt; 0) &amp; (pl.col(&quot;link_karma&quot;) &gt; 0) &amp; (pl.col(&quot;name&quot;).str.contains(r&quot;^a&quot;))
+)
+</code></pre>
+<p>这将转化为：</p>
+<pre><code class="language-python">q2.show_graph(optimized=False)
+</code></pre>
+<p><img src="optimizations/lazy/../../outputs/predicate_pushdown/graph2.png" alt="" /></p>
+<p>正如我们所见，谓词是组合在一起的。这将减少数据的复制。</p>
+<h2 id="优化随之而来"><a class="header" href="#优化随之而来">优化随之而来</a></h2>
+<p><code>Polars</code>试图从查询编写器中节省这种精神开销，并为您组合谓词。除此之外，它还将谓词下推到扫描级别！让我们看看优化后的查询是什么样子。</p>
+<pre><code class="language-python">q1.show_graph(optimized=True)
+</code></pre>
+<p><img src="optimizations/lazy/../../outputs/predicate_pushdown/graph1-optimized.png" alt="" /></p>
+<p>这可能很难看到，但很清楚的是，只有一个节点：<em>CSV扫描</em>。谓词过滤是在读取csv的过程中完成的。这意味着该查询的内存开销通过过滤因子减少了！这产生了巨大的影响。</p>
+<h3 id="内存"><a class="header" href="#内存">内存</a></h3>
+<p>正如我们所看到的，在<em>过滤器</em>之后还剩下约62000行。这意味着（除了批量大小和筛选操作的一些内存开销）我们使用\(\frac{6.2\text{e-}4}{1\text{e-}7} \sim 0.6 \text{%} \)在一次急切的评估中，我们将首先读取内存中的整个表，然后再应用过滤器。</p>
+<h3 id="性能-1"><a class="header" href="#性能-1">性能</a></h3>
+<p>在撰写本文时，谓词下推也提高了查询时间性能。</p>
+<p><strong>无优化</strong>, <code>predicate_pushdown=False</code> 标签:</p>
+<pre><code class="language-text">real    0m2,401s
+user    0m5,457s
+sys    0m0,894s
+</code></pre>
+<p><strong>有优化</strong>, <code>predicate_pushdown=True</code> 标签:</p>
+<pre><code class="language-text">real    0m1,597s
+user    0m6,143s
+sys    0m0,647s
+</code></pre>
+<h2 id="关系代数"><a class="header" href="#关系代数">关系代数</a></h2>
+<p>在查询计划的可视化中，您会看到一个\（\sigma\）符号。这表示在<em>扫描</em>级别执行的谓词。还有一个\（\pi\）符号表示投影（用于列选择的数据库行话），但我们稍后将讨论这个问题。</p>
+<h2 id="更便捷的联结joins操作"><a class="header" href="#更便捷的联结joins操作">更便捷的联结（joins）操作</a></h2>
+<p>谓词下推优化通常也会导致更便宜的连接。连接是一个昂贵的操作。连接操作中的行数越少，成本就越低。</p>
+<h1 id="投影下推"><a class="header" href="#投影下推">投影下推</a></h1>
+<p>我们来把上一章节中的查询与在 Runescape （一款游戏）数据中进行 <em>FILTER</em> 操作的结果结合起来，
+来找出以字母 <code>a</code> 开头且玩过 Runescape 的流行 Reddit 用户名。相信你一定也会对此感兴趣的！</p>
+<p>你可以构建类似于以下的查询：</p>
+<pre><code class="language-python">import polars as pl
+
+from ..paths import DATA_DIR
+
+reddit = (
+    pl.scan_csv(f&quot;{DATA_DIR}/reddit.csv&quot;)
+    .filter(pl.col(&quot;comment_karma&quot;) &gt; 0)
+    .filter(pl.col(&quot;link_karma&quot;) &gt; 0)
+    .filter(pl.col(&quot;name&quot;).str.contains(r&quot;^a&quot;))
+)
+
+runescape = pl.scan_csv(&quot;data/runescape.csv&quot;, has_header=False).select(pl.col(&quot;column_1&quot;).alias(&quot;name&quot;))
+
+dataset = reddit.join(runescape, on=&quot;name&quot;, how=&quot;inner&quot;).select([&quot;name&quot;, &quot;comment_karma&quot;, &quot;link_karma&quot;])
+
+df1 = dataset.fetch(int(1e7))
+df2 = dataset.fetch(int(1e7), predicate_pushdown=True, projection_pushdown=True)
+</code></pre>
+<p>这将产出以下 DataFrame：</p>
+<pre><code class="language-text">shape: (0, 3)
+┌──────┬───────────────┬────────────┐
+│ name ┆ comment_karma ┆ link_karma │
+│ ---  ┆ ---           ┆ ---        │
+│ str  ┆ i64           ┆ i64        │
+╞══════╪═══════════════╪════════════╡
+└──────┴───────────────┴────────────┘
+</code></pre>
+<h2 id="更近一步"><a class="header" href="#更近一步">更近一步</a></h2>
+<p>让我们再来看看查询计划。</p>
+<pre><code class="language-python">dataset.show_graph(optimized=False)
+</code></pre>
+<p><img src="optimizations/lazy/./../outputs/projection_pushdown/graph.png" alt="" /></p>
+<p>现在，我们关注的是用 <code>π</code> 表示的投影。第一个节点上显示着 π 3/6，这意味着我们从 <code>DataFrame</code>
+的 6 列中选出了其中的 3 列。在 csv 读取结果中，我们可以看到通配符 <code>π */6</code> 和 <code>π */1</code>，
+这意味着我们选中了 Reddit 数据集中的全部 6 列，以及对应的 Runescape 数据集中唯一的一列。</p>
+<p>但是，这样的查询性能并不理想 —— 我们选中了两个数据集的所有列，却只显示了关联 (join) 后的 3 列。
+这意味着一些参与关联计算的列实际上是可以被忽略的。类似的，在读取 csv 时解析了一些列，而它们在最后是被白白丢弃掉的。
+当我们要处理的 <code>DataFrame</code> 中有大量的列时，所做的这种冗余工作量可能是非常可观的。</p>
+<h3 id="更优查询方案"><a class="header" href="#更优查询方案">更优查询方案</a></h3>
+<p>让我们看看 <code>Polars</code> 是如何优化这个查询的。</p>
+<pre><code class="language-python">dataset.show_graph(optimized=True)
+</code></pre>
+<p><img src="optimizations/lazy/./../outputs/projection_pushdown/graph-optimized.png" alt="" /></p>
+<p>关联 (join) 操作中的投影被下推至 csv 读取的这一步。这意味着查询优化降低了读取数据以及关联操作这二者的开销。</p>
+<h2 id="性能-2"><a class="header" href="#性能-2">性能</a></h2>
+<p>让我们为优化前后的结果进行计时。</p>
+<p><strong>优化前</strong>，即 <code>predicate_pushdown=False</code> 且 <code>projection_pushdown=False</code>。</p>
+<pre><code class="language-text">real    0m3,273s
+user    0m9,284s
+sys    0m1,081s
+</code></pre>
+<p><strong>优化后</strong>，即将 <code>predicate_pushdown</code> 与 <code>projection_pushdown</code> 均设置为 <code>True</code>。</p>
+<pre><code class="language-text">real    0m1,732s
+user    0m7,581s
+sys    0m0,783s
+</code></pre>
+<p>可以看到，这一简单的优化使得我们节省了将近一半的查询时间！在现实应用中，业务数据通常保存了大量列，
+我们预期这使得优化前后的过滤缺失数据、进行复杂的分组操作、关联操作等的性能差异会变得更大。</p>
+<h1 id="其它优化"><a class="header" href="#其它优化">其它优化</a></h1>
+<p>除了谓词和投影下推之外，<code>Polars</code>还进行其他优化。</p>
+<p>一个重要的主题是可选的缓存和并行化。很容易想象，有两种不同的<code>DataFrame</code>计算会导致扫描同一个文件<code>Polars</code>可能会缓存扫描的文件，以防止扫描同一文件两次。但是，如果您愿意，可以重写此行为并强制<code>Polars</code>读取同一文件。这可能会更快，因为扫描可以并行进行。</p>
+<h2 id="联结并行化"><a class="header" href="#联结并行化">联结并行化</a></h2>
+<p>如果我们查看上一个查询，就会发现join操作有一个输入带有<code>data/reddit.csv</code>的计算路径作为根目录，一个路径带有<code>data/runescape.csv</code>作为根目录。<code>Polars</code>可以观察到两个<code>DataFrame</code>之间没有依赖关系，将并行读取这两个文件。如果在加入之前完成了其他操作（例如groupby、filters等），它们也会并行执行。</p>
+<p><img src="optimizations/lazy/../../outputs/projection_pushdown/graph-optimized.png" alt="" /></p>
+<h2 id="简化表达式"><a class="header" href="#简化表达式">简化表达式</a></h2>
+<p>其他一些优化是表达式简化。这些优化的影响比谓词和投影下推的影响小，但它们很可能加起来。你可以<a href="https://github.com/pola-rs/polars/issues/139">追踪这个问题</a>查看这些的最新状态。</p>
+<h1 id="参考指南"><a class="header" href="#参考指南">参考指南</a></h1>
+<p>需要查看<code>Polars</code>的所有可用方法/功能吗？我们有<code>Rust</code>和<code>Python</code>的参考向导：</p>
+<ul>
+<li><a href="https://docs.rs/polars"><code>Rust</code> 发行版本</a></li>
+<li><a href="https://pola-rs.github.io/polars/py-polars/html/reference"><code>Python</code> API</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

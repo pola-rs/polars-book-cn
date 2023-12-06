@@ -1,0 +1,16 @@
+shape: (9, 2)
+┌───────┬──────┐
+│ color ┆ size │
+│ ---   ┆ ---  │
+│ str   ┆ str  │
+╞═══════╪══════╡
+│ red   ┆ S    │
+│ red   ┆ M    │
+│ red   ┆ L    │
+│ blue  ┆ S    │
+│ blue  ┆ M    │
+│ blue  ┆ L    │
+│ green ┆ S    │
+│ green ┆ M    │
+│ green ┆ L    │
+└───────┴──────┘

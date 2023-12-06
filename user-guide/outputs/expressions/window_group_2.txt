@@ -1,0 +1,14 @@
+shape: (7, 3)
+┌─────────────────────┬────────┬───────┐
+│ Name                ┆ Type 1 ┆ Speed │
+│ ---                 ┆ ---    ┆ ---   │
+│ str                 ┆ str    ┆ i64   │
+╞═════════════════════╪════════╪═══════╡
+│ Starmie             ┆ Water  ┆ 115   │
+│ Slowpoke            ┆ Water  ┆ 30    │
+│ SlowbroMega Slowbro ┆ Water  ┆ 30    │
+│ Exeggutor           ┆ Grass  ┆ 55    │
+│ Exeggcute           ┆ Grass  ┆ 40    │
+│ Slowbro             ┆ Water  ┆ 15    │
+│ Jynx                ┆ Ice    ┆ 95    │
+└─────────────────────┴────────┴───────┘
