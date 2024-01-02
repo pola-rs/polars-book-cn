@@ -1,5 +1,5 @@
 [book]
-authors = ["ritchie46"]
+authors = ["ritchie46", "linjing-lab"]
 language = "zh-CN"
 src = "src"
 title = "Polars - 用户指南"
